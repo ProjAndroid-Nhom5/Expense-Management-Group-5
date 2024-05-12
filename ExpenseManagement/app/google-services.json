@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "54178243778",
+    "firebase_url": "https://nhom5-83f52-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "nhom5-83f52",
+    "storage_bucket": "nhom5-83f52.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:54178243778:android:876f67de4b50fed782875b",
+        "android_client_info": {
+          "package_name": "com.example.expensemanagement"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGVQUCHr-kuGlOCbaoeKsyqfsuMGcPXjc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:54178243778:android:f054b3d4a4a1965882875b",
+        "android_client_info": {
+          "package_name": "com.example.nhom5"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGVQUCHr-kuGlOCbaoeKsyqfsuMGcPXjc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
