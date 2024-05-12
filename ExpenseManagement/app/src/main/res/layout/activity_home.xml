@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".HomeActivity">
+
+    <FrameLayout
+        android:id="@+id/rootLayout"
+        android:layout_above="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+
+
+        <RadioGroup
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/lnbottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbHome"
+                android:checked="true"
+                android:background="@drawable/radio_state"
+                android:text="HOME"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:button="@null"
+                android:layout_width="60dp"
+                android:layout_height="60dp"/>
+
+
+            <RadioButton
+                android:layout_marginHorizontal="30dp"
+                android:id="@+id/rbBill"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/radio_state"
+                android:button="@null"
+                android:gravity="center"
+                android:text="BILL"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:layout_marginEnd="30dp"
+                android:id="@+id/rbStore"
+                android:background="@drawable/radio_state"
+                android:text="STORE"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:button="@null"
+                android:layout_width="60dp"
+                android:layout_height="60dp"/>
+
+            <RadioButton
+                android:id="@+id/rbAdmin"
+                android:background="@drawable/radio_state"
+                android:text="ADMIN"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:button="@null"
+                android:layout_width="60dp"
+                android:layout_height="60dp"/>
+
+
+        </RadioGroup>
+    </RelativeLayout>
+
+
+</RelativeLayout>
