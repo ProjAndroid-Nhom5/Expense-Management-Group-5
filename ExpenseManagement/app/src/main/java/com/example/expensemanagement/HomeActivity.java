@@ -14,7 +14,6 @@ import androidx.fragment.app.FragmentTransaction;
 public class HomeActivity extends AppCompatActivity {
 
     private RadioGroup mRadioGroup;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +24,7 @@ public class HomeActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+       // note tessst
         mRadioGroup = findViewById(R.id.lnbottom);
         // Măc định cho ban đầu là home
         switchFragment(new HomeFragment());
