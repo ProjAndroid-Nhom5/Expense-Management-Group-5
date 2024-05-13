@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -16,6 +17,7 @@ public class SignInActivity extends AppCompatActivity {
 
     private Button mSignIn;
     private TextView mForgotPassword;
+    private LinearLayout changeToSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class SignInActivity extends AppCompatActivity {
 
         mSignIn = findViewById(R.id.login_button);
         mForgotPassword = findViewById(R.id.forgot_password);
+        changeToSignUp = findViewById(R.id.changeToSignUp);
 
         mSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +46,14 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SignInActivity.this, Forgotpassword1.class));
+            }
+        });
+
+        changeToSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
+                finish();
             }
         });
     }
