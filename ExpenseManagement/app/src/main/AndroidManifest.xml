@@ -19,13 +19,13 @@
             android:name=".Forgotpassword1"
             android:exported="false" />
         <activity
-            android:name=".Forgotpassword2"
-            android:exported="false" />
-        <activity
             android:name=".Forgotpassword3"
             android:exported="false" />
         <activity
             android:name=".OTPVerifyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Forgotpassword2"
             android:exported="false" />
         <activity
             android:name=".SignUpActivity"
