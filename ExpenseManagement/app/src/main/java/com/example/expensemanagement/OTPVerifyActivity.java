@@ -77,7 +77,7 @@ public class OTPVerifyActivity extends AppCompatActivity {
         getPass = getIntent().getStringExtra("pass");
         getCode = getIntent().getStringExtra("code");
 
-        otpPhone.setText("+84 - " + getPhone);
+        otpPhone.setText("+84 - 0" + getPhone);
 
         otpEt1.addTextChangedListener(textWatcher);
         otpEt2.addTextChangedListener(textWatcher);
