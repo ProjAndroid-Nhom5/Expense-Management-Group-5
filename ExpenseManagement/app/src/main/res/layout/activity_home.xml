@@ -1,44 +1,323 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    android:orientation="vertical"
     tools:context=".HomeActivity">
+
+    <!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+    <!--            android:id="@+id/bottomNavigationView"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:background="@color/white"-->
+    <!--            app:itemIconTint="@color/lightblue"-->
+    <!--            app:itemTextColor="@color/lightblue"-->
+    <!--            app:menu="@menu/bottom_menu">-->
+    <!--        </com.google.android.material.bottomnavigation.BottomNavigationView>-->
 
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></FrameLayout>
 
-    </FrameLayout>
+    <View
+        android:id="@+id/transparentBg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#66000000"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fabConstraint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minHeight="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_menu"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/mainFabBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            app:backgroundTint="@color/lightblue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/baseline_add_24"
+            app:tint="@color/white" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/ecommerceFabBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:visibility="invisible"
+            app:backgroundTint="@color/lightblue"
+            app:layout_constraintBottom_toTopOf="@id/mainFabBtn"
+            app:layout_constraintEnd_toEndOf="@id/mainFabBtn"
+            app:srcCompat="@drawable/ecommerce"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/ecommerceTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/fab_text_bg"
+            android:elevation="8dp"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="8dp"
+            android:text="Add Ecommerce"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/ecommerceFabBtn"
+            app:layout_constraintEnd_toStartOf="@id/ecommerceFabBtn"
+            app:layout_constraintTop_toTopOf="@id/ecommerceFabBtn" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/employeeFabBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:backgroundTint="@color/lightblue"
+            android:visibility="invisible"
+            app:backgroundTint="@color/lightblue"
+            app:layout_constraintBottom_toTopOf="@id/ecommerceFabBtn"
+            app:layout_constraintEnd_toEndOf="@id/ecommerceFabBtn"
+            app:srcCompat="@drawable/person_add"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/employeeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/fab_text_bg"
+            android:elevation="8dp"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="8dp"
+            android:text="Add Employee"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/employeeFabBtn"
+            app:layout_constraintEnd_toStartOf="@id/employeeFabBtn"
+            app:layout_constraintTop_toTopOf="@id/employeeFabBtn" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/productFabBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:visibility="invisible"
+            app:backgroundTint="@color/lightblue"
+            app:layout_constraintBottom_toTopOf="@id/employeeFabBtn"
+            app:layout_constraintEnd_toEndOf="@id/employeeFabBtn"
+            app:srcCompat="@drawable/product_service"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/productTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/fab_text_bg"
+            android:elevation="8dp"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="8dp"
+            android:text="Add Product"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/productFabBtn"
+            app:layout_constraintEnd_toStartOf="@id/productFabBtn"
+            app:layout_constraintTop_toTopOf="@id/productFabBtn" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/supplierFabBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:visibility="invisible"
+            app:backgroundTint="@color/lightblue"
+            app:layout_constraintBottom_toTopOf="@id/productFabBtn"
+            app:layout_constraintEnd_toEndOf="@id/productFabBtn"
+            app:srcCompat="@drawable/product_management"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/supplierTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/fab_text_bg"
+            android:elevation="8dp"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="8dp"
+            android:text="Add Supplier"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/supplierFabBtn"
+            app:layout_constraintEnd_toStartOf="@id/supplierFabBtn"
+            app:layout_constraintTop_toTopOf="@id/supplierFabBtn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="@color/white"
-        app:itemIconTint="@color/lightblue"
-        app:itemTextColor="@color/lightblue"
-        app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
-        app:layout_constraintEnd_toEndOf="@+id/frameLayout"
-        app:layout_constraintStart_toStartOf="@+id/frameLayout"
-        app:menu="@menu/bottom_menu" >
+        android:elevation="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingTop="15dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="15dp"
+        android:weightSum="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:targetApi="lollipop">
 
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        <LinearLayout
+            android:id="@+id/homeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/round_back_home_100"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="178dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/baseline_add_24" />
+            <ImageView
+                android:id="@+id/homeImage"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/home_selected" />
+
+            <TextView
+                android:id="@+id/homeTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Home"
+                android:textColor="@color/home"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/billLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp">
+
+            <ImageView
+                android:id="@+id/billImage"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/bill" />
+
+            <TextView
+                android:id="@+id/billTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Bill"
+                android:textColor="@color/home"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/storeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp">
+
+            <ImageView
+                android:id="@+id/storeImage"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/store" />
+
+            <TextView
+                android:id="@+id/storeTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Store"
+                android:textColor="@color/home"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/adminLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp">
+
+            <ImageView
+                android:id="@+id/adminImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/admin" />
+
+            <TextView
+                android:id="@+id/adminTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Admin"
+                android:textColor="@color/home"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
