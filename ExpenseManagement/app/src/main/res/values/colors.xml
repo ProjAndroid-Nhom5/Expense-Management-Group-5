@@ -9,4 +9,8 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="tear_200">#FF03DAC5</color>
     <color name="tear_700">#FF018786</color>
+
+    <color name="home">#1194AA</color>
+
+    <color name="home_20">#331194AA</color>
 </resources>

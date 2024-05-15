@@ -7,11 +7,11 @@
     <item
         android:id="@+id/navBill"
         android:title="Bill"
-        android:icon="@drawable/invoice"/>
+        android:icon="@drawable/bill"/>
     <item
         android:id="@+id/navStore"
         android:title="Store"
-        android:icon="@drawable/shop"/>
+        android:icon="@drawable/store"/>
     <item
         android:id="@+id/navAdmin"
         android:title="Admin"
