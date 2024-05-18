@@ -44,8 +44,7 @@
           android:layout_alignParentEnd="true"
           android:gravity="center_vertical"
 
-          android:padding="3dp"
-          >
+          android:padding="3dp">
       </RelativeLayout>
 
     </RelativeLayout>
