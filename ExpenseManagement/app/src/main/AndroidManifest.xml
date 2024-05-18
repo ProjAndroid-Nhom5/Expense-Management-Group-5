@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
         android:allowBackup="true"
@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ExpenseManagement"
-        tools:targetApi="31" >
+        tools:targetApi="31">
         <activity
             android:name=".admin_detail"
             android:exported="false" />
@@ -19,13 +19,13 @@
             android:name=".Forgotpassword1"
             android:exported="false" />
         <activity
+            android:name=".Forgotpassword2"
+            android:exported="false" />
+        <activity
             android:name=".Forgotpassword3"
             android:exported="false" />
         <activity
             android:name=".OTPVerifyActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Forgotpassword2"
             android:exported="false" />
         <activity
             android:name=".SignUpActivity"
@@ -35,7 +35,7 @@
             android:exported="false" />
         <activity
             android:name=".SignInActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
