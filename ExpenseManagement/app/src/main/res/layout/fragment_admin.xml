@@ -28,7 +28,6 @@
                 android:textColor="#0570AC"
                 android:textStyle="bold"
                 android:textSize="25dp" />
-
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -185,9 +184,5 @@
             </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
-
-
     </RelativeLayout>
-
-
 </FrameLayout>
