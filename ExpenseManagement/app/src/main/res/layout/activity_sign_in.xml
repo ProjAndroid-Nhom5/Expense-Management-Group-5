@@ -87,7 +87,7 @@
                 android:layout_gravity="right"
                 android:layout_marginTop="15dp"
                 android:text="Forgot Password"
-                android:textColor="#0CADF2"
+                android:textColor="@color/lightblue"
                 android:textSize="16dp"
                 tools:ignore="HardcodedText" />
 
@@ -116,15 +116,15 @@
                     android:layout_height="wrap_content"
                     android:text="Don't have an Account ?"
                     android:textColor="#000000"
-                    android:textSize="14sp"
+                    android:textSize="15sp"
                     tools:ignore="HardcodedText" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" Sign Up"
-                    android:textColor="#0CADF2"
-                    android:textSize="14sp"
+                    android:textColor="@color/lightblue"
+                    android:textSize="15sp"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
 
