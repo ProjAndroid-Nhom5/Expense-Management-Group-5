@@ -23,7 +23,7 @@
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
             android:padding="24dp"
-            android:background="@drawable/boder">
+            android:background="@drawable/lightblue_border">
 
             <TextView
                 android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/signup_name"
-                android:background="@drawable/boder"
+                android:background="@drawable/lightblue_border"
                 android:layout_marginTop="20dp"
                 android:padding="12dp"
                 android:maxLines="1"
@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/signup_email"
-                android:background="@drawable/boder"
+                android:background="@drawable/lightblue_border"
                 android:layout_marginTop="15dp"
                 android:padding="12dp"
                 android:maxLines="1"
@@ -66,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/signup_phone"
-                android:background="@drawable/boder"
+                android:background="@drawable/lightblue_border"
                 android:layout_marginTop="15dp"
                 android:padding="12dp"
                 android:hint="Phone"
@@ -85,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:id="@+id/signup_password"
-                    android:background="@drawable/boder"
+                    android:background="@drawable/lightblue_border"
                     android:padding="12dp"
                     android:hint="Password"
                     android:maxLines="1"
@@ -105,7 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:id="@+id/signup_confirm_password"
-                    android:background="@drawable/boder"
+                    android:background="@drawable/lightblue_border"
                     android:padding="12dp"
                     android:hint="Confirm Password"
                     android:maxLines="1"
@@ -150,16 +150,16 @@
                     android:padding="8dp"
                     android:text="Already an user?"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/loginRedirectText2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="8dp"
-                    android:text="Login"
+                    android:text="Sign in"
                     android:textColor="@color/lightblue"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
             </LinearLayout>
 
         </LinearLayout>
