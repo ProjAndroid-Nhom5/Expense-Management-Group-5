@@ -19,272 +19,243 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/homeFrameLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="10dp">
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/materialCardView"
+                android:layout_margin="10dp"
+                app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/_16sdp"
-                app:layout_constraintTop_toTopOf="parent">
+                android:background="@drawable/chart_cart"
+                android:padding="5dp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <TextView
+                    android:id="@+id/timeTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Today"
+                    android:textColor="@color/card"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp">
-
-                    <TextView
-                        android:id="@+id/timeTxt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:text="Today"
-                        android:textColor="@color/card"
-                        android:textSize="@dimen/_14ssp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/timeTxt">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/timeTxt">
+                        android:orientation="horizontal">
 
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/card"
+                            android:layout_weight="1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/timeTxt"
+                            android:padding="10dp">
 
-                            <com.google.android.material.card.MaterialCardView
-                                android:layout_width="match_parent"
+                            <ImageView
+                                android:id="@+id/revenueImg"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginEnd="5dp"
-                                android:layout_marginBottom="5dp"
-                                android:layout_weight="1"
-                                app:cardBackgroundColor="@color/lightblue"
+                                android:src="@drawable/currency_revenue"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/timeTxt">
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                                <androidx.constraintlayout.widget.ConstraintLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:padding="10dp">
-
-                                    <ImageView
-                                        android:id="@+id/revenueImg"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:src="@drawable/currency_revenue"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent" />
-
-                                    <TextView
-                                        android:id="@+id/revenueTxt"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="5dp"
-                                        android:text="Revenue"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/_13ssp"
-                                        android:textStyle="bold"
-                                        app:layout_constraintStart_toEndOf="@+id/revenueImg"
-                                        app:layout_constraintTop_toTopOf="parent" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="8dp"
-                                        android:text="........... $"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/_13ssp"
-                                        android:textStyle="bold"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toBottomOf="@+id/revenueTxt" />
-
-                                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            </com.google.android.material.card.MaterialCardView>
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:layout_width="match_parent"
+                            <TextView
+                                android:id="@+id/revenueTxt"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginEnd="10dp"
-                                android:layout_marginBottom="5dp"
-                                android:layout_weight="1"
-                                app:cardBackgroundColor="@color/lightblue"
+                                android:text="Revenue"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_13ssp"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toEndOf="@+id/revenueImg"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="........... $"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_13ssp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/timeTxt">
+                                app:layout_constraintTop_toBottomOf="@+id/revenueTxt" />
 
-                                <androidx.constraintlayout.widget.ConstraintLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:padding="10dp">
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                                    <ImageView
-                                        android:id="@+id/imageView"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:src="@drawable/sales_amount"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent" />
-
-                                    <TextView
-                                        android:id="@+id/textView"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="5dp"
-                                        android:text="Total Revenue"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/_13ssp"
-                                        android:textStyle="bold"
-                                        app:layout_constraintStart_toEndOf="@+id/imageView"
-                                        app:layout_constraintTop_toTopOf="parent" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="8dp"
-                                        android:text="........... $"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/_13ssp"
-                                        android:textStyle="bold"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-                                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            </com.google.android.material.card.MaterialCardView>
-
-                        </LinearLayout>
-
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/card"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/timeTxt"
+                            android:padding="10dp">
 
-                            <com.google.android.material.card.MaterialCardView
-                                android:layout_width="match_parent"
+                            <ImageView
+                                android:id="@+id/imageView"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginEnd="5dp"
-                                android:layout_marginBottom="10dp"
-                                android:layout_weight="1"
-                                app:cardBackgroundColor="@color/lightblue"
+                                android:src="@drawable/sales_amount"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/timeTxt">
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                                <androidx.constraintlayout.widget.ConstraintLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:padding="10dp">
-
-                                    <ImageView
-                                        android:id="@+id/receivablesImg"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:src="@drawable/money_recive"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent" />
-
-                                    <TextView
-                                        android:id="@+id/receivablesTxt"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="5dp"
-                                        android:text="Receivables"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/_13ssp"
-                                        android:textStyle="bold"
-                                        app:layout_constraintStart_toEndOf="@+id/receivablesImg"
-                                        app:layout_constraintTop_toTopOf="parent" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="8dp"
-                                        android:text="........... $"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/_13ssp"
-                                        android:textStyle="bold"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toBottomOf="@+id/receivablesTxt" />
-
-                                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            </com.google.android.material.card.MaterialCardView>
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:layout_width="match_parent"
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginEnd="10dp"
-                                android:layout_marginBottom="10dp"
-                                android:layout_weight="1"
-                                app:cardBackgroundColor="@color/lightblue"
+                                android:text="Total Revenue"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_13ssp"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toEndOf="@+id/imageView"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="........... $"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_13ssp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/timeTxt">
+                                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-                                <androidx.constraintlayout.widget.ConstraintLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:padding="10dp">
-
-                                    <ImageView
-                                        android:id="@+id/payablesView"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:src="@drawable/amazon_pay"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent" />
-
-                                    <TextView
-                                        android:id="@+id/payablesTxt"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="5dp"
-                                        android:text="Payables"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/_13ssp"
-                                        android:textStyle="bold"
-                                        app:layout_constraintStart_toEndOf="@+id/payablesView"
-                                        app:layout_constraintTop_toTopOf="parent" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="8dp"
-                                        android:text="........... $"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/_13ssp"
-                                        android:textStyle="bold"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toBottomOf="@+id/payablesTxt" />
-
-                                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            </com.google.android.material.card.MaterialCardView>
-
-                        </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </LinearLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-            </com.google.android.material.card.MaterialCardView>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/card"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/timeTxt">
+
+                            <ImageView
+                                android:id="@+id/receivablesImg"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/money_recive"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/receivablesTxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:text="Receivables"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_13ssp"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toEndOf="@+id/receivablesImg"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="........... $"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_13ssp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/receivablesTxt" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/card"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/timeTxt">
+
+                            <ImageView
+                                android:id="@+id/payablesView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/amazon_pay"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/payablesTxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:text="Payables"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_13ssp"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toEndOf="@+id/payablesView"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="........... $"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_13ssp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/payablesTxt" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <LinearLayout
                 android:id="@+id/cardChart1"

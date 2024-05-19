@@ -152,6 +152,7 @@ public class HomeActivity extends AppCompatActivity {
                     homeLayout.startAnimation(scaleAnimation);
 
                     loadFragment(new HomeFragment(),false);
+                    mainFabBtn.setVisibility(View.VISIBLE);
 
                     selectedTab = 1;
                 }
@@ -184,6 +185,7 @@ public class HomeActivity extends AppCompatActivity {
                     billLayout.startAnimation(scaleAnimation);
 
                     loadFragment(new BillFragment(),false);
+                    mainFabBtn.setVisibility(View.INVISIBLE);
 
                     selectedTab = 2;
                 }
@@ -216,6 +218,7 @@ public class HomeActivity extends AppCompatActivity {
                     storeLayout.startAnimation(scaleAnimation);
 
                     loadFragment(new StoreFragment(),false);
+                    mainFabBtn.setVisibility(View.INVISIBLE);
 
                     selectedTab = 3;
                 }
@@ -248,6 +251,7 @@ public class HomeActivity extends AppCompatActivity {
                     adminLayout.startAnimation(scaleAnimation);
 
                     loadFragment(new AdminFragment(),false);
+                    mainFabBtn.setVisibility(View.INVISIBLE);
 
                     selectedTab = 4;
                 }
