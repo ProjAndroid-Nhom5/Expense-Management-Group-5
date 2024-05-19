@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ExpenseManagement"
         tools:targetApi="31">
         <activity
+            android:name=".BillInformation"
+            android:exported="false" />
+        <activity
             android:name=".StoreAdd"
             android:exported="false" />
         <activity
