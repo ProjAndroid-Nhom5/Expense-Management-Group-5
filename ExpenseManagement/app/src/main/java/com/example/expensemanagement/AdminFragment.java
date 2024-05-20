@@ -16,6 +16,8 @@ public class AdminFragment extends Fragment {
 
     private ImageView arrow_right_info;
 
+    private  ImageView arrow_right_store;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,15 @@ public class AdminFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Admin_Detail.class);
+                startActivity(intent);
+            }
+        });
+
+        arrow_right_store = view.findViewById(R.id.arrow_right_store);
+        arrow_right_store.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Store_Detail.class);
                 startActivity(intent);
             }
         });
