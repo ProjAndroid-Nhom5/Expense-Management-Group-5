@@ -1,5 +1,6 @@
 package com.example.expensemanagement;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,10 +10,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 public class AdminFragment extends Fragment {
 
-
+    private ImageView arrow_right_info;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,5 +33,13 @@ public class AdminFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Xu ly code o day
+        arrow_right_info = view.findViewById(R.id.arrow_right_info);
+        arrow_right_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Admin_Detail.class);
+                startActivity(intent);
+            }
+        });
     }
 }
