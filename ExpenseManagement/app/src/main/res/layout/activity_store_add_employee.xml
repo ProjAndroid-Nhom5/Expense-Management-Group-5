@@ -1,11 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StoreAddEcommerce"
-    android:id="@+id/StoreAddEcommerce">
+    android:orientation="vertical"
+    android:background="@drawable/bg2"
+    tools:context=".StoreAddEmployee">
+    <LinearLayout
+        android:id="@+id/header_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <ImageView
+            android:id="@+id/close_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/baseline_close_24" />
+
+        <TextView
+            android:id="@+id/search_box"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:inputType="text"
+            android:text="ADD INFORMATION"
+            android:textAlignment="center"
+            android:textColor="#CC9CD5"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:shadowColor="#33000000"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="2"
+            android:textAllCaps="true" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/circular"
@@ -27,7 +63,7 @@
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ec2" />
+                android:src="@drawable/workshift" />
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 
@@ -53,22 +89,24 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp">
                     <TextView
-                        android:id="@+id/NameEcommerce1"
+                        android:id="@+id/NameEmployee"
                         android:layout_width="175dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="10dp"
-                        android:text="Name Ecommerce*:"
+                        android:text="Name Employee*:"
                         android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 
                     <EditText
-                        android:id="@+id/inputNameEcommerce1"
+                        android:id="@+id/inputNameEmployee"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/NameEcommerce1"
+                        android:layout_below="@id/NameEmployee"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="5dp"
                         android:backgroundTint="@color/darkblue"
@@ -77,10 +115,10 @@
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/NameStore1"
+                        android:id="@+id/NameStore"
                         android:layout_width="120dp"
                         android:layout_height="30dp"
-                        android:layout_below="@id/inputNameEcommerce1"
+                        android:layout_below="@id/inputNameEmployee"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
                         android:text="Name Store*:"
@@ -88,10 +126,10 @@
                         android:textSize="15sp" />
 
                     <EditText
-                        android:id="@+id/inputNameStore1"
+                        android:id="@+id/inputNameStore"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/NameStore1"
+                        android:layout_below="@id/NameStore"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="5dp"
                         android:backgroundTint="@color/darkblue"
@@ -100,21 +138,21 @@
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/PaymentFee"
+                        android:id="@+id/Email"
                         android:layout_width="120dp"
                         android:layout_height="30dp"
-                        android:layout_below="@id/inputNameStore1"
+                        android:layout_below="@id/inputNameStore"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
-                        android:text="Payment Fee:"
+                        android:text="Email:"
                         android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 
                     <EditText
-                        android:id="@+id/inputPaymentFee"
+                        android:id="@+id/inputEmail"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/PaymentFee"
+                        android:layout_below="@id/Email"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="5dp"
                         android:backgroundTint="@color/darkblue"
@@ -123,21 +161,21 @@
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/FixedFee"
+                        android:id="@+id/Phone"
                         android:layout_width="120dp"
                         android:layout_height="30dp"
-                        android:layout_below="@id/inputPaymentFee"
+                        android:layout_below="@id/inputEmail"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
-                        android:text="Fixed Fee:"
+                        android:text="Phone:"
                         android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 
                     <EditText
-                        android:id="@+id/inputFixedFee"
+                        android:id="@+id/inputPhone"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/FixedFee"
+                        android:layout_below="@id/Phone"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="5dp"
                         android:backgroundTint="@color/darkblue"
@@ -146,21 +184,21 @@
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/ServiceFee"
+                        android:id="@+id/Address"
                         android:layout_width="120dp"
                         android:layout_height="30dp"
-                        android:layout_below="@id/inputFixedFee"
+                        android:layout_below="@id/inputPhone"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
-                        android:text="Service Fee:"
+                        android:text="Address:"
                         android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 
                     <EditText
-                        android:id="@+id/inputServiceFee"
+                        android:id="@+id/inputAddress"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/ServiceFee"
+                        android:layout_below="@id/Address"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="5dp"
                         android:backgroundTint="@color/darkblue"
@@ -169,21 +207,21 @@
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/FreightSurcharge"
+                        android:id="@+id/DayOfWork"
                         android:layout_width="150dp"
                         android:layout_height="30dp"
-                        android:layout_below="@id/inputServiceFee"
+                        android:layout_below="@id/inputAddress"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
-                        android:text="Freight Surcharge:"
+                        android:text="Day Of Work:"
                         android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 
                     <EditText
-                        android:id="@+id/inputFreightSurcharge"
+                        android:id="@+id/inputDayOfWork"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/FreightSurcharge"
+                        android:layout_below="@id/DayOfWork"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="5dp"
                         android:backgroundTint="@color/darkblue"
@@ -192,21 +230,21 @@
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/Receivable"
+                        android:id="@+id/Position"
                         android:layout_width="120dp"
                         android:layout_height="30dp"
-                        android:layout_below="@id/inputFreightSurcharge"
+                        android:layout_below="@id/inputDayOfWork"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
-                        android:text="Receivables:"
+                        android:text="Position:"
                         android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 
                     <EditText
-                        android:id="@+id/inputReceivable"
+                        android:id="@+id/inputPosition"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/Receivable"
+                        android:layout_below="@id/Position"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="5dp"
                         android:backgroundTint="@color/darkblue"
@@ -215,21 +253,44 @@
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/VAT"
+                        android:id="@+id/BaseSalary"
                         android:layout_width="250dp"
                         android:layout_height="30dp"
-                        android:layout_below="@id/inputReceivable"
+                        android:layout_below="@id/inputPosition"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
-                        android:text="Personal Income Tax VAT:"
+                        android:text="Base Salary:"
                         android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 
                     <EditText
-                        android:id="@+id/inputVAT"
+                        android:id="@+id/inputBaseSalary"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/VAT"
+                        android:layout_below="@id/BaseSalary"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="5dp"
+                        android:backgroundTint="@color/darkblue"
+                        android:padding="5dp"
+                        android:textColor="@color/darkblue"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/BonusSalary"
+                        android:layout_width="250dp"
+                        android:layout_height="30dp"
+                        android:layout_below="@id/inputBaseSalary"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="20dp"
+                        android:text="Bonus Salary:"
+                        android:textColor="@color/darkblue"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/inputBonusSalary"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/BonusSalary"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="5dp"
                         android:backgroundTint="@color/darkblue"
@@ -246,7 +307,7 @@
                 android:orientation="horizontal"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="15dp">
+                android:layout_marginBottom="10dp">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_save"
@@ -262,4 +323,4 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-</RelativeLayout>
+</LinearLayout>

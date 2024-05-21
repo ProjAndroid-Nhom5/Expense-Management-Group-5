@@ -40,6 +40,7 @@ public class BillFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), BillInformation.class);
+                intent.putExtra("potision",1);
                 startActivity(intent);
             }
         });

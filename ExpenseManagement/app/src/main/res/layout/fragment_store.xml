@@ -2,7 +2,6 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -106,6 +105,7 @@
             android:paddingHorizontal="20dp">
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardview_3"
                 android:layout_weight="1"
                 app:strokeColor="#0570AC"
                 app:strokeWidth="2dp"
@@ -132,6 +132,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardview_4"
                 android:layout_weight="1"
                 app:strokeColor="#0570AC"
                 app:strokeWidth="2dp"
