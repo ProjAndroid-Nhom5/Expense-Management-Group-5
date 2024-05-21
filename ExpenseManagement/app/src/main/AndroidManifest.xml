@@ -45,9 +45,6 @@
             android:name=".StoreDetailEcommerce"
             android:exported="false" />
         <activity
-            android:name=".BillInformation"
-            android:exported="false" />
-        <activity
             android:name=".StoreInformation"
             android:exported="false" />
         <activity
