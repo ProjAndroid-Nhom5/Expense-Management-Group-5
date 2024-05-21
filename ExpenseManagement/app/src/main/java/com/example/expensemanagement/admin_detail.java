@@ -10,7 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Admin_Detail extends AppCompatActivity {
+public class admin_Detail extends AppCompatActivity {
 
 
     private ImageView left_admin;
