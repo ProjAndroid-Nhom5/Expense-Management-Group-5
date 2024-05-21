@@ -6,14 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".StoreInfEcommerce"
+    tools:context=".StoreInfSupplier"
     android:background="@android:color/transparent"
-    android:id="@+id/StoreInfEcommerce">
+    android:id="@+id/StoreInfSupplier">
     <ImageView
         android:id="@+id/header_image"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:src="@drawable/ec2"
+        android:src="@drawable/supplier"
         android:layout_marginTop="10dp"
         android:scaleType="centerCrop"
         android:elevation="10dp"
@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:id="@+id/listview"
             android:scrollbars="vertical"
-            tools:listitem="@layout/list_item_store_inf_ecommerce"
+            tools:listitem="@layout/list_item_store_inf_supplier"
             android:divider="@android:color/transparent"
             android:dividerHeight="10.0sp"/>
 
