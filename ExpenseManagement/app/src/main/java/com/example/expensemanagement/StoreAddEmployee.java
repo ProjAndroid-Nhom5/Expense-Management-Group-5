@@ -10,15 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import android.widget.TextView;
 
-public class StoreDetailEcommerce extends AppCompatActivity {
+public class StoreAddEmployee extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_store_detail_ecommerce);
+        setContentView(R.layout.activity_store_add_employee);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -29,21 +28,11 @@ public class StoreDetailEcommerce extends AppCompatActivity {
         closeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StoreDetailEcommerce.this, StoreInformation.class);
+                Intent intent = new Intent(StoreAddEmployee.this, StoreInformation.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 finish();
             }
         });
-
-        String ecommerceName = getIntent().getStringExtra("ecommerceName");
-        String storeName = getIntent().getStringExtra("storeName");
-
-        // Find the TextViews and set the data
-        TextView ecommerceNameTextView = findViewById(R.id.inputNameEcommerce);
-        TextView storeNameTextView = findViewById(R.id.inputNameStore);
-
-        ecommerceNameTextView.setText(ecommerceName);
-        storeNameTextView.setText(storeName);
     }
 }

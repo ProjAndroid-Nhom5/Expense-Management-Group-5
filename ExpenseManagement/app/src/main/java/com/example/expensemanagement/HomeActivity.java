@@ -1,6 +1,7 @@
 package com.example.expensemanagement;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -64,7 +65,6 @@ public class HomeActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
         transparentBg = findViewById(R.id.transparentBg);
         fabConstraint = findViewById(R.id.fabConstraint);
 
