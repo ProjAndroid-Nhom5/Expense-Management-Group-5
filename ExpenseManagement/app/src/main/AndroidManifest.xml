@@ -31,9 +31,6 @@
             android:name=".StoreInformation"
             android:exported="false" />
         <activity
-            android:name=".admin_detail"
-            android:exported="false" />
-        <activity
             android:name=".Forgotpassword1"
             android:exported="false" />
         <activity
