@@ -40,16 +40,10 @@
             android:name=".BillInformation"
             android:exported="false" />
         <activity
-            android:name=".StoreAdd"
-            android:exported="false" />
-        <activity
-            android:name=".StoreDetail"
-            android:exported="false" />
-        <activity
             android:name=".StoreInformation"
             android:exported="false" />
         <activity
-            android:name=".admin_detail"
+            android:name=".Admin_Detail"
             android:exported="false" />
         <activity
             android:name=".Forgotpassword1"
