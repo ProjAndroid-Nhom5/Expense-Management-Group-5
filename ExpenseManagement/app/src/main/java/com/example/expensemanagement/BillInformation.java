@@ -1,5 +1,6 @@
 package com.example.expensemanagement;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -23,7 +24,11 @@ public class BillInformation extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        loadFragment(new BillInfEcommerce(),true);
+        Intent intent = getIntent();
+        int position = intent.getIntExtra("potision",0);
+        if (position == 1){
+            loadFragment(new BillInfEcommerce(),true);
+        }
     }
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {
         FragmentManager fragmentManager = getSupportFragmentManager();
