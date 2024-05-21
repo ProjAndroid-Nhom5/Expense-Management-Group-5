@@ -30,6 +30,14 @@
         <activity
             android:name=".StoreDetailEmployee"
             android:exported="false" />
+        <activity android:name=".Store_Detail"
+            android:exported="false"/>
+        <activity
+            android:name=".Admin_Detail"
+            android:exported="false" />
+        <activity
+            android:name=".BillInformation"
+            android:exported="false" />
         <activity
             android:name=".StoreAddEcommerce"
             android:exported="false" />
@@ -37,13 +45,7 @@
             android:name=".StoreDetailEcommerce"
             android:exported="false" />
         <activity
-            android:name=".BillInformation"
-            android:exported="false" />
-        <activity
             android:name=".StoreInformation"
-            android:exported="false" />
-        <activity
-            android:name=".Admin_Detail"
             android:exported="false" />
         <activity
             android:name=".Forgotpassword1"

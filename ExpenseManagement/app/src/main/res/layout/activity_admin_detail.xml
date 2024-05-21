@@ -9,8 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:id="@+id/header_admin"
@@ -118,7 +117,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Email"
+                        android:text="Email:"
                         android:textColor="#58CBD2"
                         android:textStyle="bold"
                         android:textSize="16sp" />
@@ -142,7 +141,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Phone"
+                        android:text="Phone:"
                         android:textColor="#58CBD2"
                         android:textStyle="bold"
                         android:textSize="16sp" />
