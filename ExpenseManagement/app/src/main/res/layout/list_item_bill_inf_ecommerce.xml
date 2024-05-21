@@ -15,7 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/card"
+        android:background="@drawable/list_item_card"
         android:padding="10dp">
 
         <TextView
@@ -24,7 +24,7 @@
             android:layout_height="30dp"
             android:layout_margin="10dp"
             android:text="Name Customer"
-            android:textColor="@color/white"
+            android:textColor="@color/lightblue"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,7 @@
             android:layout_height="30dp"
             android:layout_margin="10dp"
             android:text="Name: "
-            android:textColor="@color/white"
+            android:textColor="@color/lightblue"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/listNameCustomer" />
@@ -47,7 +47,7 @@
             android:layout_height="30dp"
             android:layout_margin="10dp"
             android:text="Date - ID"
-            android:textColor="@color/white"
+            android:textColor="@color/lightblue"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/listNameEcommerce" />
@@ -60,7 +60,7 @@
             app:layout_constraintBottom_toTopOf="@+id/listTotal"
             app:layout_constraintTop_toBottomOf="@id/listTime"
             android:layout_margin="10dp"
-            android:background="@color/white"
+            android:background="@color/lightblue"
             tools:layout_editor_absoluteX="10dp" />
 
         <TextView
@@ -69,7 +69,7 @@
             android:layout_height="30dp"
             android:layout_margin="10dp"
             android:text="Total Payment"
-            android:textColor="@color/white"
+            android:textColor="@color/lightblue"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -81,7 +81,7 @@
             android:layout_margin="10dp"
             android:textStyle="bold"
             android:text="O"
-            android:textColor="@color/white"
+            android:textColor="@color/lightblue"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
