@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".StoreInfEcommerce"
     android:background="@android:color/transparent"
-    android:id="@+id/StoreInfEcommerce">
+    tools:context=".BillInfEcommerce">
+
     <ImageView
         android:id="@+id/header_image"
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:id="@+id/listview"
             android:scrollbars="vertical"
-            tools:listitem="@layout/list_item_store_inf_ecommerce"
+            tools:listitem="@layout/list_item_bill_inf_ecommerce"
             android:divider="@android:color/transparent"
             android:dividerHeight="10.0sp"/>
 
@@ -45,4 +45,3 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
-

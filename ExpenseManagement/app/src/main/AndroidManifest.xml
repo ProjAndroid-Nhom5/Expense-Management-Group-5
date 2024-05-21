@@ -13,6 +13,33 @@
         android:theme="@style/Theme.ExpenseManagement"
         tools:targetApi="31">
         <activity
+            android:name=".StoreAddSupplier"
+            android:exported="false" />
+        <activity
+            android:name=".StoreDetailSupplier"
+            android:exported="false" />
+        <activity
+            android:name=".StoreDetailProduct"
+            android:exported="false" />
+        <activity
+            android:name=".StoreAddProduct"
+            android:exported="false" />
+        <activity
+            android:name=".StoreAddEmployee"
+            android:exported="false" />
+        <activity
+            android:name=".StoreDetailEmployee"
+            android:exported="false" />
+        <activity
+            android:name=".StoreAddEcommerce"
+            android:exported="false" />
+        <activity
+            android:name=".StoreDetailEcommerce"
+            android:exported="false" />
+        <activity
+            android:name=".BillInformation"
+            android:exported="false" />
+        <activity
             android:name=".StoreAdd"
             android:exported="false" />
         <activity

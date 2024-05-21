@@ -1,12 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".StoreDetailEcommerce"
-    android:id="@+id/StoreDetailEcommerce">
+    android:background="@drawable/bg2"
+    tools:context=".StoreAddEcommerce">
+    <LinearLayout
+        android:id="@+id/header_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <ImageView
+            android:id="@+id/close_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/baseline_close_24" />
+
+        <TextView
+            android:id="@+id/search_box"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:inputType="text"
+            android:text="ADD INFORMATION"
+            android:textAlignment="center"
+            android:textColor="#CC9CD5"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:shadowColor="#33000000"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="2"
+            android:textAllCaps="true" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/circular"
@@ -32,12 +67,14 @@
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 
+
     <ScrollView
+        android:layout_below="@+id/circular"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -52,7 +89,9 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp">
                     <TextView
                         android:id="@+id/NameEcommerce1"
                         android:layout_width="175dp"
@@ -60,7 +99,7 @@
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="10dp"
                         android:text="Name Ecommerce*:"
-                        android:textColor="@color/darknavyblue"
+                        android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 
                     <EditText
@@ -83,7 +122,7 @@
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
                         android:text="Name Store*:"
-                        android:textColor="@color/darknavyblue"
+                        android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 
                     <EditText
@@ -106,7 +145,7 @@
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
                         android:text="Payment Fee:"
-                        android:textColor="@color/darknavyblue"
+                        android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 
                     <EditText
@@ -129,7 +168,7 @@
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
                         android:text="Fixed Fee:"
-                        android:textColor="@color/darknavyblue"
+                        android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 
                     <EditText
@@ -152,7 +191,7 @@
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
                         android:text="Service Fee:"
-                        android:textColor="@color/darknavyblue"
+                        android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 
                     <EditText
@@ -175,7 +214,7 @@
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
                         android:text="Freight Surcharge:"
-                        android:textColor="@color/darknavyblue"
+                        android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 
                     <EditText
@@ -198,7 +237,7 @@
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
                         android:text="Receivables:"
-                        android:textColor="@color/darknavyblue"
+                        android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 
                     <EditText
@@ -221,7 +260,7 @@
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
                         android:text="Personal Income Tax VAT:"
-                        android:textColor="@color/darknavyblue"
+                        android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 
                     <EditText
@@ -241,37 +280,25 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="30dp">
+                android:layout_marginBottom="10dp">
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_update"
+                    android:id="@+id/btn_save"
                     android:layout_width="0dp"
-                    android:textColor="@color/white"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginEnd="5dp"
-                    android:background="@drawable/border_update"
+                    android:textColor="@color/white"
+                    android:background="@drawable/border_save"
                     app:cardCornerRadius="20dp"
-                    android:textSize="13dp"
+                    android:textSize="15dp"
                     android:textStyle="bold"
-                    android:text="Update" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_delete"
-                    android:textColor="@color/white"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="5dp"
-                    android:background="@drawable/border_delete"
-                    android:textStyle="bold"
-                    android:textSize="13dp"
-                    android:text="Delete" />
+                    android:text="Save" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

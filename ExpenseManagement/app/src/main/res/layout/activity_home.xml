@@ -9,16 +9,6 @@
     android:background="@drawable/bg"
     tools:context=".HomeActivity">
 
-    <!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
-    <!--            android:id="@+id/bottomNavigationView"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:background="@color/white"-->
-    <!--            app:itemIconTint="@color/lightblue"-->
-    <!--            app:itemTextColor="@color/lightblue"-->
-    <!--            app:menu="@menu/bottom_menu">-->
-    <!--        </com.google.android.material.bottomnavigation.BottomNavigationView>-->
-
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
@@ -68,11 +58,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:visibility="invisible"
-            app:backgroundTint="@color/lightblue"
+            app:backgroundTint="@color/white"
             app:layout_constraintBottom_toTopOf="@id/mainFabBtn"
             app:layout_constraintEnd_toEndOf="@id/mainFabBtn"
             app:srcCompat="@drawable/ecommerce"
-            app:tint="@color/white" />
+            app:tint="@color/lightblue" />
 
         <TextView
             android:id="@+id/ecommerceTv"
@@ -96,13 +86,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:backgroundTint="@color/lightblue"
             android:visibility="invisible"
-            app:backgroundTint="@color/lightblue"
+            app:backgroundTint="@color/white"
             app:layout_constraintBottom_toTopOf="@id/ecommerceFabBtn"
             app:layout_constraintEnd_toEndOf="@id/ecommerceFabBtn"
             app:srcCompat="@drawable/person_add"
-            app:tint="@color/white" />
+            app:tint="@color/lightblue" />
 
         <TextView
             android:id="@+id/employeeTv"
@@ -127,11 +116,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:visibility="invisible"
-            app:backgroundTint="@color/lightblue"
+            app:backgroundTint="@color/white"
             app:layout_constraintBottom_toTopOf="@id/employeeFabBtn"
             app:layout_constraintEnd_toEndOf="@id/employeeFabBtn"
             app:srcCompat="@drawable/product_service"
-            app:tint="@color/white" />
+            app:tint="@color/lightblue" />
 
         <TextView
             android:id="@+id/productTv"
@@ -155,11 +144,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:visibility="invisible"
-            app:backgroundTint="@color/lightblue"
+            app:backgroundTint="@color/white"
             app:layout_constraintBottom_toTopOf="@id/productFabBtn"
             app:layout_constraintEnd_toEndOf="@id/productFabBtn"
             app:srcCompat="@drawable/product_management"
-            app:tint="@color/white" />
+            app:tint="@color/lightblue" />
 
         <TextView
             android:id="@+id/supplierTv"

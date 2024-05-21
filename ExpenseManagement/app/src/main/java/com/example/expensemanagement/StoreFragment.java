@@ -14,12 +14,11 @@ import android.widget.TextView;
 
 public class StoreFragment extends Fragment {
 
-
+    MaterialCardView cardview_1, cardview_2, cardview_3, cardview_4;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -31,14 +30,47 @@ public class StoreFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        // Xu ly code
+        cardview_1 = view.findViewById(R.id.cardview_1);
 
-        MaterialCardView ecommerceCardView = view.findViewById(R.id.cardview_1);
-        ecommerceCardView.setOnClickListener(new View.OnClickListener() {
+        cardview_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to StoreInformation activity when the card is clicked
                 Intent intent = new Intent(getActivity(), StoreInformation.class);
+                intent.putExtra("position", 1);
+                startActivity(intent);
+            }
+        });
+
+        cardview_2 = view.findViewById(R.id.cardview_2);
+
+        cardview_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), StoreInformation.class);
+                intent.putExtra("position", 2);
+                startActivity(intent);
+            }
+        });
+
+        cardview_3 = view.findViewById(R.id.cardview_3);
+
+        cardview_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), StoreInformation.class);
+                intent.putExtra("position", 3);
+                startActivity(intent);
+            }
+        });
+
+        cardview_4 = view.findViewById(R.id.cardview_4);
+
+        cardview_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), StoreInformation.class);
+                intent.putExtra("position", 4);
                 startActivity(intent);
             }
         });
