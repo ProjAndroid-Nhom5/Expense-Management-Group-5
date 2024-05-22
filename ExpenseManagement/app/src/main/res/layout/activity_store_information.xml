@@ -59,10 +59,38 @@
             android:src="@drawable/alphabetical_sorting_az_svgrepo_com" />
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/storeFrame"
+    <ImageView
+        android:id="@+id/header_image"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/ec2"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        android:elevation="10dp"
+        android:background="@drawable/shadow" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </FrameLayout>
+        <ListView
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listview"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/list_item_store_inf_ecommerce"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="10.0sp"/>
+
+        <ImageView
+            android:id="@+id/add_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="10dp"
+            android:src="@drawable/add_to_svgrepo_com"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
