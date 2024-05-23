@@ -2,14 +2,13 @@ package com.example.expensemanagement;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -17,7 +16,6 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
@@ -101,9 +99,6 @@ public class HomeFragment extends Fragment {
         barData2.setBarWidth(0.15f);
 
         barChart2.getXAxis().setAxisMinimum(0);
-        barChart2.getXAxis().setAxisMaximum(0+barChart2.getBarData().getGroupWidth(groupSpace2,barSpace2)*7);
-        barChart2.getAxisLeft().setAxisMinimum(0);
-
         barChart2.groupBars(0,groupSpace2,barSpace2);
 
         barChart2.invalidate();
