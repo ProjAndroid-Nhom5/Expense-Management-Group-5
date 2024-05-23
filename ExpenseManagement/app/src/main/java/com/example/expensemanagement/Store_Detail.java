@@ -10,22 +10,21 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Admin_Detail extends AppCompatActivity {
+public class Store_Detail extends AppCompatActivity {
 
-
-    private ImageView left_admin;
+    private ImageView close_store_detail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_admin_detail);
+        setContentView(R.layout.activity_info_store_detail);
 
-        left_admin = findViewById(R.id.left_admin);
+        close_store_detail = findViewById(R.id.close_store_detail);
 
-        left_admin.setOnClickListener(new View.OnClickListener(){
+        close_store_detail.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                onBackPressed(); 
+                onBackPressed();
             }
         });
     }

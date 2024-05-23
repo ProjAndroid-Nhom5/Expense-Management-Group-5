@@ -12,23 +12,23 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class ListBillEcommerceAdapter extends ArrayAdapter<ListBillEcommerceData> {
-    public ListBillEcommerceAdapter(@NonNull Context context, ArrayList<ListBillEcommerceData> dataArrayList) {
-        super(context, R.layout.list_item_bill_inf_ecommerce, dataArrayList);
+public class ListBillFacitilyAdapter extends ArrayAdapter<ListBillFacilityData> {
+    public ListBillFacitilyAdapter(@NonNull Context context, ArrayList<ListBillFacilityData> dataArrayList) {
+        super(context, R.layout.list_item_bill_inf_facility, dataArrayList);
     }
     @NonNull
     @Override
     public View getView(int position, @Nullable View view, @NonNull ViewGroup parent) {
-        ListBillEcommerceData listData = getItem(position);
+        ListBillFacilityData listData = getItem(position);
         if (view == null){
-            view = LayoutInflater.from(getContext()).inflate(R.layout.list_item_bill_inf_ecommerce, parent, false);
+            view = LayoutInflater.from(getContext()).inflate(R.layout.list_item_bill_inf_facility, parent, false);
         }
-        TextView listNameCustomer = view.findViewById(R.id.listNameCustomer);
-        TextView listNameEcommerce = view.findViewById(R.id.listNameEcommerce);
+        TextView listNameFacility = view.findViewById(R.id.listNameFacility);
+        TextView listNameStore = view.findViewById(R.id.listNameStore);
         TextView listTime = view.findViewById(R.id.listTime);
         TextView listTotalPayment = view.findViewById(R.id.listTotalPayment);
-        listNameCustomer.setText(listData.getNameCustomer());
-        listNameEcommerce.setText("Name Ecommerce: "+listData.getNameEcommerce());
+        listNameFacility.setText(listData.getNameFacility());
+        listNameStore.setText("Name Store: "+listData.getNameStore());
         listTime.setText(listData.getDate()+" - "+ listData.getId());
         listTotalPayment.setText(listData.getTotalPayment().toString());
         return view;

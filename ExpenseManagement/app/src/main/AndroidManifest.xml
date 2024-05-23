@@ -13,6 +13,30 @@
         android:theme="@style/Theme.ExpenseManagement"
         tools:targetApi="31">
         <activity
+            android:name=".Bill_Detail_Ecommerce"
+            android:exported="false" />
+        <activity
+            android:name=".Bill_Detail_Workshift"
+            android:exported="false" />
+        <activity
+            android:name=".Bill_Detail_Supply"
+            android:exported="false" />
+        <activity
+            android:name=".Bill_Detail_Store"
+            android:exported="false" />
+        <activity
+            android:name=".Bill_Detail_Product"
+            android:exported="false" />
+        <activity
+            android:name=".Bill_Detail_Facility"
+            android:exported="false" />
+        <activity
+            android:name=".Admin_Change_password"
+            android:exported="false" />
+        <activity
+            android:name=".Instructions_and_regulations"
+            android:exported="false" />
+        <activity
             android:name=".StoreAddSupplier"
             android:exported="false" />
         <activity
@@ -31,19 +55,22 @@
             android:name=".StoreDetailEmployee"
             android:exported="false" />
         <activity
+            android:name=".Store_Detail"
+            android:exported="false" />
+        <activity
+            android:name=".Admin_Detail"
+            android:exported="false" />
+        <activity
+            android:name=".BillInformation"
+            android:exported="false" />
+        <activity
             android:name=".StoreAddEcommerce"
             android:exported="false" />
         <activity
             android:name=".StoreDetailEcommerce"
             android:exported="false" />
         <activity
-            android:name=".BillInformation"
-            android:exported="false" />
-        <activity
             android:name=".StoreInformation"
-            android:exported="false" />
-        <activity
-            android:name=".Admin_Detail"
             android:exported="false" />
         <activity
             android:name=".Forgotpassword1"
