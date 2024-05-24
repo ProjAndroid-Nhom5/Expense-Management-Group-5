@@ -100,14 +100,31 @@ public class HomeActivity extends AppCompatActivity {
         ecommerceFabBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onGalleryClicked();
+                Intent intent = new Intent(HomeActivity.this, StoreAddEcommerce.class);
+                startActivity(intent);
             }
         });
 
-        ecommerceTv.setOnClickListener(new View.OnClickListener() {
+        employeeFabBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onGalleryClicked();
+                Intent intent = new Intent(HomeActivity.this, StoreAddEmployee.class);
+                startActivity(intent);
+            }
+        });
+        productFabBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, StoreAddProduct.class);
+                startActivity(intent);
+            }
+        });
+
+        supplierFabBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, StoreAddProduct.class);
+                startActivity(intent);
             }
         });
 

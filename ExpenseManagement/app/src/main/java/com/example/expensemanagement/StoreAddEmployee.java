@@ -28,10 +28,7 @@ public class StoreAddEmployee extends AppCompatActivity {
         closeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StoreAddEmployee.this, StoreInformation.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-                finish();
+                onBackPressed();
             }
         });
     }
