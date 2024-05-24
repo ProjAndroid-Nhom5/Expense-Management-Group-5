@@ -24,6 +24,7 @@ public class Admin_Change_password extends AppCompatActivity {
         left_Admin_Change_password.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
                 onBackPressed();
             }
         });
