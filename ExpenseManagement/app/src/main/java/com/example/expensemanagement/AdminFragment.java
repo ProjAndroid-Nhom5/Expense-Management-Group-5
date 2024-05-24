@@ -19,6 +19,11 @@ public class AdminFragment extends Fragment {
 
     private CardView information_store;
 
+    private  CardView change_password;
+
+    private  CardView ins_and_regu;
+
+    private  CardView log_out;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +55,36 @@ public class AdminFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Store_Detail.class);
+                startActivity(intent);
+            }
+        });
+
+        change_password = view.findViewById(R.id.change_password);
+
+        change_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Admin_Change_password.class);
+                startActivity(intent);
+            }
+        });
+
+        ins_and_regu = view.findViewById(R.id.ins_and_regu);
+
+        ins_and_regu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Instructions_and_regulations.class);
+                startActivity(intent);
+            }
+        });
+
+        log_out = view.findViewById(R.id.log_out);
+
+        log_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SignInActivity.class);
                 startActivity(intent);
             }
         });
