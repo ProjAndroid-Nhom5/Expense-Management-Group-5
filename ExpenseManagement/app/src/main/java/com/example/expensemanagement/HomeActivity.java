@@ -128,6 +128,37 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        ecommerceTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, StoreAddEcommerce.class);
+                startActivity(intent);
+            }
+        });
+
+        employeeTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, StoreAddEmployee.class);
+                startActivity(intent);
+            }
+        });
+        productTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, StoreAddProduct.class);
+                startActivity(intent);
+            }
+        });
+
+        supplierTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, StoreAddProduct.class);
+                startActivity(intent);
+            }
+        });
+
         final LinearLayout homeLayout = findViewById(R.id.homeLayout);
         final LinearLayout billLayout = findViewById(R.id.billLayout);
         final LinearLayout storeLayout = findViewById(R.id.storeLayout);
@@ -275,55 +306,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-//        bottomNavigationView = findViewById(R.id.bottomNavigationView);
         frame_layout = findViewById(R.id.frameLayout);
 
-//        // Măc định cho ban đầu là home
-//        switchFragment(new HomeFragment());
-//        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                switch (checkedId) {
-//                    case R.id.rbHome:
-//                        switchFragment(new HomeFragment());
-//                        break;
-//                    case R.id.rbBill:
-//                        switchFragment(new BillFragment());
-//                        break;
-//                    case R.id.rbStore:
-//                        switchFragment(new StoreFragment());
-//                        break;
-//                    case R.id.rbAdmin:
-//                        switchFragment(new AdminFragment());
-//                        break;
-//                }
-//            }
-//        });
-
         loadFragment(new HomeFragment(),true);
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-//                int itemID = menuItem.getItemId();
-//
-//                switch (itemID) {
-//                    case R.id.navHome:
-//                        loadFragment(new HomeFragment(),false);
-//                        break;
-//                    case R.id.navBill:
-//                        loadFragment(new BillFragment(),false);
-//                        break;
-//                    case R.id.navStore:
-//                        loadFragment(new StoreFragment(),false);
-//                        break;
-//                    case R.id.navAdmin:
-//                        loadFragment(new AdminFragment(),false);
-//                        break;
-//                }
-//
-//                return true;
-//            }
-//        });
     }
 
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {
@@ -335,10 +320,6 @@ public class HomeActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.frameLayout, fragment);
         }
         fragmentTransaction.commit();
-    }
-
-    private void onGalleryClicked() {
-        Toast.makeText(this, "Gallery Clicked", Toast.LENGTH_SHORT).show();
     }
 
     private void shrinkFab() {
