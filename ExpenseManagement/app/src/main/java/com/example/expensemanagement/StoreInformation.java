@@ -117,7 +117,7 @@ public class StoreInformation extends AppCompatActivity {
                 }
             });
         } else if (position == 2) {
-            header_image.setImageResource(R.drawable.employee);
+            header_image.setImageResource(R.drawable.workshift);
 
             String[] EmployeeID = {"0", "0", "0", "0"};
             String[] EmployeeName = {"Pasta", "Maggi", "Pasta", "Maggi"};
