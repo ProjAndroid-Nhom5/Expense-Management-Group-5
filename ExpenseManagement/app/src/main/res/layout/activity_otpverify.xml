@@ -25,11 +25,17 @@
             android:padding="24dp"
             android:background="@drawable/lightblue_border">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:src="@drawable/letter_unread"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="OTP Verifition"
-                android:textSize="36sp"
+                android:textSize="30sp"
                 android:textAlignment="center"
                 android:textStyle="bold"
                 android:textColor="@color/lightblue"/>
@@ -39,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Enter your OTP that we have sent to your"
-                android:layout_marginTop="25dp"/>
+                android:layout_marginTop="10dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -136,7 +142,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="10dp">
                 <Button
                     android:id="@+id/verify_button"
                     android:layout_width="match_parent"

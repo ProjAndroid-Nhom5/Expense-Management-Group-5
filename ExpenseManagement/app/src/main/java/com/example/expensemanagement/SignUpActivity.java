@@ -52,15 +52,11 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
         signupName = findViewById(R.id.signup_name);
-        signupPhone = findViewById(R.id.signup_phone);
         signupEmail = findViewById(R.id.signup_email);
         signupPassword = findViewById(R.id.signup_password);
         signupConfirmPassword = findViewById(R.id.signup_confirm_password);
-        loginRedirectText = findViewById(R.id.loginRedirectText);
         signupButton = findViewById(R.id.signup_button);
         progressBar = findViewById(R.id.progressBar);
-
-        mAuth = FirebaseAuth.getInstance();
 
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,56 +64,16 @@ public class SignUpActivity extends AppCompatActivity {
                 if (checkDataEntered()){
                     String name = signupName.getText().toString();
                     String email = signupEmail.getText().toString();
-                    String phone = signupPhone.getText().toString();
-                    String updatedPhone  = phone.substring(1);
                     String password = signupPassword.getText().toString();
 
                     progressBar.setVisibility(View.VISIBLE);
                     signupButton.setVisibility(View.GONE);
 
-                    PhoneAuthOptions options =
-                            PhoneAuthOptions.newBuilder(mAuth)
-                                    .setPhoneNumber("+84"+ updatedPhone)       // Phone number to verify
-                                    .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                                    .setActivity(SignUpActivity.this)                 // (optional) Activity for callback binding
-                                    // If no activity is passed, reCAPTCHA verification can not be used.
-                                    .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                                        @Override
-                                        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                                            progressBar.setVisibility(View.GONE);
-                                            signupButton.setVisibility(View.VISIBLE);
-                                            Log.d(TAG, "onVerificationCompleted:" + phoneAuthCredential);
-                                            signInWithPhoneAuthCredential(phoneAuthCredential);
-                                        }
+                    // code lưu tài khoản lên firebase ở đây
 
-                                        @Override
-                                        public void onVerificationFailed(@NonNull FirebaseException e) {
-                                            progressBar.setVisibility(View.GONE);
-                                            signupButton.setVisibility(View.VISIBLE);
-                                            Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        }
-
-                                        @Override
-                                        public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                                            super.onCodeSent(verificationId,forceResendingToken);
-                                            Intent myInent1 = new Intent(SignUpActivity.this,OTPVerifyActivity.class);
-                                            myInent1.putExtra("phone", updatedPhone);
-                                            myInent1.putExtra("code", verificationId);
-                                            myInent1.putExtra("pass",password);
-                                            startActivity(myInent1);
-                                        }
-                                    })          // OnVerificationStateChangedCallbacks
-                                    .build();
-                    PhoneAuthProvider.verifyPhoneNumber(options);
+                    Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
+                    startActivity(intent);
                 }
-            }
-        });
-
-        loginRedirectText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
-                startActivity(intent);
             }
         });
     }
@@ -125,11 +81,6 @@ public class SignUpActivity extends AppCompatActivity {
     boolean isEmail(EditText text) {
         CharSequence email = text.getText().toString();
         return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
-    }
-
-    boolean isPhone(EditText text) {
-        CharSequence phone = text.getText().toString();
-        return (!TextUtils.isEmpty(phone) && Patterns.PHONE.matcher(phone).matches());
     }
 
     boolean isEmpty(EditText text) {
@@ -149,11 +100,6 @@ public class SignUpActivity extends AppCompatActivity {
             check = false;
         }
 
-        if (isPhone(signupPhone) == false) {
-            signupPhone.setError("Enter valid Phone!");
-            check = false;
-        }
-
         if (isEmail(signupEmail) == false) {
             signupEmail.setError("Enter valid Email!");
             check = false;
@@ -168,31 +114,5 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         return check;
-    }
-
-    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-
-                            FirebaseUser user = task.getResult().getUser();
-                            // Update UI
-                            Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
-                            startActivity(intent);
-                        } else {
-                            // Sign in failed, display a message and update the UI
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                // The verification code entered was invalid
-                                Toast.makeText(SignUpActivity.this,
-                                        "The verification code entered was invalid", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-                });
     }
 }

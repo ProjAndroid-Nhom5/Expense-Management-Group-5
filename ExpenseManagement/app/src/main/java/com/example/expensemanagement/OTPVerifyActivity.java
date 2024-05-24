@@ -251,7 +251,7 @@ public class OTPVerifyActivity extends AppCompatActivity {
 
                             FirebaseUser user = task.getResult().getUser();
                             // Update UI
-                            Intent intent = new Intent(OTPVerifyActivity.this, SignInActivity.class);
+                            Intent intent = new Intent(OTPVerifyActivity.this, SignUpActivity.class);
                             startActivity(intent);
                         } else {
                             // Sign in failed, display a message and update the UI
