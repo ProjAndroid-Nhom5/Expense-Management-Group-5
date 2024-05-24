@@ -123,7 +123,7 @@ public class HomeActivity extends AppCompatActivity {
         supplierFabBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, StoreAddProduct.class);
+                Intent intent = new Intent(HomeActivity.this, StoreAddSupplier.class);
                 startActivity(intent);
             }
         });
@@ -154,7 +154,7 @@ public class HomeActivity extends AppCompatActivity {
         supplierTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, StoreAddProduct.class);
+                Intent intent = new Intent(HomeActivity.this, StoreAddSupplier.class);
                 startActivity(intent);
             }
         });
