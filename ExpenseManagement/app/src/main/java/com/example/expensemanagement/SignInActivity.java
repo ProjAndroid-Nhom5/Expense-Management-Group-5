@@ -19,6 +19,7 @@ public class SignInActivity extends AppCompatActivity {
     private TextView mForgotPassword;
     private LinearLayout changeToSignUp;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

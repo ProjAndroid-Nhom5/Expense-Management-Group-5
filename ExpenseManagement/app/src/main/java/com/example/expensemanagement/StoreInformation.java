@@ -271,6 +271,7 @@ public class StoreInformation extends AppCompatActivity {
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 onBackPressed(); //
             }
         });
