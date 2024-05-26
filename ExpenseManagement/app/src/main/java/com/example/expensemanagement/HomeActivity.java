@@ -55,6 +55,7 @@ public class HomeActivity extends AppCompatActivity {
             fromBottomBgAnim,
             toBottomBgAnim;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

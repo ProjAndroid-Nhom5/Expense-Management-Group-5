@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -72,6 +74,7 @@ public class BillInformation extends AppCompatActivity {
         exit_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 onBackPressed();
             }
         });
@@ -97,7 +100,7 @@ public class BillInformation extends AppCompatActivity {
             Float[] shipCost = {2323.3f,2323.3f};
             Float[] totalPayment = {2323.3f,2323.3f};
             for (int i = 0; i < id.length; i++){
-                listBillEcommerceData = new ListBillEcommerceData(id[i],
+                listBillEcommerceData  = new ListBillEcommerceData(id[i],
                         nameEcommerce[i],
                         date[i],
                         nameCustomer[i],
@@ -112,6 +115,19 @@ public class BillInformation extends AppCompatActivity {
             listBillEcommerceAdapter = new ListBillEcommerceAdapter(BillInformation.this, listBillEcommerceDataArrayList);
             listView.setAdapter(listBillEcommerceAdapter);
             listView.setClickable(true);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ListBillEcommerceData selectedItem = (ListBillEcommerceData) parent.getItemAtPosition(position);
+                    Intent intent = new Intent(BillInformation.this, Bill_Detail_Ecommerce.class);
+                    intent.putExtra("ecommerceName", selectedItem.getNameEcommerce());
+                    intent.putExtra("date", selectedItem.getDate());
+                    intent.putExtra("totalPayment", selectedItem.getTotalPayment());
+                    startActivity(intent);
+                }
+            });
+
         }
         else if (position == 2){
             BarDataSet barDataSet1 = new BarDataSet(barEntries1(),"Facility");
@@ -139,6 +155,18 @@ public class BillInformation extends AppCompatActivity {
             listBillFacitilyAdapter = new ListBillFacitilyAdapter(BillInformation.this, listBillFacilityDataArrayList);
             listView.setAdapter(listBillFacitilyAdapter);
             listView.setClickable(true);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ListBillFacilityData selectedItem = (ListBillFacilityData) parent.getItemAtPosition(position);
+                    Intent intent = new Intent(BillInformation.this, Bill_Detail_Facility.class);
+                    intent.putExtra("nameFacility", selectedItem.getNameFacility());
+                    intent.putExtra("date", selectedItem.getDate());
+                    intent.putExtra("totalPayment", selectedItem.getTotalPayment());
+                    startActivity(intent);
+                }
+            });
         }else if (position == 3){
             BarDataSet barDataSet1 = new BarDataSet(barEntries1(),"Product");
             barDataSet1.setColors(Color.argb(188,119,193,202));
@@ -161,6 +189,18 @@ public class BillInformation extends AppCompatActivity {
             listBillProductAdapter = new ListBillProductAdapter(BillInformation.this, listBillProductDataArrayList);
             listView.setAdapter(listBillProductAdapter);
             listView.setClickable(true);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ListBillProductData selectedItem = (ListBillProductData) parent.getItemAtPosition(position);
+                    Intent intent = new Intent(BillInformation.this, Bill_Detail_Product.class);
+                    intent.putExtra("nameProduct", selectedItem.getNameProduct());
+                    intent.putExtra("billID", selectedItem.getBillID());
+                    intent.putExtra("getQuantity", selectedItem.getQuantity());
+                    startActivity(intent);
+                }
+            });
         }else if (position == 4){
             BarDataSet barDataSet1 = new BarDataSet(barEntries1(),"Store");
             barDataSet1.setColors(Color.argb(188,119,193,202));
@@ -190,6 +230,19 @@ public class BillInformation extends AppCompatActivity {
             listBillStoreAdapter = new ListBillStoreAdapter(BillInformation.this, listBillStoreDataArrayList);
             listView.setAdapter(listBillStoreAdapter);
             listView.setClickable(true);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ListBillStoreData selectedItem = (ListBillStoreData) parent.getItemAtPosition(position);
+                    Intent intent = new Intent(BillInformation.this, Bill_Detail_Store.class);
+                    intent.putExtra("nameEmployee", selectedItem.getNameEmploye());
+                    intent.putExtra("date", selectedItem.getDate());
+                    intent.putExtra("totalPayment", selectedItem.getTotal());
+                    startActivity(intent);
+                }
+            });
+
         }else if (position == 5){
             BarDataSet barDataSet1 = new BarDataSet(barEntries1(),"Supply");
             barDataSet1.setColors(Color.argb(188,119,193,202));
@@ -218,6 +271,18 @@ public class BillInformation extends AppCompatActivity {
             listBillSupplyAdapter = new ListBillSupplyAdapter(BillInformation.this, listBillSupplyDataArrayList);
             listView.setAdapter(listBillSupplyAdapter);
             listView.setClickable(true);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ListBillSupplyData selectedItem = (ListBillSupplyData) parent.getItemAtPosition(position);
+                    Intent intent = new Intent(BillInformation.this, Bill_Detail_Supply.class);
+                    intent.putExtra("nameSupplier", selectedItem.getNameSupplier());
+                    intent.putExtra("date", selectedItem.getDate());
+                    intent.putExtra("totalPayment", selectedItem.getTotal());
+                    startActivity(intent);
+                }
+            });
         }else if (position == 6){
             BarDataSet barDataSet1 = new BarDataSet(barEntries1(),"Workshift");
             barDataSet1.setColors(Color.argb(188,119,193,202));
@@ -246,8 +311,23 @@ public class BillInformation extends AppCompatActivity {
             listBillWorkshiftAdapter = new ListBillWorkshiftAdapter(BillInformation.this, listBillWorkshiftDataArrayList);
             listView.setAdapter(listBillWorkshiftAdapter);
             listView.setClickable(true);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ListBillWorkshiftData selectedItem = (ListBillWorkshiftData) parent.getItemAtPosition(position);
+                    Intent intent = new Intent(BillInformation.this, Bill_Detail_Workshift.class);
+                    intent.putExtra("nameEmployee", selectedItem.getNameEmploye());
+                    intent.putExtra("date", selectedItem.getDate());
+                    intent.putExtra("totalPayment", selectedItem.getTotal());
+                    startActivity(intent);
+                }
+            });
         }
     }
+
+
+
     private ArrayList<BarEntry> barEntries1(){
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         barEntries.add(new BarEntry(1,2000));
