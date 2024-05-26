@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context=".Instructions_and_regulations">
+    tools:context=".Admin.Instructions_and_regulations">
 
     <RelativeLayout
         android:id="@+id/header_instructions_and_regulations"

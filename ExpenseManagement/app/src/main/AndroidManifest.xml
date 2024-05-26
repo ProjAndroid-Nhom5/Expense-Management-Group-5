@@ -13,88 +13,88 @@
         android:theme="@style/Theme.ExpenseManagement"
         tools:targetApi="31">
         <activity
-            android:name=".SendOTPActivity"
+            android:name=".Admin.SendOTPActivity"
             android:exported="false" />
         <activity
-            android:name=".Bill_Detail_Ecommerce"
+            android:name=".Bill.Bill_Detail_Ecommerce"
             android:exported="false" />
         <activity
-            android:name=".Bill_Detail_Workshift"
+            android:name=".Bill.Bill_Detail_Workshift"
             android:exported="false" />
         <activity
-            android:name=".Bill_Detail_Supply"
+            android:name=".Bill.Bill_Detail_Supply"
             android:exported="false" />
         <activity
-            android:name=".Bill_Detail_Store"
+            android:name=".Bill.Bill_Detail_Store"
             android:exported="false" />
         <activity
-            android:name=".Bill_Detail_Product"
+            android:name=".Bill.Bill_Detail_Product"
             android:exported="false" />
         <activity
-            android:name=".Bill_Detail_Facility"
+            android:name=".Bill.Bill_Detail_Facility"
             android:exported="false" />
         <activity
-            android:name=".Admin_Change_password"
+            android:name=".Admin.Admin_Change_password"
             android:exported="false" />
         <activity
-            android:name=".Instructions_and_regulations"
+            android:name=".Admin.Instructions_and_regulations"
             android:exported="false" />
         <activity
-            android:name=".StoreAddSupplier"
+            android:name=".Store.StoreAddSupplier"
             android:exported="false" />
         <activity
-            android:name=".StoreDetailSupplier"
+            android:name=".Store.StoreDetailSupplier"
             android:exported="false" />
         <activity
-            android:name=".StoreDetailProduct"
+            android:name=".Store.StoreDetailProduct"
             android:exported="false" />
         <activity
-            android:name=".StoreAddProduct"
+            android:name=".Store.StoreAddProduct"
             android:exported="false" />
         <activity
-            android:name=".StoreAddEmployee"
+            android:name=".Store.StoreAddEmployee"
             android:exported="false" />
         <activity
-            android:name=".StoreDetailEmployee"
+            android:name=".Store.StoreDetailEmployee"
             android:exported="false" />
         <activity
-            android:name=".Store_Detail"
+            android:name=".Store.Store_Detail"
             android:exported="false" />
         <activity
-            android:name=".Admin_Detail"
+            android:name=".Admin.Admin_Detail"
             android:exported="false" />
         <activity
-            android:name=".BillInformation"
+            android:name=".Bill.BillInformation"
             android:exported="false" />
         <activity
-            android:name=".StoreAddEcommerce"
+            android:name=".Store.StoreAddEcommerce"
             android:exported="false" />
         <activity
-            android:name=".StoreDetailEcommerce"
+            android:name=".Store.StoreDetailEcommerce"
             android:exported="false" />
         <activity
-            android:name=".StoreInformation"
+            android:name=".Store.StoreInformation"
             android:exported="false" />
         <activity
-            android:name=".Forgotpassword1"
+            android:name=".Admin.Forgotpassword1"
             android:exported="false" />
         <activity
-            android:name=".Forgotpassword2"
+            android:name=".Admin.Forgotpassword2"
             android:exported="false" />
         <activity
-            android:name=".Forgotpassword3"
+            android:name=".Admin.Forgotpassword3"
             android:exported="false" />
         <activity
-            android:name=".OTPVerifyActivity"
+            android:name=".Admin.OTPVerifyActivity"
             android:exported="false" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".Admin.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".Home.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInActivity"
+            android:name=".Admin.SignInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
