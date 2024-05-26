@@ -16,9 +16,6 @@
             android:name=".SendOTPActivity"
             android:exported="false" />
         <activity
-            android:name=".SendPhoneOTPActivity"
-            android:exported="false" />
-        <activity
             android:name=".Bill_Detail_Ecommerce"
             android:exported="false" />
         <activity

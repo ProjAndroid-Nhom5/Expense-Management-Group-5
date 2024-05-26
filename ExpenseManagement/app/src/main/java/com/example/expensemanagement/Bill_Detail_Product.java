@@ -1,6 +1,11 @@
 package com.example.expensemanagement;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,5 +20,35 @@ public class Bill_Detail_Product extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_bill_detail_product);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+
+        ImageView close_product_detail = findViewById(R.id.close_product_detail);
+
+        close_product_detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Bill_Detail_Product.this, BillInformation.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        String nameProduct = getIntent().getStringExtra("nameProduct");
+        String billID = getIntent().getStringExtra("billID");
+        Float getQuantity = getIntent().getFloatExtra("getQuantity", 0.0f);
+
+        EditText inputNameProduct = findViewById(R.id.inpuNameProduct);
+        EditText billId = findViewById(R.id.inputBillID);
+        TextView inputQuantity =  findViewById(R.id.inputQuantity);
+
+        inputNameProduct.setText(nameProduct);
+        billId.setText(billID);
+        inputQuantity.setText(String.valueOf(getQuantity));
     }
 }
