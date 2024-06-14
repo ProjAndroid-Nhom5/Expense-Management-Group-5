@@ -90,7 +90,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="20dp">
                     <TextView
-                        android:id="@+id/NameProduct"
+                        android:id="@+id/detailNameProduct"
                         android:layout_width="175dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="30dp"
@@ -103,7 +103,7 @@
                         android:id="@+id/inputNameProduct"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/NameProduct"
+                        android:layout_below="@id/detailNameProduct"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="5dp"
                         android:backgroundTint="@color/darkblue"
@@ -112,33 +112,10 @@
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/NameStore"
+                        android:id="@+id/detailQuantity"
                         android:layout_width="120dp"
                         android:layout_height="30dp"
                         android:layout_below="@id/inputNameProduct"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginTop="20dp"
-                        android:text="Name Store*:"
-                        android:textColor="@color/darkblue"
-                        android:textSize="15sp" />
-
-                    <EditText
-                        android:id="@+id/inputNameStore"
-                        android:layout_width="250dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/NameStore"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginTop="5dp"
-                        android:backgroundTint="@color/darkblue"
-                        android:padding="5dp"
-                        android:textColor="@color/darkblue"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/Quantity"
-                        android:layout_width="120dp"
-                        android:layout_height="30dp"
-                        android:layout_below="@id/inputNameStore"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
                         android:text="Quantity:"
@@ -149,7 +126,7 @@
                         android:id="@+id/inputQuantity"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/Quantity"
+                        android:layout_below="@id/detailQuantity"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="5dp"
                         android:backgroundTint="@color/darkblue"
@@ -158,7 +135,7 @@
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/Price"
+                        android:id="@+id/detailPrice"
                         android:layout_width="120dp"
                         android:layout_height="30dp"
                         android:layout_below="@id/inputQuantity"
@@ -172,7 +149,7 @@
                         android:id="@+id/inputPrice"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/Price"
+                        android:layout_below="@id/detailPrice"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="5dp"
                         android:backgroundTint="@color/darkblue"

@@ -112,33 +112,10 @@
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/NameStore"
-                        android:layout_width="120dp"
-                        android:layout_height="30dp"
-                        android:layout_below="@id/inputNameEmployee"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginTop="20dp"
-                        android:text="Name Store*:"
-                        android:textColor="@color/darkblue"
-                        android:textSize="15sp" />
-
-                    <EditText
-                        android:id="@+id/inputNameStore"
-                        android:layout_width="250dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/NameStore"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginTop="5dp"
-                        android:backgroundTint="@color/darkblue"
-                        android:padding="5dp"
-                        android:textColor="@color/darkblue"
-                        android:textSize="15sp" />
-
-                    <TextView
                         android:id="@+id/Email"
                         android:layout_width="120dp"
                         android:layout_height="30dp"
-                        android:layout_below="@id/inputNameStore"
+                        android:layout_below="@id/inputNameEmployee"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
                         android:text="Email:"
@@ -204,7 +181,7 @@
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/DayOfWork"
+                        android:id="@+id/DayOfWorkLabel"
                         android:layout_width="150dp"
                         android:layout_height="30dp"
                         android:layout_below="@id/inputAddress"
@@ -218,16 +195,19 @@
                         android:id="@+id/inputDayOfWork"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/DayOfWork"
+                        android:layout_below="@id/DayOfWorkLabel"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="5dp"
                         android:backgroundTint="@color/darkblue"
                         android:padding="5dp"
                         android:textColor="@color/darkblue"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:clickable="true"
+                        android:focusable="false"
+                        android:onClick="showDatePickerDialog" />
 
                     <TextView
-                        android:id="@+id/Position"
+                        android:id="@+id/PositionLabel"
                         android:layout_width="120dp"
                         android:layout_height="30dp"
                         android:layout_below="@id/inputDayOfWork"
@@ -237,11 +217,11 @@
                         android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/inputPosition"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/Position"
+                        android:layout_below="@id/PositionLabel"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="5dp"
                         android:backgroundTint="@color/darkblue"

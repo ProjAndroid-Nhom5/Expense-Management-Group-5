@@ -1,62 +1,26 @@
 package com.example.expensemanagement.Store.Model;
 
 public class ListStoreEcommerceData {
-    private Integer EcommerceID,
-            PaymentFee,
-            FixedFee,
-            ServiceFee,
-            Receivables;
-    private String nameStore,
-            EcommerceName;
-    private Float FreightSurcharge,
-                PersonalIncomeTaxVAT;
+  
+    private String EcommerceName;
+    private int EcommerceID,
+                FixedFee,
+                ServiceFee,
+                PaymentFee,
+                Receivables;
+    private float VAT,
+                FreightSurcharge;
+    public ListStoreEcommerceData(){}
 
-    public Integer getEcommerceID() {
-        return EcommerceID;
-    }
-
-    public void setEcommerceID(Integer ecommerceID) {
+    public ListStoreEcommerceData(String ecommerceName, int ecommerceID, int fixedFee, int serviceFee, int paymentFee, int receivables, float vat, float freightSurcharge) {
+        EcommerceName = ecommerceName;
         EcommerceID = ecommerceID;
-    }
-
-    public Integer getPaymentFee() {
-        return PaymentFee;
-    }
-
-    public void setPaymentFee(Integer paymentFee) {
-        PaymentFee = paymentFee;
-    }
-
-    public Integer getFixedFee() {
-        return FixedFee;
-    }
-
-    public void setFixedFee(Integer fixedFee) {
         FixedFee = fixedFee;
-    }
-
-    public Integer getServiceFee() {
-        return ServiceFee;
-    }
-
-    public void setServiceFee(Integer serviceFee) {
         ServiceFee = serviceFee;
-    }
-
-    public Integer getReceivables() {
-        return Receivables;
-    }
-
-    public void setReceivables(Integer receivables) {
+        PaymentFee = paymentFee;
         Receivables = receivables;
-    }
-
-    public String getNameStore() {
-        return nameStore;
-    }
-
-    public void setNameStore(String nameStore) {
-        this.nameStore = nameStore;
+        VAT = vat;
+        FreightSurcharge = freightSurcharge;
     }
 
     public String getEcommerceName() {
@@ -67,31 +31,59 @@ public class ListStoreEcommerceData {
         EcommerceName = ecommerceName;
     }
 
-    public Float getFreightSurcharge() {
+    public int getEcommerceID() {
+        return EcommerceID;
+    }
+
+    public void setEcommerceID(int ecommerceID) {
+        EcommerceID = ecommerceID;
+    }
+
+    public int getFixedFee() {
+        return FixedFee;
+    }
+
+    public void setFixedFee(int fixedFee) {
+        FixedFee = fixedFee;
+    }
+
+    public int getServiceFee() {
+        return ServiceFee;
+    }
+
+    public void setServiceFee(int serviceFee) {
+        ServiceFee = serviceFee;
+    }
+
+    public int getPaymentFee() {
+        return PaymentFee;
+    }
+
+    public void setPaymentFee(int paymentFee) {
+        PaymentFee = paymentFee;
+    }
+
+    public int getReceivables() {
+        return Receivables;
+    }
+
+    public void setReceivables(int receivables) {
+        Receivables = receivables;
+    }
+
+    public float getVAT() {
+        return VAT;
+    }
+
+    public void setVAT(float VAT) {
+        this.VAT = VAT;
+    }
+
+    public float getFreightSurcharge() {
         return FreightSurcharge;
     }
 
-    public void setFreightSurcharge(Float freightSurcharge) {
+    public void setFreightSurcharge(float freightSurcharge) {
         FreightSurcharge = freightSurcharge;
-    }
-
-    public Float getPersonalIncomeTaxVAT() {
-        return PersonalIncomeTaxVAT;
-    }
-
-    public void setPersonalIncomeTaxVAT(Float personalIncomeTaxVAT) {
-        PersonalIncomeTaxVAT = personalIncomeTaxVAT;
-    }
-
-    public ListStoreEcommerceData(Integer ecommerceID, Integer paymentFee, Integer fixedFee, Integer serviceFee, Integer receivables, String nameStore, String ecommerceName, Float freightSurcharge, Float personalIncomeTaxVAT) {
-        this.EcommerceID = ecommerceID;
-        this.PaymentFee = paymentFee;
-        this.FixedFee = fixedFee;
-        this.ServiceFee = serviceFee;
-        this.Receivables = receivables;
-        this.nameStore = nameStore;
-        this.EcommerceName = ecommerceName;
-        this.FreightSurcharge = freightSurcharge;
-        this.PersonalIncomeTaxVAT = personalIncomeTaxVAT;
     }
 }

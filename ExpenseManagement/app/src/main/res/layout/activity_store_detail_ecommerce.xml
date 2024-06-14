@@ -111,33 +111,10 @@
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/NameStore"
-                        android:layout_width="120dp"
-                        android:layout_height="30dp"
-                        android:layout_below="@id/inputNameEcommerce"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginTop="20dp"
-                        android:text="Name Store*:"
-                        android:textColor="@color/darknavyblue"
-                        android:textSize="15sp" />
-
-                    <EditText
-                        android:id="@+id/inputNameStore"
-                        android:layout_width="250dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/NameStore"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginTop="5dp"
-                        android:backgroundTint="@color/darkblue"
-                        android:padding="5dp"
-                        android:textColor="@color/darkblue"
-                        android:textSize="15sp" />
-
-                    <TextView
                         android:id="@+id/PaymentFee"
                         android:layout_width="120dp"
                         android:layout_height="30dp"
-                        android:layout_below="@id/inputNameStore"
+                        android:layout_below="@id/inputNameEcommerce"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
                         android:text="Payment Fee:"

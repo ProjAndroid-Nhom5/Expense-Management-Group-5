@@ -1,27 +1,17 @@
 package com.example.expensemanagement.Store.Model;
 
 public class ListStoreProductData {
-    private String ProductID,
-                ProductName,
-                StoreName;
+    private String ProductName;
+    private int ProductID,
+                Quantity,
+                Price;
+    public ListStoreProductData(){}
 
-    private Integer Quantity,
-                    Price;
-
-    public ListStoreProductData(String productID, String productName, String storeName, Integer quantity, Integer price) {
-        ProductID = productID;
+    public ListStoreProductData(String productName, int productID, int quantity, int price) {
         ProductName = productName;
-        StoreName = storeName;
+        ProductID = productID;
         Quantity = quantity;
         Price = price;
-    }
-
-    public String getProductID() {
-        return ProductID;
-    }
-
-    public void setProductID(String productID) {
-        ProductID = productID;
     }
 
     public String getProductName() {
@@ -32,27 +22,27 @@ public class ListStoreProductData {
         ProductName = productName;
     }
 
-    public String getStoreName() {
-        return StoreName;
+    public int getProductID() {
+        return ProductID;
     }
 
-    public void setStoreName(String storeName) {
-        StoreName = storeName;
+    public void setProductID(int productID) {
+        ProductID = productID;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return Quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         Quantity = quantity;
     }
 
-    public Integer getPrice() {
+    public int getPrice() {
         return Price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(int price) {
         Price = price;
     }
 }

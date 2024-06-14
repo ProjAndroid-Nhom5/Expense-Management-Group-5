@@ -1,21 +1,19 @@
 package com.example.expensemanagement.Store.Model;
 
 public class ListStoreSupplierData {
-    private String SupplierID,
-            SupplierName,
-            StoreName;
-
-    public ListStoreSupplierData(String supplierID, String supplierName, String storeName) {
+    private int SupplierID;
+    private String SupplierName;
+    public ListStoreSupplierData(){}
+    public ListStoreSupplierData(int supplierID, String supplierName) {
         SupplierID = supplierID;
         SupplierName = supplierName;
-        StoreName = storeName;
     }
 
-    public String getSupplierID() {
+    public int getSupplierID() {
         return SupplierID;
     }
 
-    public void setSupplierID(String supplierID) {
+    public void setSupplierID(int supplierID) {
         SupplierID = supplierID;
     }
 
@@ -25,13 +23,5 @@ public class ListStoreSupplierData {
 
     public void setSupplierName(String supplierName) {
         SupplierName = supplierName;
-    }
-
-    public String getStoreName() {
-        return StoreName;
-    }
-
-    public void setStoreName(String storeName) {
-        StoreName = storeName;
     }
 }

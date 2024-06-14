@@ -3,21 +3,21 @@ package com.example.expensemanagement.Store.Model;
 import java.util.Date;
 
 public class ListStoreEmployeeData {
-    private String EmployeeID;
-    private String EmployeeName;
-    private String StoreName;
-    private String Email;
-    private String Phone;
-    private String Address;
-    private String Position;
-    private String DayOfWork;
-    private Integer BaseSalary;
-    private Integer BonusSalary;
+  
+    private int EmployeeID;
+    private String EmployeeName,
+                    Email,
+                    Phone,
+                    Address,
+                    Position;
+    private Date DayOfWork;
+    private int BaseSalary,
+                BonusSalary;
+    public ListStoreEmployeeData(){}
 
-    public ListStoreEmployeeData(String employeeID, String employeeName, String storeName, String email, String phone, String address, String position, String dayOfWork, Integer baseSalary, Integer bonusSalary) {
+    public ListStoreEmployeeData(int employeeID, String employeeName, String email, String phone, String address, String position, Date dayOfWork, int baseSalary, int bonusSalary) {
         EmployeeID = employeeID;
         EmployeeName = employeeName;
-        StoreName = storeName;
         Email = email;
         Phone = phone;
         Address = address;
@@ -27,12 +27,11 @@ public class ListStoreEmployeeData {
         BonusSalary = bonusSalary;
     }
 
-    // Getters and setters for all fields
-    public String getEmployeeID() {
+    public int getEmployeeID() {
         return EmployeeID;
     }
 
-    public void setEmployeID(String employeeID) {
+    public void setEmployeeID(int employeeID) {
         EmployeeID = employeeID;
     }
 
@@ -42,14 +41,6 @@ public class ListStoreEmployeeData {
 
     public void setEmployeeName(String employeeName) {
         EmployeeName = employeeName;
-    }
-
-    public String getStoreName() {
-        return StoreName;
-    }
-
-    public void setStoreName(String storeName) {
-        StoreName = storeName;
     }
 
     public String getEmail() {
@@ -84,27 +75,27 @@ public class ListStoreEmployeeData {
         Position = position;
     }
 
-    public String getDayOfWork() {
+    public Date getDayOfWork() {
         return DayOfWork;
     }
 
-    public void setDayOfWork(String dayOfWork) {
+    public void setDayOfWork(Date dayOfWork) {
         DayOfWork = dayOfWork;
     }
 
-    public Integer getBaseSalary() {
+    public int getBaseSalary() {
         return BaseSalary;
     }
 
-    public void setBaseSalary(Integer baseSalary) {
+    public void setBaseSalary(int baseSalary) {
         BaseSalary = baseSalary;
     }
 
-    public Integer getBonusSalary() {
+    public int getBonusSalary() {
         return BonusSalary;
     }
 
-    public void setBonusSalary(Integer bonusSalary) {
+    public void setBonusSalary(int bonusSalary) {
         BonusSalary = bonusSalary;
     }
 }

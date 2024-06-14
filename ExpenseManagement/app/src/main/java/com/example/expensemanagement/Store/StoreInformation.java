@@ -1,18 +1,19 @@
 package com.example.expensemanagement.Store;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.view.View;
-import android.content.Intent;
-import android.widget.ListView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
 
 import com.example.expensemanagement.R;
 import com.example.expensemanagement.Store.Adapter.ListStoreEcommerceAdapter;
@@ -24,31 +25,40 @@ import com.example.expensemanagement.Store.Model.ListStoreEmployeeData;
 import com.example.expensemanagement.Store.Model.ListStoreProductData;
 import com.example.expensemanagement.Store.Model.ListStoreSupplierData;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.lang.String;
 
 public class StoreInformation extends AppCompatActivity {
+    //ecommerce
+    List<ListStoreEcommerceData> ecommerceDataList;
+    ListStoreEcommerceAdapter ecommerceAdapter;
 
-    //Ecommerce
-    ListStoreEcommerceAdapter listStoreEcommerceAdapter;
-    ArrayList<ListStoreEcommerceData> listStoreEcommerceDataArrayList = new ArrayList<>();
-    ListStoreEcommerceData listStoreEcommerceData;
+    // emloyee
+    List<ListStoreEmployeeData> employeeDataList;
+    ListStoreEmployeeAdapter employeeAdapter;
 
-    //Employee
-    ListStoreEmployeeAdapter listStoreEmployeeAdapter;
-    ArrayList<ListStoreEmployeeData> listStoreEmployeeDataArrayList = new ArrayList<>();
-    ListStoreEmployeeData listStoreEmployeeData;
+    // product
+    List<ListStoreProductData> productDataList;
+    ListStoreProductAdapter productAdapter;
 
-    //Product
-    ListStoreProductAdapter listStoreProductAdapter;
-    ArrayList<ListStoreProductData> listStoreProductDataArrayList = new ArrayList<>();
-    ListStoreProductData listStoreProductData;
-
-    //Supplier
-    ListStoreSupplierAdapter listStoreSupplierAdapter;
-    ArrayList<ListStoreSupplierData> listStoreSupplierDataArrayList = new ArrayList<>();
-    ListStoreSupplierData listStoreSupplierData;
-    ListView listView;
-    ImageView header_image;
+    //supplier
+    List<ListStoreSupplierData> supplierDataList;
+    ListStoreSupplierAdapter supplierAdapter;
+    DatabaseReference databaseReference;
+    ValueEventListener eventListener;
+    RecyclerView recyclerView;
+    ImageView header_image, icon_az2;
+    SearchView searchView;
+    boolean isAscending = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,57 +74,70 @@ public class StoreInformation extends AppCompatActivity {
         Intent intent = getIntent();
         int position = intent.getIntExtra("position", 0);
 
-        listView = findViewById(R.id.listview);
+        recyclerView = findViewById(R.id.recyclerView);
         header_image = findViewById(R.id.header_image);
+        icon_az2 = findViewById(R.id.icon_az2);
+        searchView = findViewById(R.id.search);
+
+        ImageView exit_icon = findViewById(R.id.exit_icon);
+        exit_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         if (position == 1) {
             header_image.setImageResource(R.drawable.ec2);
 
-            Integer[] EcommerceID = {0, 1, 2, 3};
-            String[] nameEcommerce = {"Pasta", "Maggi", "Pasta", "Maggi"};
-            String[] nameStore = {"Lazada", "Shopee", "Amazon", "Tiki"};
-            Integer[] PaymentFee = {0, 0 ,0, 0};
-            Integer[] FixedFee = {0, 0 ,0, 0};
-            Integer[] ServiceFee = {0, 0 ,0, 0};
-            Float[] FreightSurcharge = {0.0f, 0.0f ,0.0f, 0.0f};
-            Float[] PersonalIncomeTaxVAT = {0.0f, 0.0f ,0.0f, 0.0f};
-            Integer[] Receivables = {0, 0 ,0, 0};
+            searchView.clearFocus();
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(StoreInformation.this, 1);
+            recyclerView.setLayoutManager(gridLayoutManager);
 
-            ArrayList<ListStoreEcommerceData> dataArrayList = new ArrayList<>();
-            ListStoreEcommerceData listData;
+            ecommerceDataList = new ArrayList<>();
 
-            for (int i = 0; i < EcommerceID.length; i++) {
-                listData = new ListStoreEcommerceData(
-                        EcommerceID[i],
-                        PaymentFee[i],
-                        FixedFee[i],
-                        ServiceFee[i],
-                        Receivables[i],
-                        nameStore[i],
-                        nameEcommerce[i],
-                        FreightSurcharge[i],
-                        PersonalIncomeTaxVAT[i]
-                );
-                dataArrayList.add(listData);
-            }
+            ecommerceAdapter = new ListStoreEcommerceAdapter(StoreInformation.this, ecommerceDataList);
+            recyclerView.setAdapter(ecommerceAdapter);
 
-            listStoreEcommerceAdapter = new ListStoreEcommerceAdapter(StoreInformation.this, dataArrayList);
-            listView.setAdapter(listStoreEcommerceAdapter);
-            listView.setClickable(true);
+            databaseReference = FirebaseDatabase.getInstance().getReference("ecommerces");
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    ListStoreEcommerceData selectedItem = (ListStoreEcommerceData) parent.getItemAtPosition(position);
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    ecommerceDataList.clear();
+                    for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+                        ListStoreEcommerceData employeeData = itemSnapshot.getValue(ListStoreEcommerceData.class);
+                        ecommerceDataList.add(employeeData);
+                    }
+                    ecommerceAdapter.notifyDataSetChanged();
+                }
 
-                    Intent intent = new Intent(StoreInformation.this, StoreDetailEcommerce.class);
-                    intent.putExtra("ecommerceName", selectedItem.getEcommerceName());
-                    intent.putExtra("storeName", selectedItem.getNameStore());
-                    startActivity(intent);
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
                 }
             });
 
-            // Chuyển đến trang AddEcommerce khi nhấn vào add_button
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    searchListEcommerce(newText);
+                    return true;
+                }
+            });
+
+            icon_az2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sortEcommerceList();
+                }
+            });
+
             ImageView addButton = findViewById(R.id.add_button);
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -126,52 +149,55 @@ public class StoreInformation extends AppCompatActivity {
         } else if (position == 2) {
             header_image.setImageResource(R.drawable.workshift);
 
-            String[] EmployeeID = {"0", "0", "0", "0"};
-            String[] EmployeeName = {"Pasta", "Maggi", "Pasta", "Maggi"};
-            String[] StoreName = {"Lazada", "Shopee", "Amazon", "Tiki"};
-            String[] Email = {"0", "0", "0", "0"};
-            String[] Phone = {"0", "0", "0", "0"};
-            String[] Address = {"0", "0", "0", "0"};
-            String[] Position = {"0", "0", "0", "0"};
-            String[] DayOfWork = {"0", "0", "0", "0"};
-            Integer[] BaseSalary = {0, 0, 0, 0};
-            Integer[] BonusSalary = {0, 0, 0, 0};
+            searchView.clearFocus();
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(StoreInformation.this, 1);
+            recyclerView.setLayoutManager(gridLayoutManager);
 
-            ArrayList<ListStoreEmployeeData> dataArrayList = new ArrayList<>();
+            employeeDataList = new ArrayList<>();
+            employeeAdapter = new ListStoreEmployeeAdapter(StoreInformation.this, employeeDataList);
+            recyclerView.setAdapter(employeeAdapter);
 
-            for (int i = 0; i < EmployeeID.length; i++) {
-                ListStoreEmployeeData listData = new ListStoreEmployeeData(
-                        EmployeeID[i],
-                        EmployeeName[i],
-                        StoreName[i],
-                        Email[i],
-                        Phone[i],
-                        Address[i],
-                        Position[i],
-                        DayOfWork[i],
-                        BaseSalary[i],
-                        BonusSalary[i]
-                );
-                dataArrayList.add(listData);
-            }
+            databaseReference = FirebaseDatabase.getInstance().getReference("employees");
 
-            listStoreEmployeeAdapter = new ListStoreEmployeeAdapter(StoreInformation.this, dataArrayList);
-            listView.setAdapter(listStoreEmployeeAdapter);
-            listView.setClickable(true);
-
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    ListStoreEmployeeData selectedItem = (ListStoreEmployeeData) parent.getItemAtPosition(position);
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    employeeDataList.clear();
+                    for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+                        ListStoreEmployeeData employeeData = itemSnapshot.getValue(ListStoreEmployeeData.class);
+                        if (employeeData != null) {
+                            employeeDataList.add(employeeData);
+                        }
+                    }
+                    employeeAdapter.notifyDataSetChanged();
+                }
 
-                    Intent intent = new Intent(StoreInformation.this, StoreDetailEmployee.class);
-                    intent.putExtra("EmployeeName", selectedItem.getEmployeeName());
-                    intent.putExtra("storeName", selectedItem.getStoreName());
-                    startActivity(intent);
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Xử lý lỗi nếu cần
                 }
             });
 
-            // Chuyển đến trang AddEcommerce khi nhấn vào add_button
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    searchListEmployee(newText);
+                    return true;
+                }
+            });
+
+            icon_az2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sortEmployeeList();
+                }
+            });
+
             ImageView addButton = findViewById(R.id.add_button);
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -180,107 +206,244 @@ public class StoreInformation extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-        } else if (position == 3) {
-            header_image.setImageResource(R.drawable.product);
+        }
+        else if (position == 3) {
+                header_image.setImageResource(R.drawable.product);
 
-            String[] ProductID = {"0", "1", "2", "3"};
-            String[] ProductName = {"Pasta", "Maggi", "Pasta", "Maggi"};
-            String[] StoreName = {"0", "0", "0", "0"};
-            Integer[] Quantity = {0, 0, 0 , 0};
-            Integer[] Price = {0, 0, 0 , 0};
+                searchView.clearFocus();
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(StoreInformation.this, 1);
+                recyclerView.setLayoutManager(gridLayoutManager);
 
-            ArrayList<ListStoreProductData> dataArrayList = new ArrayList<>();
-            ListStoreProductData listData;
+                productDataList = new ArrayList<>();
 
-            for (int i = 0; i < ProductID.length; i++) {
-                listData = new ListStoreProductData(
-                        ProductID[i],
-                        ProductName[i],
-                        StoreName[i],
-                        Quantity[i],
-                        Price[i]
-                );
-                dataArrayList.add(listData);
+                productAdapter = new ListStoreProductAdapter(StoreInformation.this, productDataList);
+                recyclerView.setAdapter(productAdapter);
+
+                databaseReference = FirebaseDatabase.getInstance().getReference("products");
+
+                eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        productDataList.clear();
+                        for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+                            ListStoreProductData productData = itemSnapshot.getValue(ListStoreProductData.class);
+                            productDataList.add(productData);
+                        }
+                        productAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        searchListProduct(newText);
+                        return true;
+                    }
+                });
+
+                icon_az2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        sortProductList();
+                    }
+                });
+
+                ImageView addButton = findViewById(R.id.add_button);
+                addButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(StoreInformation.this, StoreAddProduct.class);
+                        startActivity(intent);
+                    }
+                });
+            } else if (position == 4) {
+                header_image.setImageResource(R.drawable.supplier);
+
+                searchView.clearFocus();
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(StoreInformation.this, 1);
+                recyclerView.setLayoutManager(gridLayoutManager);
+
+                supplierDataList = new ArrayList<>();
+
+                supplierAdapter = new ListStoreSupplierAdapter(StoreInformation.this, supplierDataList);
+                recyclerView.setAdapter(supplierAdapter);
+
+                databaseReference = FirebaseDatabase.getInstance().getReference("suppliers");
+
+                eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        supplierDataList.clear();
+                        for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+                            ListStoreSupplierData supplierData = itemSnapshot.getValue(ListStoreSupplierData.class);
+                            supplierDataList.add(supplierData);
+                        }
+                        supplierAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        searchListSupplier(newText);
+                        return true;
+                    }
+                });
+                icon_az2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        sortSupplierList();
+                    }
+                });
+
+                ImageView addButton = findViewById(R.id.add_button);
+                addButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(StoreInformation.this, StoreAddSupplier.class);
+                        startActivity(intent);
+                    }
+                });
             }
+    }
 
-            listStoreProductAdapter = new ListStoreProductAdapter(StoreInformation.this, dataArrayList);
-            listView.setAdapter(listStoreProductAdapter);
-            listView.setClickable(true);
-
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    ListStoreProductData selectedItem = (ListStoreProductData) parent.getItemAtPosition(position);
-
-                    Intent intent = new Intent(StoreInformation.this, StoreDetailProduct.class);
-                    intent.putExtra("productName", selectedItem.getProductName());
-                    intent.putExtra("storeName", selectedItem.getStoreName());
-                    startActivity(intent);
+    public void searchListEcommerce(String text) {
+            ArrayList<ListStoreEcommerceData> searchList = new ArrayList<>();
+            for (ListStoreEcommerceData ecommerceData : ecommerceDataList) {
+                if (ecommerceData.getEcommerceName().toLowerCase().contains(text.toLowerCase())) {
+                    searchList.add(ecommerceData);
                 }
-            });
-
-            // Chuyển đến trang AddEcommerce khi nhấn vào add_button
-            ImageView addButton = findViewById(R.id.add_button);
-            addButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(StoreInformation.this, StoreAddProduct.class);
-                    startActivity(intent);
-                }
-            });
-        }else if (position == 4) {
-            header_image.setImageResource(R.drawable.supplier);
-
-            String[] SupplierID = {"0", "1", "2", "3"};
-            String[] SupplierName = {"Pasta", "Maggi", "Pasta", "Maggi"};
-            String[] StoreName = {"0", "0", "0", "0"};
-
-            ArrayList<ListStoreSupplierData> dataArrayList = new ArrayList<>();
-            ListStoreSupplierData listData;
-
-            for (int i = 0; i < SupplierID.length; i++) {
-                listData = new ListStoreSupplierData(
-                        SupplierID[i],
-                        SupplierName[i],
-                        StoreName[i]
-                );
-                dataArrayList.add(listData);
             }
+            ecommerceAdapter.searchDataList(searchList);
+        }
 
-            listStoreSupplierAdapter = new ListStoreSupplierAdapter(StoreInformation.this, dataArrayList);
-            listView.setAdapter(listStoreSupplierAdapter);
-            listView.setClickable(true);
+    private void sortEcommerceList() {
+            if (isAscending) {
+                Collections.sort(ecommerceDataList, new Comparator<ListStoreEcommerceData>() {
+                    @Override
+                    public int compare(ListStoreEcommerceData p1, ListStoreEcommerceData p2) {
+                        return p1.getEcommerceName().compareToIgnoreCase(p2.getEcommerceName());
+                    }
+                });
+            } else {
+                Collections.sort(ecommerceDataList, new Comparator<ListStoreEcommerceData>() {
+                    @Override
+                    public int compare(ListStoreEcommerceData p1, ListStoreEcommerceData p2) {
+                        return p2.getEcommerceName().compareToIgnoreCase(p1.getEcommerceName());
+                    }
+                });
+            }
+            ecommerceAdapter.notifyDataSetChanged();
+            isAscending = !isAscending;
+        }
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    public void searchListEmployee(String text) {
+            ArrayList<ListStoreEmployeeData> searchList = new ArrayList<>();
+            for (ListStoreEmployeeData employeeData : employeeDataList) {
+                if (employeeData.getEmployeeName().toLowerCase().contains(text.toLowerCase())) {
+                    searchList.add(employeeData);
+                }
+            }
+            employeeAdapter.searchDataList(searchList);
+        }
+
+    private void sortEmployeeList() {
+            if (isAscending) {
+                Collections.sort(employeeDataList, new Comparator<ListStoreEmployeeData>() {
+                    @Override
+                    public int compare(ListStoreEmployeeData p1, ListStoreEmployeeData p2) {
+                        return p1.getEmployeeName().compareToIgnoreCase(p2.getEmployeeName());
+                    }
+                });
+            } else {
+                Collections.sort(employeeDataList, new Comparator<ListStoreEmployeeData>() {
+                    @Override
+                    public int compare(ListStoreEmployeeData p1, ListStoreEmployeeData p2) {
+                        return p2.getEmployeeName().compareToIgnoreCase(p1.getEmployeeName());
+                    }
+                });
+            }
+            employeeAdapter.notifyDataSetChanged();
+            isAscending = !isAscending;
+        }
+
+    public void searchListProduct(String text) {
+        ArrayList<ListStoreProductData> searchList = new ArrayList<>();
+        for (ListStoreProductData productData : productDataList) {
+            if (productData.getProductName().toLowerCase().contains(text.toLowerCase())) {
+                searchList.add(productData);
+            }
+        }
+        productAdapter.searchDataList(searchList);
+    }
+
+    private void sortProductList() {
+        if (isAscending) {
+            Collections.sort(productDataList, new Comparator<ListStoreProductData>() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    ListStoreSupplierData selectedItem = (ListStoreSupplierData) parent.getItemAtPosition(position);
-
-                    Intent intent = new Intent(StoreInformation.this, StoreDetailSupplier.class);
-                    intent.putExtra("supplierName", selectedItem.getSupplierName());
-                    intent.putExtra("storeName", selectedItem.getStoreName());
-                    startActivity(intent);
+                public int compare(ListStoreProductData p1, ListStoreProductData p2) {
+                    return p1.getProductName().compareToIgnoreCase(p2.getProductName());
                 }
             });
-
-            // Chuyển đến trang AddEcommerce khi nhấn vào add_button
-            ImageView addButton = findViewById(R.id.add_button);
-            addButton.setOnClickListener(new View.OnClickListener() {
+        } else {
+            Collections.sort(productDataList, new Comparator<ListStoreProductData>() {
                 @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(StoreInformation.this, StoreAddSupplier.class);
-                    startActivity(intent);
+                public int compare(ListStoreProductData p1, ListStoreProductData p2) {
+                    return p2.getProductName().compareToIgnoreCase(p1.getProductName());
                 }
             });
         }
-
-        ImageView exitButton = findViewById(R.id.exit_icon);
-        exitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                onBackPressed(); //
-            }
-        });
+        productAdapter.notifyDataSetChanged();
+        isAscending = !isAscending;
     }
+
+    public void searchListSupplier(String text) {
+            ArrayList<ListStoreSupplierData> searchList = new ArrayList<>();
+            for (ListStoreSupplierData supplierData : supplierDataList) {
+                if (supplierData.getSupplierName().toLowerCase().contains(text.toLowerCase())) {
+                    searchList.add(supplierData);
+                }
+            }
+            supplierAdapter.searchDataList(searchList);
+        }
+
+    private void sortSupplierList() {
+            if (isAscending) {
+                Collections.sort(supplierDataList, new Comparator<ListStoreSupplierData>() {
+                    @Override
+                    public int compare(ListStoreSupplierData p1, ListStoreSupplierData p2) {
+                        return p1.getSupplierName().compareToIgnoreCase(p2.getSupplierName());
+                    }
+                });
+            } else {
+                Collections.sort(supplierDataList, new Comparator<ListStoreSupplierData>() {
+                    @Override
+                    public int compare(ListStoreSupplierData p1, ListStoreSupplierData p2) {
+                        return p2.getSupplierName().compareToIgnoreCase(p1.getSupplierName());
+                    }
+                });
+            }
+            supplierAdapter.notifyDataSetChanged();
+            isAscending = !isAscending;
+        }
 }
