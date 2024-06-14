@@ -2,11 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/Bill_Detail_Product"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg2"
-    tools:context=".Bill_Detail_Product">
+    tools:context=".Bill.Bill_Detail_Product">
 
     <RelativeLayout
         android:id="@+id/header_product_detail"
@@ -56,7 +56,7 @@
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
 
-        <RelativeLayout
+    <RelativeLayout
             android:layout_below="@+id/header_product_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -191,7 +191,5 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
-
-
 
 </RelativeLayout>

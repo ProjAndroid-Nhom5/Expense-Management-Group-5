@@ -1,0 +1,11 @@
+<resources>
+    <string-array name="positions_array">
+        <item>Director</item>
+        <item>Supervisor</item>
+        <item>Manager</item>
+        <item>Specialist</item>
+        <item>Administrative Assistant</item>
+        <item>Representative</item>
+        <item>Employee</item>
+    </string-array>
+</resources>

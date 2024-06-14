@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/bg"
-    tools:context=".SignUpActivity">
+    tools:context=".Admin.SignUpActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -61,20 +61,6 @@
                 android:drawablePadding="8dp"
                 android:textColor="@color/black"
                 android:inputType="text|textNoSuggestions"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/signup_phone"
-                android:background="@drawable/lightblue_border"
-                android:layout_marginTop="15dp"
-                android:padding="12dp"
-                android:hint="Phone"
-                android:maxLines="1"
-                android:drawableLeft="@drawable/baseline_call_24"
-                android:drawablePadding="8dp"
-                android:textColor="@color/black"
-                android:inputType="number"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -136,31 +122,6 @@
                     android:layout_gravity="center"
                     android:visibility="gone"/>
             </FrameLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="horizontal"
-                android:id="@+id/loginRedirectText">
-                <TextView
-                    android:id="@+id/loginRedirectText1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Already an user?"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/loginRedirectText2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:text="Sign in"
-                    android:textColor="@color/lightblue"
-                    android:textSize="15sp" />
-            </LinearLayout>
 
         </LinearLayout>
 

@@ -5,153 +5,259 @@
     android:id="@+id/info_store_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
-    tools:context=".Store_Detail">
+    android:background="@drawable/bg2"
+    tools:context=".Store.Store_Detail">
 
     <RelativeLayout
-        android:id="@+id/header_store"
+        android:id="@+id/header_product_detail"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#D0EFED"
-        android:gravity="center_vertical">
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_marginTop="10dp"
-            android:id="@+id/close_store_detail"
+            android:id="@+id/close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/baseline_close_24" />
 
         <TextView
-            android:id="@+id/store_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="10dp"
-            android:text="DETAIL"
-            android:textColor="#0570AC"
-            android:textStyle="bold"
-            android:textSize="25dp" />
-
-        <RelativeLayout
+            android:layout_below="@+id/close"
+            android:id="@+id/textview_product_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:gravity="center_vertical"
+            android:layout_centerInParent="true"
+            android:text="DETAIL STORE"
+            android:textColor="#CC9CD5"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:shadowColor="#33000000"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="2" />
 
-            android:padding="3dp">
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/header_store"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="100dp"
-        app:cardElevation="10dp">
-
-        <ImageView
-            android:id="@+id/profileImageView"
-            android:layout_width="120dp"
-            android:layout_height="110dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/storee" />
-    </androidx.cardview.widget.CardView>
-
-    <LinearLayout
-        android:id="@+id/info_store"
-        android:layout_below="@+id/card_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/card"
-        android:padding="10dp"
-        android:layout_margin="20dp">
-
-        <TextView
-            android:id="@+id/name_store"
+        <androidx.cardview.widget.CardView
+            android:layout_below="@+id/textview_product_detail"
+            android:id="@+id/card_view_product_detail"
+            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_margin="10dp"
-            android:text="Name Store:"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
+            app:cardCornerRadius="100dp">
 
-        <TextView
-            android:id="@+id/name_manager_store"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Name Manager: "
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
+            <ImageView
+                android:id="@+id/imgview_product_detail"
+                android:layout_width="110dp"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/storee" />
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
-        <TextView
-            android:id="@+id/impost_store"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"
-            android:text="Impost:"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/email_store"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Email:"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            />
-
-        <TextView
-            android:id="@+id/phone_store"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Phone:"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            />
-
-    </LinearLayout>
-
-    <androidx.cardview.widget.CardView
-        android:layout_below="@id/info_store"
+    <ScrollView
+        android:id="@+id/scroll_view_storeinf"
+        android:layout_below="@+id/header_product_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        app:cardCornerRadius="12dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp">
+        android:layout_margin="20dp">
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/storeinf"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#77C1CA"
-            android:gravity="center">
+            android:layout_height="wrap_content">
 
-            <Button
-                android:layout_width="wrap_content"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview_info_product_detail"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Update"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                app:cardCornerRadius="20dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
+                    <TextView
+                        android:id="@+id/ManagerName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Name Manager:"
+                        android:textColor="@color/darknavyblue"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/inputManagerName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:backgroundTint="@color/darkblue"
+                        android:padding="5dp"
+                        android:textColor="@color/darkblue"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/StoreName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Name Store:"
+                        android:textColor="@color/darknavyblue"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/inputStoreName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:backgroundTint="@color/darkblue"
+                        android:padding="5dp"
+                        android:textColor="@color/darkblue"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/Impost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Impost:"
+                        android:textColor="@color/darknavyblue"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/inputImpost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:backgroundTint="@color/darkblue"
+                        android:padding="5dp"
+                        android:textColor="@color/darkblue"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/Address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Address:"
+                        android:textColor="@color/darknavyblue"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/inputAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:backgroundTint="@color/darkblue"
+                        android:padding="5dp"
+                        android:textColor="@color/darkblue"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/Describe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Describe:"
+                        android:textColor="@color/darknavyblue"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/inputDescribe"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:backgroundTint="@color/darkblue"
+                        android:padding="5dp"
+                        android:textColor="@color/darkblue"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/Email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Email:"
+                        android:textColor="@color/darknavyblue"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/inputEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:backgroundTint="@color/darkblue"
+                        android:padding="5dp"
+                        android:textColor="@color/darkblue"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/Phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Phone:"
+                        android:textColor="@color/darknavyblue"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/inputPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:backgroundTint="@color/darkblue"
+                        android:padding="5dp"
+                        android:textColor="@color/darkblue"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_below="@+id/cardview_info_product_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                app:cardCornerRadius="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#77C1CA"
+                    android:padding="5dp"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/btn_update"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="UPDATE"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
