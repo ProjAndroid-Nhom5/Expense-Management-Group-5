@@ -28,6 +28,7 @@ public class StoreDetailSupplier extends AppCompatActivity {
     Button btn_update, btn_delete;
     private DatabaseReference databaseReference;
     private int supplierId;
+  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -41,6 +41,7 @@ public class StoreDetailEcommerce extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         inputNameEcommerce = findViewById(R.id.inputNameEcommerce);
         inputPaymentFee = findViewById(R.id.inputPaymentFee);
         inputFixedFee = findViewById(R.id.inputFixedFee);

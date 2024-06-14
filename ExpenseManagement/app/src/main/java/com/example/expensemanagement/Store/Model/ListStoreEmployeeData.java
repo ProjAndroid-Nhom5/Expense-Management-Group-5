@@ -3,6 +3,7 @@ package com.example.expensemanagement.Store.Model;
 import java.util.Date;
 
 public class ListStoreEmployeeData {
+  
     private int EmployeeID;
     private String EmployeeName,
                     Email,

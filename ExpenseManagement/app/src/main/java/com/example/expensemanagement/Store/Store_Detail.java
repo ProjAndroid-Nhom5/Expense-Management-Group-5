@@ -34,7 +34,7 @@ public class Store_Detail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_info_store_detail);
-
+  
         inputManagerName = findViewById(R.id.inputManagerName);
         inputStoreName = findViewById(R.id.inputStoreName);
         inputImpost = findViewById(R.id.inputImpost);
@@ -50,12 +50,13 @@ public class Store_Detail extends AppCompatActivity {
         loadStoreDetails();
 
         close.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-
+          
         btn_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

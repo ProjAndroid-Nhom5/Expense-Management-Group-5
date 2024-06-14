@@ -3,6 +3,7 @@ package com.example.expensemanagement.Store;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -10,10 +11,12 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
 import android.util.Log;
 
 import com.example.expensemanagement.R;
@@ -32,6 +35,7 @@ public class StoreAddEcommerce extends AppCompatActivity {
 
     EditText inputNameEcommerce,inputPaymentFee, inputFixedFee, inputServiceFee, inputFreightSurcharge, inputReceivable, inputVAT;
     Button btn_save;
+  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +54,7 @@ public class StoreAddEcommerce extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
+  
         inputNameEcommerce = findViewById(R.id.inputNameEcommerce);
         inputPaymentFee = findViewById(R.id.inputPaymentFee);
         inputFixedFee = findViewById(R.id.inputFixedFee);

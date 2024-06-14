@@ -1,6 +1,7 @@
 package com.example.expensemanagement.Store.Model;
 
 public class ListStoreEcommerceData {
+  
     private String EcommerceName;
     private int EcommerceID,
                 FixedFee,
