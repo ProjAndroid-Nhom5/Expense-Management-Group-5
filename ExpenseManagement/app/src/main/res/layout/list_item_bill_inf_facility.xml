@@ -31,11 +31,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/listNameStore"
+            android:id="@+id/listNameManager"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_margin="10dp"
-            android:text="Name: "
+            android:text="Name Manager: "
             android:textColor="@color/lightblue"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
             android:textColor="@color/lightblue"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listNameStore" />
+            app:layout_constraintTop_toBottomOf="@+id/listNameManager" />
 
         <View
             android:id="@+id/listLine"

@@ -100,6 +100,7 @@
                         android:backgroundTint="@color/darkblue"
                         android:padding="5dp"
                         android:textColor="@color/darkblue"
+                        android:enabled="false"
                         android:textSize="15sp" />
 
                     <TextView
@@ -114,6 +115,7 @@
 
                     <EditText
                         android:id="@+id/inputNameEcommerce"
+                        android:enabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -136,6 +138,7 @@
 
                     <EditText
                         android:id="@+id/inputDate"
+                        android:enabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -158,6 +161,7 @@
 
                     <EditText
                         android:id="@+id/inputNameCustomer"
+                        android:enabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -180,6 +184,7 @@
 
                     <EditText
                         android:id="@+id/inputPhone"
+                        android:enabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -202,6 +207,7 @@
 
                     <EditText
                         android:id="@+id/inputAddress"
+                        android:enabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -224,6 +230,7 @@
 
                     <EditText
                         android:id="@+id/inputProductCost"
+                        android:enabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -246,6 +253,7 @@
 
                     <EditText
                         android:id="@+id/inputShipCost"
+                        android:enabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -258,6 +266,7 @@
 
                     <TextView
                         android:id="@+id/paymentTime"
+                        android:enabled="false"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -268,6 +277,7 @@
 
                     <EditText
                         android:id="@+id/inputPaymentTime"
+                        android:enabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -346,6 +356,7 @@
                 >
 
                 <LinearLayout
+                    android:id="@+id/remove"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#77C1CA"

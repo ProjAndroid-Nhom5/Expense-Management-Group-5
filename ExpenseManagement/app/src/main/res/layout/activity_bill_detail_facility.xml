@@ -94,6 +94,7 @@
                         android:id="@+id/input_facitily_detail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="20dp"
@@ -116,6 +117,7 @@
                         android:id="@+id/inpuNameFacility"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="20dp"
@@ -138,6 +140,7 @@
                         android:id="@+id/inputDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="20dp"
@@ -152,7 +155,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="Name Store:"
+                        android:text="Name Manager:"
                         android:textColor="@color/darknavyblue"
                         android:textSize="15sp" />
 
@@ -160,6 +163,7 @@
                         android:id="@+id/inputNameStore"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="20dp"
@@ -182,6 +186,7 @@
                         android:id="@+id/inputTranMethod"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="20dp"
@@ -257,6 +262,7 @@
                >
 
                 <LinearLayout
+                    android:id="@+id/remove"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#77C1CA"

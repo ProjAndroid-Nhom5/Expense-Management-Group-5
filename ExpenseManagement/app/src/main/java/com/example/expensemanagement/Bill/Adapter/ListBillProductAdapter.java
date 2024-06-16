@@ -10,19 +10,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.expensemanagement.Bill.Model.ListBillProductData;
+import com.example.expensemanagement.Bill.Model.BillProduct;
 import com.example.expensemanagement.R;
 
 import java.util.ArrayList;
 
-public class ListBillProductAdapter extends ArrayAdapter<ListBillProductData> {
-    public ListBillProductAdapter(@NonNull Context context, ArrayList<ListBillProductData> dataArrayList) {
+public class ListBillProductAdapter extends ArrayAdapter<BillProduct> {
+    public ListBillProductAdapter(@NonNull Context context, ArrayList<BillProduct> dataArrayList) {
         super(context, R.layout.list_item_bill_inf_product, dataArrayList);
     }
     @NonNull
     @Override
     public View getView(int position, @Nullable View view, @NonNull ViewGroup parent) {
-        ListBillProductData listData = getItem(position);
+        BillProduct listData = getItem(position);
         if (view == null){
             view = LayoutInflater.from(getContext()).inflate(R.layout.list_item_bill_inf_product, parent, false);
         }
