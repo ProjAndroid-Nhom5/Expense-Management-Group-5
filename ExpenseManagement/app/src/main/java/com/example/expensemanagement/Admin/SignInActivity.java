@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.expensemanagement.Home.HomeActivity;
 import com.example.expensemanagement.R;
+import com.example.expensemanagement.WaitingActivity;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -41,7 +42,7 @@ public class SignInActivity extends AppCompatActivity {
         mSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignInActivity.this, HomeActivity.class));
+                startActivity(new Intent(SignInActivity.this, WaitingActivity.class));
                 finish();
             }
         });
