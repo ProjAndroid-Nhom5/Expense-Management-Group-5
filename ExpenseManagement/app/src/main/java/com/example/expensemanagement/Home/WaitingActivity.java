@@ -1,4 +1,4 @@
-package com.example.expensemanagement;
+package com.example.expensemanagement.Home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,16 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.example.expensemanagement.Admin.SignInActivity;
-import com.example.expensemanagement.Bill.Adapter.ListBillEcommerceAdapter;
-import com.example.expensemanagement.Bill.Adapter.ListBillFacitilyAdapter;
-import com.example.expensemanagement.Bill.Adapter.ListBillProductAdapter;
-import com.example.expensemanagement.Bill.Adapter.ListBillStoreAdapter;
-import com.example.expensemanagement.Bill.Adapter.ListBillSupplyAdapter;
-import com.example.expensemanagement.Bill.Adapter.ListBillWorkshiftAdapter;
-import com.example.expensemanagement.Bill.BillInformation;
 import com.example.expensemanagement.Bill.Model.BillEcommerce;
 import com.example.expensemanagement.Bill.Model.BillFacility;
 import com.example.expensemanagement.Bill.Model.BillProduct;
@@ -32,14 +23,12 @@ import com.example.expensemanagement.Bill.Respository.BillProductRespository;
 import com.example.expensemanagement.Bill.Respository.BillStoreRespository;
 import com.example.expensemanagement.Bill.Respository.BillSupplyRespository;
 import com.example.expensemanagement.Bill.Respository.BillWorkshiftRespository;
-import com.example.expensemanagement.Home.HomeActivity;
+import com.example.expensemanagement.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 public class WaitingActivity extends AppCompatActivity {
     Handler handler;
@@ -51,7 +40,6 @@ public class WaitingActivity extends AppCompatActivity {
     private BillWorkshiftRespository billWorkshiftRespository;
     private DatabaseReference billRef;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private static final int REQUEST_CODE_BILL_INFORMATION = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

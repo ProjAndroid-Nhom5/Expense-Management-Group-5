@@ -4,8 +4,10 @@ package com.example.expensemanagement.Bill.Respository;
 import android.content.Context;
 
 import com.example.expensemanagement.Bill.Database.BillEcommerceDatabase;
+import com.example.expensemanagement.Bill.Database.BillFacitilyDatabase;
 import com.example.expensemanagement.Bill.Model.BarBill;
 import com.example.expensemanagement.Bill.Model.BillEcommerce;
+import com.example.expensemanagement.Bill.Model.BillFacility;
 import com.github.mikephil.charting.data.BarEntry;
 
 import java.text.ParseException;
@@ -175,5 +177,29 @@ public class BillEcmmerceRespository {
     public void clearListBillEcommerce(Context context){
         listBillEcommerce.clear();
         BillEcommerceDatabase.getInstance(context).billEcommerceDAO().deleteAllBillEcommerce();
+    }
+
+    public Float getTotalPaymentForCurrentMonth(Context context){
+        ArrayList<BillEcommerce> list = (ArrayList<BillEcommerce>) BillEcommerceDatabase
+                .getInstance(context)
+                .billEcommerceDAO()
+                .getListBillEcommerce();
+        Calendar calendar = Calendar.getInstance();
+        int currentYear = calendar.get(Calendar.YEAR);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        float total = 0f;
+        for (BillEcommerce b : list) {
+            Date billDate = null;
+            try {
+                billDate = sdf.parse(b.getDate());
+                if (billDate.getYear() == currentYear - 1900) { // Month is 0-based
+                    total += b.getTotalPayment();
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return total;
     }
 }

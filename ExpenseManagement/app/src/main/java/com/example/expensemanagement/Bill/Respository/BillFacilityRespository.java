@@ -178,4 +178,28 @@ public class BillFacilityRespository {
         listBillFacility.clear();
         BillFacitilyDatabase.getInstance(context).billFacilityDAO().deleteAllBillFacility();
     }
+
+    public Float getTotalPaymentForCurrentMonth(Context context){
+        ArrayList<BillFacility> list = (ArrayList<BillFacility>) BillFacitilyDatabase
+                .getInstance(context)
+                .billFacilityDAO()
+                .getListBillFacility();
+        Calendar calendar = Calendar.getInstance();
+        int currentYear = calendar.get(Calendar.YEAR);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        float total = 0f;
+        for (BillFacility b : list) {
+            Date billDate = null;
+            try {
+                billDate = sdf.parse(b.getDate());
+                if (billDate.getYear() == currentYear - 1900) { // Month is 0-based
+                    total += b.getTotalPayment();
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return total;
+    }
 }

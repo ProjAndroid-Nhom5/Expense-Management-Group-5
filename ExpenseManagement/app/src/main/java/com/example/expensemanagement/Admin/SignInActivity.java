@@ -13,9 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.expensemanagement.Home.HomeActivity;
 import com.example.expensemanagement.R;
-import com.example.expensemanagement.WaitingActivity;
+import com.example.expensemanagement.Home.WaitingActivity;
 
 public class SignInActivity extends AppCompatActivity {
 
