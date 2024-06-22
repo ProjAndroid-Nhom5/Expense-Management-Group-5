@@ -178,4 +178,28 @@ public class BillSupplyRespository {
         listBillSupply.clear();
         BillSupplyDatabase.getInstance(context).billSupplyDAO().deleteAllBillSupply();
     }
+
+    public Float getTotalPaymentForCurrentMonth(Context context){
+        ArrayList<BillSupply> list = (ArrayList<BillSupply>) BillSupplyDatabase
+                .getInstance(context)
+                .billSupplyDAO()
+                .getListBillSupply();
+        Calendar calendar = Calendar.getInstance();
+        int currentYear = calendar.get(Calendar.YEAR);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        float total = 0f;
+        for (BillSupply b : list) {
+            Date billDate = null;
+            try {
+                billDate = sdf.parse(b.getDate());
+                if (billDate.getYear() == currentYear - 1900) { // Month is 0-based
+                    total += b.getTotal();
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return total;
+    }
 }

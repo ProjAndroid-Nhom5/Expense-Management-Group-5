@@ -3,9 +3,11 @@ package com.example.expensemanagement.Bill.Respository;
 
 import android.content.Context;
 
+import com.example.expensemanagement.Bill.Database.BillStoreDatabase;
 import com.example.expensemanagement.Bill.Database.BillSupplyDatabase;
 import com.example.expensemanagement.Bill.Database.BillWorkshiftDatabase;
 import com.example.expensemanagement.Bill.Model.BarBill;
+import com.example.expensemanagement.Bill.Model.BillStore;
 import com.example.expensemanagement.Bill.Model.BillSupply;
 import com.example.expensemanagement.Bill.Model.BillWorkshift;
 import com.github.mikephil.charting.data.BarEntry;
@@ -177,5 +179,29 @@ public class BillWorkshiftRespository {
     public void clearListBillWorkshift(Context context){
         listBillWorkshift.clear();
         BillWorkshiftDatabase.getInstance(context).billWorkshiftDAO().deleteAllBillWorkshift();
+    }
+
+    public Float getTotalPaymentForCurrentMonth(Context context){
+        ArrayList<BillWorkshift> list = (ArrayList<BillWorkshift>) BillWorkshiftDatabase
+                .getInstance(context)
+                .billWorkshiftDAO()
+                .getListBillWorkshift();
+        Calendar calendar = Calendar.getInstance();
+        int currentYear = calendar.get(Calendar.YEAR);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        float total = 0f;
+        for (BillWorkshift b : list) {
+            Date billDate = null;
+            try {
+                billDate = sdf.parse(b.getDate());
+                if (billDate.getYear() == currentYear - 1900) { // Month is 0-based
+                    total += b.getTotal();
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return total;
     }
 }
