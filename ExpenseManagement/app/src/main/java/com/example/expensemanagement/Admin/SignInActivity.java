@@ -215,6 +215,7 @@ public class SignInActivity extends AppCompatActivity {
         return TextUtils.isEmpty(str);
     }
 
+    
     boolean checkDataSignIn() {
         boolean isValid = true;
 
