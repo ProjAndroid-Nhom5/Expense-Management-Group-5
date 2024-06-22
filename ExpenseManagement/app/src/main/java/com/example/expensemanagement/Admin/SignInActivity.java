@@ -228,11 +228,11 @@ public class SignInActivity extends AppCompatActivity {
 
         if (isEmpty(mPassword)) {
             mPassword.setError("Password is required.");
-            showPw.setVisibility(View.INVISIBLE); // Ẩn biểu tượng mắt
+            showPw.setVisibility(View.INVISIBLE); // Ẩn biểu tượng mắt....
             isValid = false;
         } else if (!isPasswordValid(mPassword.getText().toString().trim())) {
             mPassword.setError("Password must not be empty.");
-            showPw.setVisibility(View.INVISIBLE); // Ẩn biểu tượng mắt
+            showPw.setVisibility(View.INVISIBLE); // Ẩn biểu tượng mắt.....
             isValid = false;
         }
 
