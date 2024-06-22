@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,9 +16,6 @@
         tools:targetApi="31">
         <activity
             android:name=".Home.WaitingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Admin.SendOTPActivity"
             android:exported="false" />
         <activity
             android:name=".Bill.Bill_Detail_Ecommerce"
@@ -65,6 +64,7 @@
             android:exported="false" />
         <activity
             android:name=".Admin.Admin_Detail"
+
             android:exported="false" />
         <activity
             android:name=".Bill.BillInformation"
@@ -79,16 +79,7 @@
             android:name=".Store.StoreInformation"
             android:exported="false" />
         <activity
-            android:name=".Admin.Forgotpassword1"
-            android:exported="false" />
-        <activity
-            android:name=".Admin.Forgotpassword2"
-            android:exported="false" />
-        <activity
-            android:name=".Admin.Forgotpassword3"
-            android:exported="false" />
-        <activity
-            android:name=".Admin.OTPVerifyActivity"
+            android:name=".Admin.ForgotPassword"
             android:exported="false" />
         <activity
             android:name=".Admin.SignUpActivity"

@@ -63,22 +63,37 @@
                 android:background="@drawable/lightblue_border"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
-                android:hint="Username"
+                android:hint="Email"
                 android:padding="10dp"
                 android:textColor="@color/black" />
 
-            <EditText
-                android:id="@+id/signin_password"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/lightblue_border"
-                android:drawableLeft="@drawable/baseline_lock_24"
-                android:drawablePadding="8dp"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:padding="10dp"
-                android:textColor="@color/black" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/signin_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/lightblue_border"
+                    android:drawableLeft="@drawable/baseline_lock_24"
+                    android:drawablePadding="8dp"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:imeOptions="actionDone"/>
+
+                 <ImageView
+                    android:id="@+id/sign_in_seePw"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                     android:layout_marginTop="35dp"
+                     android:layout_marginEnd="10dp"
+                    android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
+
 
             <TextView
                 android:id="@+id/forgot_password"
@@ -91,20 +106,44 @@
                 android:textSize="16dp"
                 tools:ignore="HardcodedText" />
 
-            <Button
-                android:id="@+id/login_button"
+<!--            <Button-->
+<!--                android:id="@+id/login_button"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:backgroundTint="@color/lightblue"-->
+<!--                android:text="Sign In"-->
+<!--                android:textSize="18sp"-->
+<!--                app:cornerRadius="20dp" />-->
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="15dp"
-                android:backgroundTint="@color/lightblue"
-                android:text="Sign In"
-                android:textSize="18sp"
-                app:cornerRadius="20dp" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <Button
+                    android:id="@+id/signin_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:backgroundTint="@color/lightblue"
+                    android:text="Sign In"
+                    android:textSize="18sp"
+                    app:cornerRadius="20dp"
+
+                    />
+
+                <ProgressBar
+                    android:id="@+id/signin_progressBar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"/>
+            </FrameLayout>
 
             <LinearLayout
                 android:id="@+id/changeToSignUp"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal"
@@ -127,6 +166,7 @@
                     android:textSize="15sp"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
+
 
         </LinearLayout>
 
