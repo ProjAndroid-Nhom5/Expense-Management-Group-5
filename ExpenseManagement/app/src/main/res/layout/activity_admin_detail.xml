@@ -59,9 +59,11 @@
         </androidx.cardview.widget.CardView>
 
 
-
+    <ScrollView
+        android:layout_below="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <LinearLayout
-            android:layout_below="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -78,14 +80,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
-                    android:padding="23dp">
+                    android:padding="23dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/info_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Name:"
                         android:textColor="#58CBD2"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/info_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#58CBD2"
+                        android:background="@null"
                         android:textStyle="bold"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -104,7 +116,80 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
-                    android:padding="23dp">
+                    android:padding="23dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Birthday:"
+                        android:textColor="#58CBD2"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/birthday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#58CBD2"
+                        android:background="@null"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                app:cardCornerRadius="12dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:padding="23dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gender:"
+                        android:textColor="#58CBD2"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/Gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#58CBD2"
+                        android:background="@null"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                app:cardCornerRadius="12dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:padding="23dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -113,6 +198,18 @@
                         android:textColor="#58CBD2"
                         android:textStyle="bold"
                         android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/admin_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:background="@null"
+                        android:textColor="#58CBD2"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:focusable="false"
+                        android:clickable="true"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -128,7 +225,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
-                    android:padding="23dp">
+                    android:padding="23dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -137,34 +235,48 @@
                         android:textColor="#58CBD2"
                         android:textStyle="bold"
                         android:textSize="16sp" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                app:cardCornerRadius="12dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#77C1CA"
-                    android:padding="7dp"
-                    android:gravity="center">
-
-                    <Button
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:id="@+id/admin_phone"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Update"
-                        android:textColor="#FFFFFF"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#58CBD2"
+                        android:background="@null"
                         android:textStyle="bold"
                         android:textSize="16sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp">
+
+                <Button
+                    android:id="@+id/update_admin"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:backgroundTint="@color/lightblue"
+                    android:text="Update"
+                    android:textSize="16sp"
+                    app:cornerRadius="12dp" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"/>
+            </FrameLayout>
+
         </LinearLayout>
+    </ScrollView>
+
     </RelativeLayout>
 </FrameLayout>

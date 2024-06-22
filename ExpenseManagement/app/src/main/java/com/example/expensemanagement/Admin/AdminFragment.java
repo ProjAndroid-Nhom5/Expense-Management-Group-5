@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.expensemanagement.R;
 import com.example.expensemanagement.Store.Store_Detail;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminFragment extends Fragment {
 
@@ -29,7 +30,6 @@ public class AdminFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -38,6 +38,8 @@ public class AdminFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_admin, container, false);
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -86,10 +88,12 @@ public class AdminFragment extends Fragment {
         log_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getActivity(), SignInActivity.class);
                 startActivity(intent);
                 getActivity().finish();
             }
         });
     }
+
 }
