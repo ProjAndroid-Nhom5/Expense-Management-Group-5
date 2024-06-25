@@ -25,6 +25,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.expensemanagement.Admin.AdminFragment;
 import com.example.expensemanagement.Bill.BillFragment;
+import com.example.expensemanagement.Bill.Respository.BillEcmmerceRespository;
+import com.example.expensemanagement.Bill.Respository.BillFacilityRespository;
+import com.example.expensemanagement.Bill.Respository.BillProductRespository;
+import com.example.expensemanagement.Bill.Respository.BillStoreRespository;
+import com.example.expensemanagement.Bill.Respository.BillSupplyRespository;
+import com.example.expensemanagement.Bill.Respository.BillWorkshiftRespository;
 import com.example.expensemanagement.R;
 import com.example.expensemanagement.Store.StoreAddEcommerce;
 import com.example.expensemanagement.Store.StoreAddEmployee;
@@ -32,6 +38,8 @@ import com.example.expensemanagement.Store.StoreAddProduct;
 import com.example.expensemanagement.Store.StoreAddSupplier;
 import com.example.expensemanagement.Store.StoreFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -56,7 +64,6 @@ public class HomeActivity extends AppCompatActivity {
             rotateAntiClockWiseFabAnim,
             fromBottomBgAnim,
             toBottomBgAnim;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

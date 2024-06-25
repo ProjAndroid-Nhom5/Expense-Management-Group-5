@@ -15,6 +15,7 @@
         android:background="#D0EFED"
         android:gravity="center_vertical">
 
+
         <ImageView
             android:layout_marginTop="12dp"
             android:id="@+id/left_instructions_and_regulations"
@@ -41,36 +42,83 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="20dp"
         android:layout_margin="20dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFF"
-            android:orientation="vertical"
-            android:padding="20dp"
-            android:weightSum="3">
-
-            <TextView
-                android:layout_weight="1"
-                android:id="@+id/instructions_text"
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#58CBD2"
-                android:layout_centerInParent="true"
-                android:text="1. Instructions"
-                android:textSize="24sp"
-               />
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:weightSum="3">
 
-            <TextView
-                android:id="@+id/regulations_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/instructions_text"
-                android:textColor="#58CBD2"
-                android:layout_weight="2"
-                android:text="2. Regulations"
-                android:textSize="24sp"
-                />
-        </LinearLayout>
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/instructions_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#58CBD2"
+                    android:layout_centerInParent="true"
+                    android:text="I. Instructions"
+                    android:textSize="24sp"
+                    />
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1. Establish Clear Policies: Create detailed guidelines outlining what expenses are allowable, the approval process, documentation requirements, and spending limits. These guidelines should be communicated clearly to all employees."/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="2. Receipts and Documentation: Require receipts or other forms of documentation for all expenses submitted. This ensures that expenses can be verified and are in compliance with internal policies and tax regulations."/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="3. Expense Reporting: Implement a standardized system for employees to report their expenses. This system should be user-friendly and include all necessary fields for documenting expenses and attaching receipts."/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="4. Expense Categories: Specify different categories of expenses (e.g., travel, supplies, entertainment) for better tracking and analysis. This helps in understanding where funds are being allocated and identifying areas for potential cost savings."/>
+
+                <TextView
+                    android:id="@+id/regulations_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/instructions_text"
+                    android:textColor="#58CBD2"
+                    android:layout_weight="2"
+                    android:text="II. Regulations"
+                    android:textSize="24sp"
+                    />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1. Compliance with Regulations: Ensure that all expense management practices adhere to relevant laws and regulations, including tax laws and accounting standards."/>
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2. Budget Adherence: Monitor and control expenses to ensure they stay within allocated budgets or approved limits."/>
+                             <TextView
+                                 android:layout_marginTop="10dp"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:text="3. Audit and Review: Conduct periodic audits or reviews of expense reports to ensure compliance with policies and regulations. This helps in detecting any anomalies or potential fraud."/>
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="4. Continuous Improvement: Regularly review and update expense policies and procedures to adapt to changing business needs, regulations, and best practices."/>
+            </LinearLayout>
+        </ScrollView>
+
     </androidx.cardview.widget.CardView>
 
 

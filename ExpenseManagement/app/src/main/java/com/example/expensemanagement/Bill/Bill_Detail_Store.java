@@ -5,15 +5,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.expensemanagement.Bill.Model.BillFacility;
+import com.example.expensemanagement.Bill.Model.BillStore;
 import com.example.expensemanagement.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Bill_Detail_Store extends AppCompatActivity {
 
@@ -41,16 +50,38 @@ public class Bill_Detail_Store extends AppCompatActivity {
             }
         });
 
-        String nameEmployee = getIntent().getStringExtra("nameEmployee");
-        String date = getIntent().getStringExtra("date");
-        Float totalPayment = getIntent().getFloatExtra("totalPayment", 0.0f);
+        BillStore billStore = (BillStore) getIntent().getSerializableExtra("billStore");
 
-        EditText inputNameEmployee = findViewById(R.id.inputNameEmployee);
+        EditText input_store_detail = findViewById(R.id.input_store_detail);
+        EditText inpuProductCost = findViewById(R.id.inpuProductCost);
         EditText inputDate = findViewById(R.id.inputDate);
+        EditText inputNameEmployee = findViewById(R.id.inputNameEmployee);
         TextView TotalPayment =  findViewById(R.id.totalPayment);
+        LinearLayout remove =  findViewById(R.id.remove);
 
-        inputNameEmployee.setText(nameEmployee);
-        inputDate.setText(date);
-        TotalPayment.setText(String.valueOf(totalPayment));
+        input_store_detail.setText(String.valueOf(billStore.getId()));
+        inputNameEmployee.setText(billStore.getNameEmploye());
+        inputDate.setText(billStore.getDate());
+        inpuProductCost.setText(String.valueOf(billStore.getProductCost()));
+        TotalPayment.setText(String.valueOf(billStore.getTotal()));
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("billStores/"+billStore.getId());
+                myRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Bill_Detail_Store.this, "Data deleted successfully.", Toast.LENGTH_SHORT).show();
+                            onBackPressed();
+                            finish();
+                        } else {
+                            Toast.makeText(Bill_Detail_Store.this, "Error deleting data.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
     }
 }

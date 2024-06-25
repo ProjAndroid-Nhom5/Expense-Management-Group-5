@@ -1,20 +1,51 @@
 package com.example.expensemanagement.Bill.Model;
 
-public class ListBillEcommerceData {
-    private String id,
-            nameEcommerce,
-            date,
-            nameCustomer,
-            phone,
-            address,
-            paymentTime;
-    private Float productCost,shipCost,totalPayment;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-    public String getId() {
+import java.io.Serializable;
+
+@Entity(tableName = "BillEcommerce")
+//        , foreignKeys = {@ForeignKey(
+//                entity = Bill.class,
+//                parentColumns = "id",
+//                childColumns = "id",
+//                onDelete = ForeignKey.CASCADE
+//        )})
+public class BillEcommerce implements Serializable {
+    @PrimaryKey
+    private int id;
+    private String nameEcommerce;
+    private String date;
+    private String nameCustomer;
+    private String phone;
+    private String address;
+    private String paymentTime;
+    private Float productCost;
+    private Float shipCost;
+    private Float totalPayment;
+
+    public BillEcommerce() {
+    }
+
+    public BillEcommerce(int id, String nameEcommerce, String date, String nameCustomer, String phone, String address, String paymentTime, Float productCost, Float shipCost, Float totalPayment) {
+        this.id = id;
+        this.nameEcommerce = nameEcommerce;
+        this.date = date;
+        this.nameCustomer = nameCustomer;
+        this.phone = phone;
+        this.address = address;
+        this.paymentTime = paymentTime;
+        this.productCost = productCost;
+        this.shipCost = shipCost;
+        this.totalPayment = totalPayment;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -85,21 +116,7 @@ public class ListBillEcommerceData {
     public Float getTotalPayment() {
         return totalPayment;
     }
-
     public void setTotalPayment(Float totalPayment) {
-        this.totalPayment = totalPayment;
-    }
-
-    public ListBillEcommerceData(String id, String nameEcommerce, String date, String nameCustomer, String phone, String address, String paymentTime, Float productCost, Float shipCost, Float totalPayment) {
-        this.id = id;
-        this.nameEcommerce = nameEcommerce;
-        this.date = date;
-        this.nameCustomer = nameCustomer;
-        this.phone = phone;
-        this.address = address;
-        this.paymentTime = paymentTime;
-        this.productCost = productCost;
-        this.shipCost = shipCost;
         this.totalPayment = totalPayment;
     }
 }

@@ -1,18 +1,27 @@
 package com.example.expensemanagement.Bill;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.expensemanagement.Bill.Adapter.ListBillEcommerceAdapter;
 import com.example.expensemanagement.Bill.Adapter.ListBillFacitilyAdapter;
@@ -20,49 +29,68 @@ import com.example.expensemanagement.Bill.Adapter.ListBillProductAdapter;
 import com.example.expensemanagement.Bill.Adapter.ListBillStoreAdapter;
 import com.example.expensemanagement.Bill.Adapter.ListBillSupplyAdapter;
 import com.example.expensemanagement.Bill.Adapter.ListBillWorkshiftAdapter;
-import com.example.expensemanagement.Bill.Model.ListBillEcommerceData;
-import com.example.expensemanagement.Bill.Model.ListBillFacilityData;
-import com.example.expensemanagement.Bill.Model.ListBillProductData;
-import com.example.expensemanagement.Bill.Model.ListBillStoreData;
-import com.example.expensemanagement.Bill.Model.ListBillSupplyData;
-import com.example.expensemanagement.Bill.Model.ListBillWorkshiftData;
+import com.example.expensemanagement.Bill.Model.BillEcommerce;
+import com.example.expensemanagement.Bill.Model.BillFacility;
+import com.example.expensemanagement.Bill.Model.BillProduct;
+import com.example.expensemanagement.Bill.Model.BillStore;
+import com.example.expensemanagement.Bill.Model.BillSupply;
+import com.example.expensemanagement.Bill.Model.BillWorkshift;
+import com.example.expensemanagement.Bill.Respository.BillEcmmerceRespository;
+import com.example.expensemanagement.Bill.Respository.BillFacilityRespository;
+import com.example.expensemanagement.Bill.Respository.BillProductRespository;
+import com.example.expensemanagement.Bill.Respository.BillStoreRespository;
+import com.example.expensemanagement.Bill.Respository.BillSupplyRespository;
+import com.example.expensemanagement.Bill.Respository.BillWorkshiftRespository;
 import com.example.expensemanagement.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class BillInformation extends AppCompatActivity {
     //
-    ListBillEcommerceAdapter listBillEcommerceAdapter;
-    ArrayList<ListBillEcommerceData> listBillEcommerceDataArrayList = new ArrayList<>();
-    ListBillEcommerceData listBillEcommerceData;
+    private ListBillEcommerceAdapter listBillEcommerceAdapter;
+    private ArrayList<BillEcommerce> billEcommerceList = new ArrayList<>();
+    private BillEcmmerceRespository billEcmmerceRespository;
     //
-    ListBillFacitilyAdapter listBillFacitilyAdapter;
-    ArrayList<ListBillFacilityData> listBillFacilityDataArrayList = new ArrayList<>();
-    ListBillFacilityData listBillFacilityData;
+    private ListBillFacitilyAdapter listBillFacitilyAdapter;
+    private ArrayList<BillFacility> billFacilityList = new ArrayList<>();
+    private BillFacilityRespository billFacilityRespository;
     //
-    ListBillProductAdapter listBillProductAdapter;
-    ArrayList<ListBillProductData> listBillProductDataArrayList = new ArrayList<>();
-    ListBillProductData listBillProductData;
+    private ListBillProductAdapter listBillProductAdapter;
+    private ArrayList<BillProduct> billProductList = new ArrayList<>();
+    private BillProductRespository billProductRespository;
     //
-    ListBillStoreData listBillStoreData;
-    ArrayList<ListBillStoreData> listBillStoreDataArrayList = new ArrayList<>();
-    ListBillStoreAdapter listBillStoreAdapter;
+    private BillStoreRespository billStoreRespository;
+    private ArrayList<BillStore> billStoreList = new ArrayList<>();
+    private ListBillStoreAdapter listBillStoreAdapter;
     //
-    ListBillSupplyAdapter listBillSupplyAdapter;
-    ArrayList<ListBillSupplyData> listBillSupplyDataArrayList = new ArrayList<>();
-    ListBillSupplyData listBillSupplyData;
+    private ListBillSupplyAdapter listBillSupplyAdapter;
+    private ArrayList<BillSupply> billSupplyList = new ArrayList<>();
+    private BillSupplyRespository billSupplyRespository;
     //
-    ListBillWorkshiftAdapter listBillWorkshiftAdapter;
-    ArrayList<ListBillWorkshiftData> listBillWorkshiftDataArrayList = new ArrayList<>();
-    ListBillWorkshiftData listBillWorkshiftData;
-    ImageView exit_icon;
-    ListView listView;
-    BarChart barChart;
+    private ListBillWorkshiftAdapter listBillWorkshiftAdapter;
+    private ArrayList<BillWorkshift> billWorkshiftList = new ArrayList<>();
+    private BillWorkshiftRespository billWorkshiftRespository;
+    private ImageView exit_icon;
+    private ListView listView;
+    private BarChart barChart;
+    private SearchView searchView;
+    private TextView atoz_text,timeTxt,totalTxt;
+    private ConstraintLayout layout_atoz, layout_time, layout_totalpayment;
+    private ImageView atoz_image,timeImages,totalImage;
+    private DatabaseReference billRef;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private String selectedFilter = "all";
+    private String searchText = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,277 +106,557 @@ public class BillInformation extends AppCompatActivity {
         exit_icon = findViewById(R.id.exit_icon);
         barChart = findViewById(R.id.barchart);
         listView = findViewById(R.id.listview);
-
-        XAxis xAxis = barChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        barChart.invalidate();
+        searchView = findViewById(R.id.search);
+        layout_atoz = findViewById(R.id.layout_atoz);
+        layout_time = findViewById(R.id.layout_time);
+        layout_totalpayment = findViewById(R.id.layout_totalpayment);
+        atoz_text = findViewById(R.id.atoz_text);
+        timeTxt = findViewById(R.id.timeTxt);
+        totalTxt = findViewById(R.id.totalTxt);
+        atoz_image = findViewById(R.id.atoz_image);
+        timeImages = findViewById(R.id.timeImages);
+        totalImage = findViewById(R.id.totalImage);
 
         exit_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 onBackPressed();
             }
         });
 
         Intent intent = getIntent();
         int position = intent.getIntExtra("potision",0);
-        if (position == 1){
-            BarDataSet barDataSet1 = new BarDataSet(barEntries1(),"Ecommerce");
-            barDataSet1.setColors(Color.argb(188,119,193,202));
 
-            BarData barData1 = new BarData();
-            barData1.addDataSet(barDataSet1);
-            barChart.setData(barData1);
-
-            String[] id = {"Pasta", "Maggi"};
-            String[] nameEcommerce = {"Pasta", "Maggi"};
-            String[] date = {"30 mins", "2 mins"};
-            String[] nameCustomer = {"30 mins", "2 mins"};
-            String[] phone = {"Pasta", "Maggi"};
-            String[] address = {"30 mins", "2 mins"};
-            String[] paymentTime = {"Pasta", "Maggi"};
-            Float[] productCost = {2323.3f,2323.3f};
-            Float[] shipCost = {2323.3f,2323.3f};
-            Float[] totalPayment = {2323.3f,2323.3f};
-            for (int i = 0; i < id.length; i++){
-                listBillEcommerceData  = new ListBillEcommerceData(id[i],
-                        nameEcommerce[i],
-                        date[i],
-                        nameCustomer[i],
-                        phone[i],
-                        address[i],
-                        paymentTime[i],
-                        productCost[i],
-                        shipCost[i],
-                        totalPayment[i]);
-                listBillEcommerceDataArrayList.add(listBillEcommerceData);
+        layout_atoz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedFilter.equals("atoz")){
+                    selectedFilter = "ztoa";
+                    atoz_text.setText("Z - A ");
+                    atoz_image.setImageResource(R.drawable.baseline_arrow_downward_24);
+                    if (position == 1){
+                        billEcommerceList = billEcmmerceRespository.getListFromZToA(BillInformation.this);
+                    }else if (position == 2){
+                        billFacilityList = billFacilityRespository.getListFromZToA(BillInformation.this);
+                    }else if (position == 3){
+                        billProductList = billProductRespository.getListFromZToA(BillInformation.this);
+                    }else if (position == 4){
+                        billStoreList = billStoreRespository.getListFromZToA(BillInformation.this);
+                    }else if (position == 5){
+                        billSupplyList = billSupplyRespository.getListFromZToA(BillInformation.this);
+                    }else if (position == 6){
+                        billWorkshiftList = billWorkshiftRespository.getListFromZToA(BillInformation.this);
+                    }
+                    searchChange(position);
+                }else if(selectedFilter.equals("ztoa")){
+                    int colorResourceId = R.color.blue;
+                    int color = ContextCompat.getColor(BillInformation.this, colorResourceId);
+                    layout_atoz.setBackgroundColor(color);
+                    selectedFilter = "all";
+                    atoz_text.setText("A - Z ");
+                    atoz_image.setImageResource(R.drawable.transfer_4);
+                    Nomarl(position);
+                    searchChange(position);
+                } else {
+                    layout_time_nomral();
+                    layout_totalpayment_nomral();
+                    int colorResourceId = R.color.white;
+                    int color = ContextCompat.getColor(BillInformation.this, colorResourceId);
+                    layout_atoz.setBackgroundColor(color);
+                    selectedFilter = "atoz";
+                    atoz_text.setText("A - Z ");
+                    atoz_image.setImageResource(R.drawable.baseline_arrow_upward_24);
+                    if (position == 1){
+                        billEcommerceList = billEcmmerceRespository.getListFromAToZ(BillInformation.this);
+                    }else if (position == 2){
+                        billFacilityList = billFacilityRespository.getListFromAToZ(BillInformation.this);
+                    }else if (position == 3){
+                        billProductList = billProductRespository.getListFromAToZ(BillInformation.this);
+                    }else if (position == 4){
+                        billStoreList = billStoreRespository.getListFromAToZ(BillInformation.this);
+                    }else if (position == 5){
+                        billSupplyList = billSupplyRespository.getListFromAToZ(BillInformation.this);
+                    }else if (position == 6){
+                        billWorkshiftList = billWorkshiftRespository.getListFromAToZ(BillInformation.this);
+                    }
+                    searchChange(position);
+                }
             }
-            listBillEcommerceAdapter = new ListBillEcommerceAdapter(BillInformation.this, listBillEcommerceDataArrayList);
-            listView.setAdapter(listBillEcommerceAdapter);
+        });
+
+        layout_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedFilter.equals("timeASC")){
+                    selectedFilter = "timeDESC";
+                    timeImages.setImageResource(R.drawable.baseline_arrow_downward_24);
+                    listView.setAdapter(listBillEcommerceAdapter);
+                    if (position == 1){
+                        billEcommerceList = billEcmmerceRespository.getListFromTimeDESC(BillInformation.this);
+                    }else if (position == 2){
+                        billFacilityList = billFacilityRespository.getListFromTimeDESC(BillInformation.this);
+                    }else if (position == 4){
+                        billStoreList = billStoreRespository.getListFromTimeDESC(BillInformation.this);
+                    }else if (position == 5){
+                        billSupplyList = billSupplyRespository.getListFromTimeDESC(BillInformation.this);
+                    }else if (position == 6){
+                        billWorkshiftList = billWorkshiftRespository.getListFromTimeDESC(BillInformation.this);
+                    }
+                    searchChange(position);
+                }else if(selectedFilter.equals("timeDESC")){
+                    int colorResourceId = R.color.blue;
+                    int color = ContextCompat.getColor(BillInformation.this, colorResourceId);
+                    layout_time.setBackgroundColor(color);
+                    selectedFilter = "all";
+                    timeImages.setImageResource(R.drawable.transfer_4);
+                    Nomarl(position);
+                    searchChange(position);
+                } else {
+                    layout_atoz_nomral();
+                    layout_totalpayment_nomral();
+                    int colorResourceId = R.color.white;
+                    int color = ContextCompat.getColor(BillInformation.this, colorResourceId);
+                    layout_time.setBackgroundColor(color);
+                    selectedFilter = "timeASC";
+                    timeImages.setImageResource(R.drawable.baseline_arrow_upward_24);
+                    if (position == 1){
+                        billEcommerceList = billEcmmerceRespository.getListFromTimeASC(BillInformation.this);
+                    }else if (position == 2){
+                        billFacilityList = billFacilityRespository.getListFromTimeASC(BillInformation.this);
+                    }else if (position == 4){
+                        billStoreList = billStoreRespository.getListFromTimeASC(BillInformation.this);
+                    }else if (position == 5){
+                        billSupplyList = billSupplyRespository.getListFromTimeASC(BillInformation.this);
+                    }else if (position == 6){
+                        billWorkshiftList = billWorkshiftRespository.getListFromTimeASC(BillInformation.this);
+                    }
+                    searchChange(position);
+                }
+            }
+        });
+
+        layout_totalpayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedFilter.equals("totalpaymentASC")){
+                    selectedFilter = "totalpaymentDESC";
+                    totalImage.setImageResource(R.drawable.baseline_arrow_downward_24);
+                    if (position == 1){
+                        billEcommerceList = billEcmmerceRespository.getListFromTotalPaymentDESC(BillInformation.this);
+                    }else if (position == 2){
+                        billFacilityList = billFacilityRespository.getListFromTotalPaymentDESC(BillInformation.this);
+                    }else if (position == 3){
+                        billProductList = billProductRespository.getListFromQuantityDESC(BillInformation.this);
+                    }else if (position == 4){
+                        billStoreList = billStoreRespository.getListFromTotalPaymentDESC(BillInformation.this);
+                    }else if (position == 5){
+                        billSupplyList = billSupplyRespository.getListFromTotalPaymentDESC(BillInformation.this);
+                    }else if (position == 6){
+                        billWorkshiftList = billWorkshiftRespository.getListFromTotalPaymentDESC(BillInformation.this);
+                    }
+                    searchChange(position);
+                }else if(selectedFilter.equals("totalpaymentDESC")){
+                    int colorResourceId = R.color.blue;
+                    int color = ContextCompat.getColor(BillInformation.this, colorResourceId);
+                    layout_totalpayment.setBackgroundColor(color);
+                    selectedFilter = "all";
+                    totalImage.setImageResource(R.drawable.transfer_4);
+                    Nomarl(position);
+                    searchChange(position);
+                } else {
+                    layout_atoz_nomral();
+                    layout_time_nomral();
+                    int colorResourceId = R.color.white;
+                    int color = ContextCompat.getColor(BillInformation.this, colorResourceId);
+                    layout_totalpayment.setBackgroundColor(color);
+                    selectedFilter = "totalpaymentASC";
+                    totalImage.setImageResource(R.drawable.baseline_arrow_upward_24);
+                    if (position == 1){
+                        billEcommerceList = billEcmmerceRespository.getListFromTotalPaymentASC(BillInformation.this);
+                    }else if (position == 2){
+                        billFacilityList = billFacilityRespository.getListFromTotalPaymentASC(BillInformation.this);
+                    }else if (position == 3){
+                        billProductList = billProductRespository.getListFromQuantityASC(BillInformation.this);
+                    }else if (position == 4){
+                        billStoreList = billStoreRespository.getListFromTotalPaymentASC(BillInformation.this);
+                    }else if (position == 5){
+                        billSupplyList = billSupplyRespository.getListFromTotalPaymentASC(BillInformation.this);
+                    }else if (position ==  6){
+                        billWorkshiftList = billWorkshiftRespository.getListFromTotalPaymentASC(BillInformation.this);
+                    }
+                    searchChange(position);
+                }
+            }
+        });
+
+        initSearch(position);
+
+        if (position == 1){
+            billEcmmerceRespository = new BillEcmmerceRespository();
+            billRef = database.getReference("billEcommerces");
+
+            fetchBill(position);
+
             listView.setClickable(true);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    ListBillEcommerceData selectedItem = (ListBillEcommerceData) parent.getItemAtPosition(position);
+                    BillEcommerce selectedItem = (BillEcommerce) parent.getItemAtPosition(position);
                     Intent intent = new Intent(BillInformation.this, Bill_Detail_Ecommerce.class);
-                    intent.putExtra("ecommerceName", selectedItem.getNameEcommerce());
-                    intent.putExtra("date", selectedItem.getDate());
-                    intent.putExtra("totalPayment", selectedItem.getTotalPayment());
+                    intent.putExtra("billEcommerce", selectedItem);
                     startActivity(intent);
                 }
             });
-
         }
         else if (position == 2){
-            BarDataSet barDataSet1 = new BarDataSet(barEntries1(),"Facility");
-            barDataSet1.setColors(Color.argb(188,119,193,202));
+            billFacilityRespository = new BillFacilityRespository();
+            billRef = database.getReference("billFacilities");
 
-            BarData barData1 = new BarData();
-            barData1.addDataSet(barDataSet1);
-            barChart.setData(barData1);
+            fetchBill(position);
 
-            String[] id = {"Pasta", "Maggi"};
-            String[] nameFacility = {"Pasta", "Maggi"};
-            String[] date = {"30 mins", "2 mins"};
-            String[] nameStore = {"30 mins", "2 mins"};
-            String[] transactionMethod = {"Pasta", "Maggi"};
-            Float[] totalPayment = {2323.3f,2323.3f};
-            for (int i = 0; i < id.length; i++){
-                listBillFacilityData = new ListBillFacilityData(id[i],
-                        nameFacility[i],
-                        date[i],
-                        nameStore[i],
-                        transactionMethod[i],
-                        totalPayment[i]);
-                listBillFacilityDataArrayList.add(listBillFacilityData);
-            }
-            listBillFacitilyAdapter = new ListBillFacitilyAdapter(BillInformation.this, listBillFacilityDataArrayList);
-            listView.setAdapter(listBillFacitilyAdapter);
             listView.setClickable(true);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    ListBillFacilityData selectedItem = (ListBillFacilityData) parent.getItemAtPosition(position);
+                    BillFacility selectedItem = (BillFacility) parent.getItemAtPosition(position);
                     Intent intent = new Intent(BillInformation.this, Bill_Detail_Facility.class);
-                    intent.putExtra("nameFacility", selectedItem.getNameFacility());
-                    intent.putExtra("date", selectedItem.getDate());
-                    intent.putExtra("totalPayment", selectedItem.getTotalPayment());
+                    intent.putExtra("billFacility", selectedItem);
                     startActivity(intent);
                 }
             });
-        }else if (position == 3){
-            BarDataSet barDataSet1 = new BarDataSet(barEntries1(),"Product");
-            barDataSet1.setColors(Color.argb(188,119,193,202));
+        }else if (position == 3) {
+            barChart.setVisibility(View.GONE);
+            layout_time.setVisibility(View.GONE);
+            totalTxt.setText("Quantity ");
 
-            BarData barData1 = new BarData();
-            barData1.addDataSet(barDataSet1);
-            barChart.setData(barData1);
+            billProductRespository = new BillProductRespository();
+            billRef = database.getReference("billProducts");
 
-            String[] bill_ProductID = {"Pasta", "Maggi"};
-            String[] nameProduct = {"Pasta", "Maggi"};
-            String[] billID = {"30 mins", "2 mins"};
-            Float[] Quantity = {2323.3f,2323.3f};
-            for (int i = 0; i < bill_ProductID.length; i++){
-                listBillProductData = new ListBillProductData(bill_ProductID[i],
-                        nameProduct[i],
-                        billID[i],
-                        Quantity[i]);
-                listBillProductDataArrayList.add(listBillProductData);
-            }
-            listBillProductAdapter = new ListBillProductAdapter(BillInformation.this, listBillProductDataArrayList);
-            listView.setAdapter(listBillProductAdapter);
+            fetchBill(position);
+
             listView.setClickable(true);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    ListBillProductData selectedItem = (ListBillProductData) parent.getItemAtPosition(position);
+                    BillProduct selectedItem = (BillProduct) parent.getItemAtPosition(position);
                     Intent intent = new Intent(BillInformation.this, Bill_Detail_Product.class);
-                    intent.putExtra("nameProduct", selectedItem.getNameProduct());
-                    intent.putExtra("billID", selectedItem.getBillID());
-                    intent.putExtra("getQuantity", selectedItem.getQuantity());
+                    intent.putExtra("billProduct", selectedItem);
                     startActivity(intent);
                 }
             });
         }else if (position == 4){
-            BarDataSet barDataSet1 = new BarDataSet(barEntries1(),"Store");
-            barDataSet1.setColors(Color.argb(188,119,193,202));
+            billStoreRespository = new BillStoreRespository();
+            billRef = database.getReference("billStores");
 
-            BarData barData1 = new BarData();
-            barData1.addDataSet(barDataSet1);
-            barChart.setData(barData1);
+            fetchBill(position);
 
-            String[] id = {"Pasta", "Maggi"};
-            String[] idEmploye = {"Pasta", "Maggi"};
-            String[] date = {"30 mins", "2 mins"};
-            String[] nameProduct = {"30 mins", "2 mins"};
-            String[] nameEmploye = {"Pasta", "Maggi"};
-            Float[] productCost = {2323.3f,2323.3f};
-            Float[] total = {2323.3f,2323.3f};
-
-            for (int i = 0; i < id.length; i++){
-                listBillStoreData = new ListBillStoreData(id[i],
-                        idEmploye[i],
-                        date[i],
-                        nameProduct[i],
-                        nameEmploye[i],
-                        productCost[i],
-                        total[i]);
-                listBillStoreDataArrayList.add(listBillStoreData);
-            }
-            listBillStoreAdapter = new ListBillStoreAdapter(BillInformation.this, listBillStoreDataArrayList);
-            listView.setAdapter(listBillStoreAdapter);
             listView.setClickable(true);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    ListBillStoreData selectedItem = (ListBillStoreData) parent.getItemAtPosition(position);
+                    BillStore selectedItem = (BillStore) parent.getItemAtPosition(position);
                     Intent intent = new Intent(BillInformation.this, Bill_Detail_Store.class);
-                    intent.putExtra("nameEmployee", selectedItem.getNameEmploye());
-                    intent.putExtra("date", selectedItem.getDate());
-                    intent.putExtra("totalPayment", selectedItem.getTotal());
+                    intent.putExtra("billStore", selectedItem);
                     startActivity(intent);
                 }
             });
 
         }else if (position == 5){
-            BarDataSet barDataSet1 = new BarDataSet(barEntries1(),"Supply");
-            barDataSet1.setColors(Color.argb(188,119,193,202));
+            billSupplyRespository = new BillSupplyRespository();
+            billRef = database.getReference("billSupplies");
 
-            BarData barData1 = new BarData();
-            barData1.addDataSet(barDataSet1);
-            barChart.setData(barData1);
+            fetchBill(position);
 
-            String[] id = {"Pasta", "Maggi"};
-            String[] nameSupplier = {"Pasta", "Maggi"};
-            String[] date = {"30 mins", "2 mins"};
-            String[] number = {"30 mins", "2 mins"};
-            Float[] productCost = {2323.3f,2323.3f};
-            Float[] shipCost = {2323.3f,2323.3f};
-            Float[] total = {2323.3f,2323.3f};
-            for (int i = 0; i < id.length; i++){
-                listBillSupplyData = new ListBillSupplyData(id[i],
-                        nameSupplier[i],
-                        date[i],
-                        number[i],
-                        productCost[i],
-                        shipCost[i],
-                        total[i]);
-                listBillSupplyDataArrayList.add(listBillSupplyData);
-            }
-            listBillSupplyAdapter = new ListBillSupplyAdapter(BillInformation.this, listBillSupplyDataArrayList);
-            listView.setAdapter(listBillSupplyAdapter);
             listView.setClickable(true);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    ListBillSupplyData selectedItem = (ListBillSupplyData) parent.getItemAtPosition(position);
+                    BillSupply selectedItem = (BillSupply) parent.getItemAtPosition(position);
                     Intent intent = new Intent(BillInformation.this, Bill_Detail_Supply.class);
-                    intent.putExtra("nameSupplier", selectedItem.getNameSupplier());
-                    intent.putExtra("date", selectedItem.getDate());
-                    intent.putExtra("totalPayment", selectedItem.getTotal());
+                    intent.putExtra("billSupply", selectedItem);
                     startActivity(intent);
                 }
             });
         }else if (position == 6){
-            BarDataSet barDataSet1 = new BarDataSet(barEntries1(),"Workshift");
-            barDataSet1.setColors(Color.argb(188,119,193,202));
+            billWorkshiftRespository = new BillWorkshiftRespository();
+            billRef = database.getReference("billWorkshifts");
 
-            BarData barData1 = new BarData();
-            barData1.addDataSet(barDataSet1);
-            barChart.setData(barData1);
+            fetchBill(position);
 
-            String[] id = {"Pasta", "Maggi"};
-            String[] nameEmploye = {"Pasta", "Maggi"};
-            String[] date = {"30 mins", "2 mins"};
-            Float[] totalWorked = {2323.3f,2323.3f};
-            Float[] salary = {2323.3f,2323.3f};
-            Float[] pTV = {2323.3f,2323.3f};
-            Float[] total = {2323.3f,2323.3f};
-            for (int i = 0; i < id.length; i++){
-                listBillWorkshiftData = new ListBillWorkshiftData(id[i],
-                        nameEmploye[i],
-                        date[i],
-                        totalWorked[i],
-                        salary[i],
-                        pTV[i],
-                        total[i]);
-                listBillWorkshiftDataArrayList.add(listBillWorkshiftData);
-            }
-            listBillWorkshiftAdapter = new ListBillWorkshiftAdapter(BillInformation.this, listBillWorkshiftDataArrayList);
-            listView.setAdapter(listBillWorkshiftAdapter);
             listView.setClickable(true);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    ListBillWorkshiftData selectedItem = (ListBillWorkshiftData) parent.getItemAtPosition(position);
+                    BillWorkshift selectedItem = (BillWorkshift) parent.getItemAtPosition(position);
                     Intent intent = new Intent(BillInformation.this, Bill_Detail_Workshift.class);
-                    intent.putExtra("nameEmployee", selectedItem.getNameEmploye());
-                    intent.putExtra("date", selectedItem.getDate());
-                    intent.putExtra("totalPayment", selectedItem.getTotal());
+                    intent.putExtra("billWorkshift", selectedItem);
                     startActivity(intent);
                 }
             });
         }
     }
 
+    private void initSearch(int potion){
+        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchText = newText;
+                searchChange(potion);
+                return true;
+            }
+        });
+    }
 
-    private ArrayList<BarEntry> barEntries1(){
-        ArrayList<BarEntry> barEntries = new ArrayList<>();
-        barEntries.add(new BarEntry(1,2000));
-        barEntries.add(new BarEntry(2,791));
-        barEntries.add(new BarEntry(3,630));
-        barEntries.add(new BarEntry(4,450));
-        barEntries.add(new BarEntry(5,2724));
-        barEntries.add(new BarEntry(6,500));
-        barEntries.add(new BarEntry(7,2173));
-        return barEntries;
+    private void fetchBill(int postion) {
+        billRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (postion == 1){
+                    billEcmmerceRespository.clearListBillEcommerce(BillInformation.this);
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        BillEcommerce billEcommerce = snapshot.getValue(BillEcommerce.class);
+                        if (billEcommerce != null) {
+                            billEcmmerceRespository.addBillEcommerce(billEcommerce,BillInformation.this);
+                        }
+                    }
+                    billEcommerceList = billEcmmerceRespository.getListBillEcommerce(BillInformation.this);
+                } else if (postion == 2) {
+                    billFacilityRespository.clearListBillFacility(BillInformation.this);
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        BillFacility billFacility = snapshot.getValue(BillFacility.class);
+                        if (billFacility != null) {
+                            billFacilityRespository.addBillFacility(billFacility,BillInformation.this);
+                        }
+                    }
+                    billFacilityList = billFacilityRespository.getListBillFacility(BillInformation.this);
+                } else if (postion == 3) {
+                    billProductRespository.clearListBillProduct(BillInformation.this);
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        BillProduct billProduct = snapshot.getValue(BillProduct.class);
+                        if (billProduct != null) {
+                            billProductRespository.addBillProduct(billProduct,BillInformation.this);
+                        }
+                    }
+                    billProductList = billProductRespository.getListBillProduct(BillInformation.this);
+                } else if (postion == 4) {
+                    billStoreRespository.clearListBillStore(BillInformation.this);
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        BillStore billStore = snapshot.getValue(BillStore.class);
+                        if (billStore != null) {
+                            billStoreRespository.addBillStore(billStore,BillInformation.this);
+                        }
+                    }
+                    billStoreList = billStoreRespository.getListBillStore(BillInformation.this);
+                } else if (postion == 5) {
+                    billSupplyRespository.clearListBillSupply(BillInformation.this);
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        BillSupply billSupply = snapshot.getValue(BillSupply.class);
+                        if (billSupply != null) {
+                            billSupplyRespository.addBillSupply(billSupply,BillInformation.this);
+                        }
+                    }
+                    billSupplyList = billSupplyRespository.getListBillSupply(BillInformation.this);
+                }else if (postion == 6) {
+                    billWorkshiftRespository.clearListBillWorkshift(BillInformation.this);
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        BillWorkshift billWorkshift = snapshot.getValue(BillWorkshift.class);
+                        if (billWorkshift != null) {
+                            billWorkshiftRespository.addBillWorkshift(billWorkshift,BillInformation.this);
+                        }
+                    }
+                    billWorkshiftList = billWorkshiftRespository.getListBillWorkshift(BillInformation.this);
+                }
+
+                searchChange(postion);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle possible errors.
+
+            }
+        });
+    }
+
+    private void CreateBar(ArrayList<BarEntry> arrayList,String name){
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        barChart.invalidate();
+
+        BarDataSet barDataSet1 = new BarDataSet(arrayList,name);
+        barDataSet1.setColors(Color.argb(188,119,193,202));
+
+        BarData barData = new BarData();
+        barData.addDataSet(barDataSet1);
+        barChart.setData(barData);
+    }
+
+    private void searchChange(int position){
+        if(position == 1){
+            if (searchText.isEmpty() || searchText.equals("")){
+                listBillEcommerceAdapter = new ListBillEcommerceAdapter(BillInformation.this, billEcommerceList);
+                listView.setAdapter(listBillEcommerceAdapter);
+
+                CreateBar(billEcmmerceRespository.displayBill(billEcommerceList),"Ecommerce");
+            }else {
+                ArrayList<BillEcommerce> list = new ArrayList<>();
+
+                for (BillEcommerce b:billEcommerceList){
+                    if (b.getNameCustomer().toLowerCase().contains(searchText.toLowerCase())){
+                        list.add(b);
+                    }
+                }
+
+                listBillEcommerceAdapter = new ListBillEcommerceAdapter(BillInformation.this, list);
+                listView.setAdapter(listBillEcommerceAdapter);
+
+                CreateBar(billEcmmerceRespository.displayBill(list),"Ecommerce");
+            }
+        }else if(position == 2){
+            if (searchText.isEmpty() || searchText.equals("")){
+                listBillFacitilyAdapter = new ListBillFacitilyAdapter(BillInformation.this, billFacilityList);
+                listView.setAdapter(listBillFacitilyAdapter);
+
+                CreateBar(billFacilityRespository.displayBill(billFacilityList),"Facility");
+            }else {
+                ArrayList<BillFacility> list = new ArrayList<>();
+
+                for (BillFacility b:billFacilityList){
+                    if (b.getNameFacility().toLowerCase().contains(searchText.toLowerCase())){
+                        list.add(b);
+                    }
+                }
+
+                listBillFacitilyAdapter = new ListBillFacitilyAdapter(BillInformation.this, list);
+                listView.setAdapter(listBillFacitilyAdapter);
+
+                CreateBar(billFacilityRespository.displayBill(list),"Facility");
+            }
+        }else if(position == 3){
+            if (searchText.isEmpty() || searchText.equals("")){
+                listBillProductAdapter = new ListBillProductAdapter(BillInformation.this, billProductList);
+                listView.setAdapter(listBillProductAdapter);
+            }else {
+                ArrayList<BillProduct> list = new ArrayList<>();
+
+                for (BillProduct b:billProductList){
+                    if (b.getNameProduct().toLowerCase().contains(searchText.toLowerCase())){
+                        list.add(b);
+                    }
+                }
+
+                listBillProductAdapter = new ListBillProductAdapter(BillInformation.this, list);
+                listView.setAdapter(listBillProductAdapter);
+            }
+        }else if(position == 4){
+            if (searchText.isEmpty() || searchText.equals("")){
+                listBillStoreAdapter = new ListBillStoreAdapter(BillInformation.this, billStoreList);
+                listView.setAdapter(listBillStoreAdapter);
+
+                CreateBar(billStoreRespository.displayBill(billStoreList),"Store");
+            }else {
+                ArrayList<BillStore> list = new ArrayList<>();
+
+                for (BillStore b:billStoreList){
+                    if (b.getNameEmploye().toLowerCase().contains(searchText.toLowerCase())){
+                        list.add(b);
+                    }
+                }
+
+                listBillStoreAdapter = new ListBillStoreAdapter(BillInformation.this, list);
+                listView.setAdapter(listBillStoreAdapter);
+
+                CreateBar(billStoreRespository.displayBill(list),"Store");
+            }
+        }else if(position == 5){
+            if (searchText.isEmpty() || searchText.equals("")){
+                listBillSupplyAdapter = new ListBillSupplyAdapter(BillInformation.this, billSupplyList);
+                listView.setAdapter(listBillSupplyAdapter);
+
+                CreateBar(billSupplyRespository.displayBill(billSupplyList),"Supply");
+            }else {
+                ArrayList<BillSupply> list = new ArrayList<>();
+
+                for (BillSupply b:billSupplyList){
+                    if (b.getNameSupplier().toLowerCase().contains(searchText.toLowerCase())){
+                        list.add(b);
+                    }
+                }
+
+                listBillSupplyAdapter = new ListBillSupplyAdapter(BillInformation.this, list);
+                listView.setAdapter(listBillSupplyAdapter);
+
+                CreateBar(billSupplyRespository.displayBill(list),"Supply");
+            }
+        }else if(position == 6){
+            if (searchText.isEmpty() || searchText.equals("")){
+                listBillWorkshiftAdapter = new ListBillWorkshiftAdapter(BillInformation.this, billWorkshiftList);
+                listView.setAdapter(listBillWorkshiftAdapter);
+
+                CreateBar(billWorkshiftRespository.displayBill(billWorkshiftList),"Workshift");
+            }else {
+                ArrayList<BillWorkshift> list = new ArrayList<>();
+
+                for (BillWorkshift b:billWorkshiftList){
+                    if (b.getNameEmploye().toLowerCase().contains(searchText.toLowerCase())){
+                        list.add(b);
+                    }
+                }
+
+                listBillWorkshiftAdapter = new ListBillWorkshiftAdapter(BillInformation.this, list);
+                listView.setAdapter(listBillWorkshiftAdapter);
+
+                CreateBar(billWorkshiftRespository.displayBill(list),"Workshift");
+            }
+        }
+    }
+
+    private void layout_atoz_nomral(){
+        int colorResourceId = R.color.blue;
+        int color = ContextCompat.getColor(BillInformation.this, colorResourceId);
+        layout_atoz.setBackgroundColor(color);
+        atoz_text.setText("A - Z ");
+        atoz_image.setImageResource(R.drawable.transfer_4);
+    }
+
+    private void layout_time_nomral(){
+        int colorResourceId = R.color.blue;
+        int color = ContextCompat.getColor(BillInformation.this, colorResourceId);
+        layout_time.setBackgroundColor(color);
+        timeImages.setImageResource(R.drawable.transfer_4);
+    }
+
+    private void layout_totalpayment_nomral(){
+        int colorResourceId = R.color.blue;
+        int color = ContextCompat.getColor(BillInformation.this, colorResourceId);
+        layout_totalpayment.setBackgroundColor(color);
+        timeImages.setImageResource(R.drawable.transfer_4);
+    }
+
+    private void Nomarl(int position){
+        if (position == 1){
+            billEcommerceList = billEcmmerceRespository.getListBillEcommerce(BillInformation.this);
+        }else if (position == 2){
+            billFacilityList = billFacilityRespository.getListBillFacility(BillInformation.this);
+        }else if (position == 3){
+            billProductList = billProductRespository.getListBillProduct(BillInformation.this);
+        }else if (position == 4){
+            billStoreList = billStoreRespository.getListBillStore(BillInformation.this);
+        }else if (position == 5){
+            billSupplyList = billSupplyRespository.getListBillSupply(BillInformation.this);
+        }else if (position == 6){
+            billWorkshiftList = billWorkshiftRespository.getListBillWorkshift(BillInformation.this);
+        }
     }
 }

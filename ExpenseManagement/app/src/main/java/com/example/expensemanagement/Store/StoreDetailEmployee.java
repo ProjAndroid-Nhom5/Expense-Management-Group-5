@@ -39,7 +39,6 @@ public class StoreDetailEmployee extends AppCompatActivity {
     EditText inputNameEmployee, inputEmail, inputPhone, inputAddress, inputBaseSalary, inputBonusSalary;
     TextView inputDayOfWork;
     Spinner inputPosition;
-
     Button btn_update, btn_delete;
     private DatabaseReference databaseReference;
     private int employeeId;

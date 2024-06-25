@@ -10,20 +10,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.expensemanagement.Bill.Model.ListBillWorkshiftData;
+import com.example.expensemanagement.Bill.Model.BillWorkshift;
 import com.example.expensemanagement.R;
 
 import java.util.ArrayList;
 
-public class ListBillWorkshiftAdapter extends ArrayAdapter<ListBillWorkshiftData> {
-    public ListBillWorkshiftAdapter(@NonNull Context context, ArrayList<ListBillWorkshiftData> dataArrayList) {
+public class ListBillWorkshiftAdapter extends ArrayAdapter<BillWorkshift> {
+    public ListBillWorkshiftAdapter(@NonNull Context context, ArrayList<BillWorkshift> dataArrayList) {
         super(context, R.layout.list_item_bill_inf_workshift, dataArrayList);
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View view, @NonNull ViewGroup parent) {
-        ListBillWorkshiftData listData = getItem(position);
+        BillWorkshift listData = getItem(position);
         if (view == null) {
             view = LayoutInflater.from(getContext()).inflate(R.layout.list_item_bill_inf_workshift, parent, false);
         }

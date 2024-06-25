@@ -60,7 +60,7 @@
                 android:layout_width="90dp"
                 android:layout_height="85dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ec2" />
+                android:src="@drawable/eco" />
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 
@@ -95,7 +95,7 @@
                         android:layout_height="30dp"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="10dp"
-                        android:text="Name Ecommerce*:"
+                        android:text="Name Ecommerce:"
                         android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 

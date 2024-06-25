@@ -5,15 +5,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.expensemanagement.Bill.Model.BillFacility;
+import com.example.expensemanagement.Bill.Model.BillProduct;
 import com.example.expensemanagement.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Bill_Detail_Product extends AppCompatActivity {
 
@@ -41,16 +50,37 @@ public class Bill_Detail_Product extends AppCompatActivity {
             }
         });
 
-        String nameProduct = getIntent().getStringExtra("nameProduct");
-        String billID = getIntent().getStringExtra("billID");
-        Float getQuantity = getIntent().getFloatExtra("getQuantity", 0.0f);
+        BillProduct billProduct = (BillProduct) getIntent().getSerializableExtra("billProduct");
 
+        EditText input_product_detail = findViewById(R.id.input_product_detail);
         EditText inputNameProduct = findViewById(R.id.inpuNameProduct);
         EditText billId = findViewById(R.id.inputBillID);
         TextView inputQuantity =  findViewById(R.id.inputQuantity);
+        LinearLayout remove =  findViewById(R.id.remove);
 
-        inputNameProduct.setText(nameProduct);
-        billId.setText(billID);
-        inputQuantity.setText(String.valueOf(getQuantity));
+        input_product_detail.setText(String.valueOf(billProduct.getBill_ProductID()));
+        inputNameProduct.setText(billProduct.getNameProduct());
+        billId.setText(String.valueOf(billProduct.getBillID()));
+        inputQuantity.setText(String.valueOf(billProduct.getQuantity()));
+
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("billProducts/"+billProduct.getBill_ProductID());
+                myRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Bill_Detail_Product.this, "Data deleted successfully.", Toast.LENGTH_SHORT).show();
+                            onBackPressed();
+                            finish();
+                        } else {
+                            Toast.makeText(Bill_Detail_Product.this, "Error deleting data.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
     }
 }

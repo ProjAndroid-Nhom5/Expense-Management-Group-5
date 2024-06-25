@@ -54,7 +54,7 @@
         android:id="@+id/header_image"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:src="@drawable/ec2"
+        android:src="@drawable/eco"
         android:layout_marginTop="10dp"
         android:scaleType="centerCrop"
         android:elevation="10dp"

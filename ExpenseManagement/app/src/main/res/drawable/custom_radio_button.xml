@@ -1,0 +1,7 @@
+<!-- custom_radio_button.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- State when RadioButton is checked -->
+    <item android:drawable="@drawable/radio_checked" android:state_checked="true"/>
+    <!-- Default state -->
+    <item android:drawable="@drawable/radio_unchecked"/>
+</selector>
