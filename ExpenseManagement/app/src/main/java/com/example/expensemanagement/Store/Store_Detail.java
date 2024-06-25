@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.expensemanagement.Home.HomeActivity;
 import com.example.expensemanagement.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +27,7 @@ public class Store_Detail extends AppCompatActivity {
     private Button btn_update;
     private ImageView close;
     private DatabaseReference databaseReference;
+    private DatabaseReference userReference;
     private int StoreID = 1;
     private String StoreName, ManagerName, Address, Describe, Email, Phone;
     private float Impost;
@@ -34,7 +37,7 @@ public class Store_Detail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_info_store_detail);
-  
+
         inputManagerName = findViewById(R.id.inputManagerName);
         inputStoreName = findViewById(R.id.inputStoreName);
         inputImpost = findViewById(R.id.inputImpost);
@@ -47,22 +50,53 @@ public class Store_Detail extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("store").child(String.valueOf(StoreID));
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String userId = user.getUid();
+            userReference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+            loadUserProfile();
+        } else {
+            Toast.makeText(this, "User not logged in.", Toast.LENGTH_SHORT).show();
+        }
+
         loadStoreDetails();
 
         close.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-          
+
         btn_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (validateInput()) {
                     updateStoreDetails();
                 }
+            }
+        });
+    }
+
+    private void loadUserProfile() {
+        userReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String name = snapshot.child("name").getValue(String.class);
+                    if (name != null) {
+                        inputManagerName.setText(name);
+                    } else {
+                        Toast.makeText(Store_Detail.this, "Tên người dùng không tồn tại.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(Store_Detail.this, "Người dùng không tồn tại.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Toast.makeText(Store_Detail.this, "Lỗi khi tải thông tin người dùng.", Toast.LENGTH_SHORT).show();
             }
         });
     }
