@@ -48,6 +48,8 @@ public class Store_Detail extends AppCompatActivity {
         btn_update = findViewById(R.id.btn_update);
         close = findViewById(R.id.close);
 
+        inputManagerName.setEnabled(false);
+
         databaseReference = FirebaseDatabase.getInstance().getReference("store").child(String.valueOf(StoreID));
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -82,21 +84,13 @@ public class Store_Detail extends AppCompatActivity {
         userReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    String name = snapshot.child("name").getValue(String.class);
-                    if (name != null) {
-                        inputManagerName.setText(name);
-                    } else {
-                        Toast.makeText(Store_Detail.this, "Tên người dùng không tồn tại.", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(Store_Detail.this, "Người dùng không tồn tại.", Toast.LENGTH_SHORT).show();
-                }
+                String name = snapshot.child("name").getValue(String.class);
+                inputManagerName.setText(name);
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                Toast.makeText(Store_Detail.this, "Lỗi khi tải thông tin người dùng.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Store_Detail.this, "Error loading user information", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -160,7 +154,6 @@ public class Store_Detail extends AppCompatActivity {
     }
 
     private void updateStoreDetails() {
-        databaseReference.child("ManagerName").setValue(ManagerName);
         databaseReference.child("StoreName").setValue(StoreName);
         databaseReference.child("Address").setValue(Address);
         databaseReference.child("Describe").setValue(Describe);
@@ -170,7 +163,7 @@ public class Store_Detail extends AppCompatActivity {
 
         Toast.makeText(this, "Information Store updated successfully", Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(Store_Detail.this, HomeActivity.class);
+        Intent intent = new Intent(Store_Detail.this, Store_Detail.class);
         startActivity(intent);
         finish();
     }
