@@ -88,7 +88,7 @@ public class StoreInformation extends AppCompatActivity {
         });
 
         if (position == 1) {
-            header_image.setImageResource(R.drawable.eco);
+            header_image.setImageResource(R.drawable.ec2);
 
             searchView.clearFocus();
             GridLayoutManager gridLayoutManager = new GridLayoutManager(StoreInformation.this, 1);

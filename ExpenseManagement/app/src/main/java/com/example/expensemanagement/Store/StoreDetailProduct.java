@@ -25,7 +25,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class StoreDetailProduct extends AppCompatActivity {
     private EditText inputNameProduct, inputQuantity, inputPrice;
     private Button btn_update, btn_delete;
-    private ImageView closeIcon;
     private DatabaseReference databaseReference;
     private int productId;
 
@@ -38,17 +37,6 @@ public class StoreDetailProduct extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
-        });
-
-        closeIcon = findViewById(R.id.close_icon);
-        closeIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(StoreDetailProduct.this, StoreInformation.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-                finish();
-            }
         });
 
         inputNameProduct = findViewById(R.id.inputNameProduct);
