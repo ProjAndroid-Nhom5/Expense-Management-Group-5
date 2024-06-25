@@ -95,7 +95,7 @@
                         android:layout_height="30dp"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="10dp"
-                        android:text="Name Product*:"
+                        android:text="Name Product:"
                         android:textColor="@color/darkblue"
                         android:textSize="15sp" />
 

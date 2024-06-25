@@ -94,7 +94,7 @@
                         android:layout_height="30dp"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="10dp"
-                        android:text="Name Ecommerce*:"
+                        android:text="Name Ecommerce:"
                         android:textColor="@color/darknavyblue"
                         android:textSize="15sp" />
 

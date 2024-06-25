@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,14 @@ public class StoreAddProduct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveData();
+            }
+        });
+
+        ImageView closeIcon = findViewById(R.id.close_icon);
+        closeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }
