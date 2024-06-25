@@ -43,7 +43,6 @@ import java.util.Calendar;
 import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity {
-    final String TAG = SignUpActivity.class.getName();
     EditText signupName, signupEmail, signupPassword, signupConfirmPassword, signup_phone, signupBirthdate;;
 
     // Khai báo các thành phần trong XML
