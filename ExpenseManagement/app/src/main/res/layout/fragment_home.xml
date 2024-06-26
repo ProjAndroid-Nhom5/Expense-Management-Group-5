@@ -31,7 +31,17 @@
                 android:background="@drawable/chart_cart"
                 android:padding="5dp">
 
-                <TextView
+                <Spinner
+                    android:id="@+id/timeTxt"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:dropDownVerticalOffset="40dp"
+                    android:textSize="@dimen/_14ssp"
+                    android:background="@drawable/bg_spinner_date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <!--<TextView
                     android:id="@+id/timeTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -41,7 +51,7 @@
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent" />-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -274,7 +284,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
                     android:text="Profit And Loss Trend"
                     android:textColor="@color/card"
                     android:textSize="@dimen/_14ssp"
@@ -300,7 +313,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
                     android:text="Debt Trend"
                     android:textColor="@color/card"
                     android:textSize="@dimen/_14ssp"

@@ -508,7 +508,7 @@ public class BillInformation extends AppCompatActivity {
                 listBillEcommerceAdapter = new ListBillEcommerceAdapter(BillInformation.this, billEcommerceList);
                 listView.setAdapter(listBillEcommerceAdapter);
 
-                CreateBar(billEcmmerceRespository.displayBill(billEcommerceList),"Ecommerce");
+                CreateBar(billEcmmerceRespository.displayBillForCurrentYear(billEcommerceList),"Ecommerce");
             }else {
                 ArrayList<BillEcommerce> list = new ArrayList<>();
 
@@ -521,14 +521,14 @@ public class BillInformation extends AppCompatActivity {
                 listBillEcommerceAdapter = new ListBillEcommerceAdapter(BillInformation.this, list);
                 listView.setAdapter(listBillEcommerceAdapter);
 
-                CreateBar(billEcmmerceRespository.displayBill(list),"Ecommerce");
+                CreateBar(billEcmmerceRespository.displayBillForCurrentYear(list),"Ecommerce");
             }
         }else if(position == 2){
             if (searchText.isEmpty() || searchText.equals("")){
                 listBillFacitilyAdapter = new ListBillFacitilyAdapter(BillInformation.this, billFacilityList);
                 listView.setAdapter(listBillFacitilyAdapter);
 
-                CreateBar(billFacilityRespository.displayBill(billFacilityList),"Facility");
+                CreateBar(billFacilityRespository.displayBillForCurrentYear(billFacilityList),"Facility");
             }else {
                 ArrayList<BillFacility> list = new ArrayList<>();
 
@@ -541,7 +541,7 @@ public class BillInformation extends AppCompatActivity {
                 listBillFacitilyAdapter = new ListBillFacitilyAdapter(BillInformation.this, list);
                 listView.setAdapter(listBillFacitilyAdapter);
 
-                CreateBar(billFacilityRespository.displayBill(list),"Facility");
+                CreateBar(billFacilityRespository.displayBillForCurrentYear(list),"Facility");
             }
         }else if(position == 3){
             if (searchText.isEmpty() || searchText.equals("")){
@@ -564,7 +564,7 @@ public class BillInformation extends AppCompatActivity {
                 listBillStoreAdapter = new ListBillStoreAdapter(BillInformation.this, billStoreList);
                 listView.setAdapter(listBillStoreAdapter);
 
-                CreateBar(billStoreRespository.displayBill(billStoreList),"Store");
+                CreateBar(billStoreRespository.displayBillForCurrentYear(billStoreList),"Store");
             }else {
                 ArrayList<BillStore> list = new ArrayList<>();
 
@@ -577,14 +577,14 @@ public class BillInformation extends AppCompatActivity {
                 listBillStoreAdapter = new ListBillStoreAdapter(BillInformation.this, list);
                 listView.setAdapter(listBillStoreAdapter);
 
-                CreateBar(billStoreRespository.displayBill(list),"Store");
+                CreateBar(billStoreRespository.displayBillForCurrentYear(list),"Store");
             }
         }else if(position == 5){
             if (searchText.isEmpty() || searchText.equals("")){
                 listBillSupplyAdapter = new ListBillSupplyAdapter(BillInformation.this, billSupplyList);
                 listView.setAdapter(listBillSupplyAdapter);
 
-                CreateBar(billSupplyRespository.displayBill(billSupplyList),"Supply");
+                CreateBar(billSupplyRespository.displayBillForCurrentYear(billSupplyList),"Supply");
             }else {
                 ArrayList<BillSupply> list = new ArrayList<>();
 
@@ -597,14 +597,14 @@ public class BillInformation extends AppCompatActivity {
                 listBillSupplyAdapter = new ListBillSupplyAdapter(BillInformation.this, list);
                 listView.setAdapter(listBillSupplyAdapter);
 
-                CreateBar(billSupplyRespository.displayBill(list),"Supply");
+                CreateBar(billSupplyRespository.displayBillForCurrentYear(list),"Supply");
             }
         }else if(position == 6){
             if (searchText.isEmpty() || searchText.equals("")){
                 listBillWorkshiftAdapter = new ListBillWorkshiftAdapter(BillInformation.this, billWorkshiftList);
                 listView.setAdapter(listBillWorkshiftAdapter);
 
-                CreateBar(billWorkshiftRespository.displayBill(billWorkshiftList),"Workshift");
+                CreateBar(billWorkshiftRespository.displayBillForCurrentYear(billWorkshiftList),"Workshift");
             }else {
                 ArrayList<BillWorkshift> list = new ArrayList<>();
 
@@ -617,7 +617,7 @@ public class BillInformation extends AppCompatActivity {
                 listBillWorkshiftAdapter = new ListBillWorkshiftAdapter(BillInformation.this, list);
                 listView.setAdapter(listBillWorkshiftAdapter);
 
-                CreateBar(billWorkshiftRespository.displayBill(list),"Workshift");
+                CreateBar(billWorkshiftRespository.displayBillForCurrentYear(list),"Workshift");
             }
         }
     }

@@ -124,6 +124,24 @@ public class SignInActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         });
 
+        mPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    mEmailOrPhone.setSelection(0); // Đặt con trỏ văn bản về vị trí đầu tiên khi mất focus
+                }
+            }
+        });
+
+        mPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    mEmailOrPhone.setSelection(0); // Đặt con trỏ văn bản về vị trí đầu tiên khi mất focus
+                }
+            }
+        });
+
         mEmailOrPhone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}

@@ -64,6 +64,7 @@
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
                 android:hint="Email"
+                android:singleLine="true"
                 android:padding="10dp"
                 android:textColor="@color/black" />
 
