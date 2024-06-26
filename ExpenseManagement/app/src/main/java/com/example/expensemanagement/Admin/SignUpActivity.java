@@ -31,6 +31,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.expensemanagement.Admin.model.User;
 import com.example.expensemanagement.R;
+import com.example.expensemanagement.Store.Model.StoreInfDetail;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -55,6 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
     Button signupButton;
     FirebaseAuth mAuth;
     DatabaseReference databaseReference;
+    DatabaseReference storeReference;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,7 @@ public class SignUpActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         mAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        storeReference = FirebaseDatabase.getInstance().getReference("stores");
 
 
         showPw = findViewById(R.id.sign_up_seePw);
@@ -214,10 +217,6 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
 
         // Thêm TextWatcher cho signupPassword và signupConfirmPassword
         signupPassword.addTextChangedListener(new TextWatcher() {
