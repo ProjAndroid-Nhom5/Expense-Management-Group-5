@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.expensemanagement.Home.HomeActivity;
 import com.example.expensemanagement.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,9 +25,9 @@ public class Store_Detail extends AppCompatActivity {
     private EditText inputManagerName, inputStoreName, inputImpost, inputAddress, inputDescribe, inputEmail, inputPhone;
     private Button btn_update;
     private ImageView close;
-    private DatabaseReference databaseReference;
+    private DatabaseReference storeReference;
     private DatabaseReference userReference;
-    private int StoreID = 1;
+    private String userId;
     private String StoreName, ManagerName, Address, Describe, Email, Phone;
     private float Impost;
 
@@ -50,18 +49,16 @@ public class Store_Detail extends AppCompatActivity {
 
         inputManagerName.setEnabled(false);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("store").child(String.valueOf(StoreID));
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            String userId = user.getUid();
+            userId = user.getUid();
             userReference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+            storeReference = FirebaseDatabase.getInstance().getReference("store").child(userId);
             loadUserProfile();
+            loadStoreDetails();
         } else {
             Toast.makeText(this, "User not logged in.", Toast.LENGTH_SHORT).show();
         }
-
-        loadStoreDetails();
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,8 +81,12 @@ public class Store_Detail extends AppCompatActivity {
         userReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                String name = snapshot.child("name").getValue(String.class);
-                inputManagerName.setText(name);
+                if (snapshot.exists()) {
+                    String name = snapshot.child("name").getValue(String.class);
+                    inputManagerName.setText(name);
+                } else {
+                    Toast.makeText(Store_Detail.this, "User profile not found.", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -96,12 +97,11 @@ public class Store_Detail extends AppCompatActivity {
     }
 
     private void loadStoreDetails() {
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        storeReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     StoreName = dataSnapshot.child("StoreName").getValue(String.class);
-                    ManagerName = dataSnapshot.child("ManagerName").getValue(String.class);
                     Address = dataSnapshot.child("Address").getValue(String.class);
                     Describe = dataSnapshot.child("Describe").getValue(String.class);
                     Email = dataSnapshot.child("Email").getValue(String.class);
@@ -111,7 +111,6 @@ public class Store_Detail extends AppCompatActivity {
                     }
 
                     inputStoreName.setText(StoreName);
-                    inputManagerName.setText(ManagerName);
                     inputAddress.setText(Address);
                     inputDescribe.setText(Describe);
                     inputEmail.setText(Email);
@@ -154,12 +153,12 @@ public class Store_Detail extends AppCompatActivity {
     }
 
     private void updateStoreDetails() {
-        databaseReference.child("StoreName").setValue(StoreName);
-        databaseReference.child("Address").setValue(Address);
-        databaseReference.child("Describe").setValue(Describe);
-        databaseReference.child("Email").setValue(Email);
-        databaseReference.child("Phone").setValue(Phone);
-        databaseReference.child("Impost").setValue(Impost);
+        storeReference.child("StoreName").setValue(StoreName);
+        storeReference.child("Address").setValue(Address);
+        storeReference.child("Describe").setValue(Describe);
+        storeReference.child("Email").setValue(Email);
+        storeReference.child("Phone").setValue(Phone);
+        storeReference.child("Impost").setValue(Impost);
 
         Toast.makeText(this, "Information Store updated successfully", Toast.LENGTH_SHORT).show();
 
