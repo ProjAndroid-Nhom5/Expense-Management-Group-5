@@ -106,7 +106,7 @@ public class AdminFragment extends Fragment {
                                 dialog.dismiss();
                             }
                         })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setIcon(R.drawable.baseline_warning_amber_24)
                         .show();
             }
         });
