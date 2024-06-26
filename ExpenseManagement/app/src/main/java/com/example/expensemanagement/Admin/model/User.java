@@ -1,8 +1,8 @@
 package com.example.expensemanagement.Admin.model;
 
 public class User {
-    private static int nextId = 1; // Biến static để tự động tăng ID
-    private int id; // Sử dụng int cho ID để đơn giản hóa
+    private static int nextId = 1;
+    private int id;
     private String name;
     private String email;
     private String phone;
@@ -10,11 +10,10 @@ public class User {
     private String birthday;
 
     public User() {
-        // Empty constructor needed for Firebase
     }
 
     public User(String name, String email, String phone, String gender, String birthday) {
-        this.id = nextId++; // Gán ID và tăng nextId lên cho người dùng tiếp theo
+        this.id = nextId++;
         this.name = name;
         this.email = email;
         this.phone = phone;

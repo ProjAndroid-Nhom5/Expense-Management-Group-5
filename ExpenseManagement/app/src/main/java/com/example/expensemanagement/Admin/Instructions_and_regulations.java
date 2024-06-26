@@ -18,7 +18,6 @@ public class Instructions_and_regulations extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_instructions_and_regulations);
         left_instructions_and_regulations = findViewById(R.id.left_instructions_and_regulations);
 

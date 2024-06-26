@@ -49,7 +49,6 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sign_in);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -175,12 +174,10 @@ public class SignInActivity extends AppCompatActivity {
                                 FirebaseUser user = mAuth.getCurrentUser();
 
                                 if (user != null && user.isEmailVerified()) {
-                                    // Email đã được xác minh
                                     Toast.makeText(SignInActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(SignInActivity.this, WaitingActivity.class));
                                     finish();
                                 } else {
-                                    // Email chưa được xác minh
                                     if (user != null) {
                                         user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override

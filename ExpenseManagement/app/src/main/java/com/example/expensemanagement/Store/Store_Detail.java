@@ -34,9 +34,7 @@ public class Store_Detail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_info_store_detail);
-
         inputManagerName = findViewById(R.id.inputManagerName);
         inputStoreName = findViewById(R.id.inputStoreName);
         inputImpost = findViewById(R.id.inputImpost);
