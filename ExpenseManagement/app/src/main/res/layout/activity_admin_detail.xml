@@ -7,16 +7,11 @@
     android:background="@drawable/bg"
     tools:context=".Admin.AdminFragment">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <RelativeLayout
             android:id="@+id/header_admin"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#D0EFED"
-            android:gravity="center_vertical">
+            android:background="#D0EFED">
 
             <ImageView
                 android:layout_marginTop="10dp"
@@ -278,5 +273,4 @@
         </LinearLayout>
     </ScrollView>
 
-    </RelativeLayout>
 </RelativeLayout>
