@@ -116,8 +116,8 @@ public class SignInActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mPassword.setError(null); // Xóa thông báo lỗi khi người dùng bắt đầu gõ
-                showPw.setVisibility(View.VISIBLE); // Hiển thị lại biểu tượng mắt khi người dùng gõ vào trường mật khẩu
+                mPassword.setError(null);
+                showPw.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -128,7 +128,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    mEmailOrPhone.setSelection(0); // Đặt con trỏ văn bản về vị trí đầu tiên khi mất focus
+                    mEmailOrPhone.setSelection(0);
                 }
             }
         });
@@ -137,7 +137,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    mEmailOrPhone.setSelection(0); // Đặt con trỏ văn bản về vị trí đầu tiên khi mất focus
+                    mEmailOrPhone.setSelection(0);
                 }
             }
         });
@@ -164,7 +164,6 @@ public class SignInActivity extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);
             mSignInBtn.setVisibility(View.GONE);
 
-            // Xử lý đăng nhập tài khoản
             mAuth.signInWithEmailAndPassword(emailOrPhone, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -197,7 +196,6 @@ public class SignInActivity extends AppCompatActivity {
                                     }
                                 }
                             } else {
-                                // Đăng nhập thất bại
                                 if (task.getException() != null) {
                                     Toast.makeText(SignInActivity.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 } else {
@@ -211,20 +209,16 @@ public class SignInActivity extends AppCompatActivity {
 
     boolean isEmail(EditText text) {
         CharSequence email = text.getText().toString().trim();
-        // Kiểm tra địa chỉ email không rỗng, hợp lệ, có đuôi @gmail.com và phần trước @gmail.com chứa ít nhất một chữ cái
         return (!TextUtils.isEmpty(email) &&
                 Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
                 email.toString().matches("^[A-Za-z].*@gmail\\.com$"));
     }
 
     boolean isPhone(String input) {
-        // Kiểm tra xem input có đúng định dạng số điện thoại không
-        // Đúng định dạng số điện thoại là số Việt Nam có 10 hoặc 11 chữ số và bắt đầu bằng +84 hoặc số bắt đầu bằng 0
         return input.matches("^\\+84[0-9]{9,10}$") || input.matches("^(0)[0-9]{9}$");
     }
 
     boolean isPasswordValid(String password) {
-        // Chỉ kiểm tra xem mật khẩu có rỗng hay không
         return !TextUtils.isEmpty(password);
     }
 
@@ -246,11 +240,11 @@ public class SignInActivity extends AppCompatActivity {
 
         if (isEmpty(mPassword)) {
             mPassword.setError("Password is required.");
-            showPw.setVisibility(View.INVISIBLE); // Ẩn biểu tượng mắt....
+            showPw.setVisibility(View.INVISIBLE);
             isValid = false;
         } else if (!isPasswordValid(mPassword.getText().toString().trim())) {
             mPassword.setError("Password must not be empty.");
-            showPw.setVisibility(View.INVISIBLE); // Ẩn biểu tượng mắt.....
+            showPw.setVisibility(View.INVISIBLE);
             isValid = false;
         }
 

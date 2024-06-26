@@ -113,8 +113,8 @@ public class Admin_Change_password extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                newPw.setError(null); // Clear error when user starts typing
-                admin_see_hideNewPw.setVisibility(View.VISIBLE); // Show eye icon
+                newPw.setError(null);
+                admin_see_hideNewPw.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -127,8 +127,8 @@ public class Admin_Change_password extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                reNewPw.setError(null); // Clear error when user starts typing
-                admin_see_hideReNewPw.setVisibility(View.VISIBLE); // Show eye icon
+                reNewPw.setError(null);
+                admin_see_hideReNewPw.setVisibility(View.VISIBLE);
             }
 
             @Override

@@ -46,7 +46,6 @@ import java.util.regex.Pattern;
 public class SignUpActivity extends AppCompatActivity {
     EditText signupName, signupEmail, signupPassword, signupConfirmPassword, signup_phone, signupBirthdate;;
 
-    // Khai báo các thành phần trong XML
     TextView snGender;
     RadioGroup radioGroupGender;
     RadioButton radioMan, radioWomen;
@@ -85,6 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         mAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+
         storeReference = FirebaseDatabase.getInstance().getReference("stores");
 
 
@@ -118,6 +118,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
+
         loginRedirectText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,21 +134,15 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-            // Thiết lập sự kiện khi người dùng chọn nút radio
             radioGroupGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    // Kiểm tra xem nút radio nào được chọn
                     switch (checkedId) {
                         case R.id.radioMan:
-                            // Xử lý khi chọn nút Man
                             String selectedMan = radioMan.getText().toString();
-                            // TODO: Đoạn xử lý khi chọn Man
                             break;
                         case R.id.radioWomen:
-                            // Xử lý khi chọn nút Women
                             String selectedWomen = radioWomen.getText().toString();
-                            // TODO: Đoạn xử lý khi chọn Women
                             break;
                         default:
                             break;
@@ -164,20 +159,18 @@ public class SignUpActivity extends AppCompatActivity {
                     final String email = signupEmail.getText().toString().trim();
                     final String phone = signup_phone.getText().toString().trim();
                     final String password = signupPassword.getText().toString().trim();
-                    final String gender; // Khởi tạo role ban đầu
-                    final String birthday; // Khởi tạo birthday ban đầu
+                    final String gender;
+                    final String birthday;
 
-                    // Lấy giá trị từ radio button
                     int selectedRoleId = radioGroupGender.getCheckedRadioButtonId();
                     if (selectedRoleId == R.id.radioMan) {
                         gender = "Man";
                     } else if (selectedRoleId == R.id.radioWomen) {
                         gender = "Women";
                     } else {
-                        gender = ""; // Handle default case if needed
+                        gender = "";
                     }
 
-                    // Lấy giá trị từ EditText birthday
                     birthday = signupBirthdate.getText().toString().trim();
 
                     progressBar.setVisibility(View.VISIBLE);
@@ -218,15 +211,14 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        // Thêm TextWatcher cho signupPassword và signupConfirmPassword
         signupPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                signupPassword.setError(null); // Xóa thông báo lỗi khi người dùng bắt đầu gõ
-                showPw.setVisibility(View.VISIBLE); // Hiển thị lại biểu tượng mắt khi người dùng gõ vào trường mật khẩu
+                signupPassword.setError(null);
+                showPw.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -239,8 +231,8 @@ public class SignUpActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                signupConfirmPassword.setError(null); // Xóa thông báo lỗi khi người dùng bắt đầu gõ
-                showCfPw.setVisibility(View.VISIBLE); // Hiển thị lại biểu tượng mắt khi người dùng gõ vào trường xác nhận mật khẩu
+                signupConfirmPassword.setError(null);
+                showCfPw.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -271,7 +263,6 @@ public class SignUpActivity extends AppCompatActivity {
 
     boolean isEmail(EditText text) {
         CharSequence email = text.getText().toString();
-        // Kiểm tra địa chỉ email không rỗng, hợp lệ, có đuôi @gmail.com và phần trước @gmail.com chứa ít nhất một chữ cái
         return (!TextUtils.isEmpty(email) &&
                 Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
                 email.toString().matches("^[A-Za-z].*@gmail\\.com$"));
@@ -291,7 +282,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     boolean isValidPhoneNumber(EditText text) {
         CharSequence phone = text.getText().toString().trim();
-        // Sử dụng biểu thức chính quy để kiểm tra số điện thoại Việt Nam
+
         String regex = "^(03|05|07|08|09)\\d{8}$";
         return !TextUtils.isEmpty(phone) && Pattern.compile(regex).matcher(phone).matches();
     }
@@ -335,14 +326,12 @@ public class SignUpActivity extends AppCompatActivity {
             check = false;
         }
 
-        // Kiểm tra xem role đã được chọn hay chưa
         int selectedRoleId = radioGroupGender.getCheckedRadioButtonId();
-        if (selectedRoleId == -1) { // Không có nút radio nào được chọn
+        if (selectedRoleId == -1) {
             Toast.makeText(SignUpActivity.this, "Please select a Role!", Toast.LENGTH_SHORT).show();
             check = false;
         }
 
-        // Kiểm tra xem birthday đã được chọn hay chưa
         if (TextUtils.isEmpty(signupBirthdate.getText().toString().trim())) {
             signupBirthdate.setError("Select Birthdate!");
             check = false;

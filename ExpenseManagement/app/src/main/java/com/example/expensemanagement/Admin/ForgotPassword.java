@@ -38,7 +38,6 @@ public class ForgotPassword extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        //Reset Button Listener
         rsPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
