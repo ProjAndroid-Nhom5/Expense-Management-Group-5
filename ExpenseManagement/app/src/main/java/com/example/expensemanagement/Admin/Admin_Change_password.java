@@ -33,7 +33,6 @@ public class Admin_Change_password extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_admin_change_password);
 
         left_Admin_Change_password = findViewById(R.id.left_Admin_Change_password);

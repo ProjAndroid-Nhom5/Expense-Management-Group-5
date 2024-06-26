@@ -32,9 +32,7 @@ import java.util.Locale;
 
 public class Admin_Detail extends AppCompatActivity {
 
-    private EditText mName, mEmail, mPhone;
-    private EditText mBirthday; // EditText for Birthday
-    private EditText mGender; // EditText for Gender
+    private EditText mName, mEmail, mPhone,mBirthday,mGender ;
 
     Button BtnUpAdmin;
     private ProgressBar progressBar;
@@ -42,9 +40,8 @@ public class Admin_Detail extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ImageView left_admin;
 
-    private DatabaseReference mDatabase;
 
-    private String[] genders = {"Man", "Woman"}; // Array of gender options
+    private String[] genders = {"Man", "Woman"};
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -56,10 +53,10 @@ public class Admin_Detail extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
         mName = findViewById(R.id.info_text);
-        mBirthday = findViewById(R.id.birthday); // EditText for Birthday
-        mBirthday.setFocusable(false); // Prevent direct editing
-        mGender = findViewById(R.id.Gender); // EditText for Gender
-        mGender.setFocusable(false); // Prevent direct editing
+        mBirthday = findViewById(R.id.birthday);
+        mBirthday.setFocusable(false);
+        mGender = findViewById(R.id.Gender);
+        mGender.setFocusable(false);
 
         mGender.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,18 +100,18 @@ public class Admin_Detail extends AppCompatActivity {
 
     }
 
-    // Method to show gender options using AlertDialog
+
     private void showGenderOptions() {
         new AlertDialog.Builder(this)
                 .setTitle("Select Gender")
                 .setItems(genders, (dialog, which) -> {
                     String selectedGender = genders[which];
-                    mGender.setText(selectedGender); // Set selected gender to mGender EditText
+                    mGender.setText(selectedGender);
                 })
                 .show();
     }
 
-    // Method to show DatePickerDialog
+
     private void showDatePickerDialog() {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -150,14 +147,14 @@ public class Admin_Detail extends AppCompatActivity {
                     String name = user.getName();
                     String email = user.getEmail();
                     String phone = user.getPhone();
-                    String gender = user.getGender(); // Lấy thông tin Gender
-                    String birthday = user.getBirthday(); // Lấy thông tin Birthday
+                    String gender = user.getGender();
+                    String birthday = user.getBirthday();
 
                     mName.setText(name);
                     mEmail.setText(email);
                     mPhone.setText(phone);
-                    mGender.setText(gender); // Hiển thị Gender lên EditText mGender
-                    mBirthday.setText(birthday); // Hiển thị Birthday lên EditText mBirthday
+                    mGender.setText(gender);
+                    mBirthday.setText(birthday);
                 } else {
                     Toast.makeText(Admin_Detail.this, "Something went wrong!", Toast.LENGTH_LONG).show();
                 }
@@ -178,63 +175,63 @@ public class Admin_Detail extends AppCompatActivity {
             String userIdofRegistered = firebaseUser.getUid();
             DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Users").child(userIdofRegistered);
 
-            // Get new name, gender, and birthday
-            String newName = mName.getText().toString().trim();
-            String newGender = mGender.getText().toString().trim(); // Lấy giá trị Gender từ EditText
-            String newBirthday = mBirthday.getText().toString().trim(); // Lấy giá trị Birthday từ EditText
-            String newPhone = mPhone.getText().toString().trim(); // Lấy giá trị Phone từ EditText
 
-            // Clear previous error messages
+            String newName = mName.getText().toString().trim();
+            String newGender = mGender.getText().toString().trim();
+            String newBirthday = mBirthday.getText().toString().trim();
+            String newPhone = mPhone.getText().toString().trim();
+
+
             mName.setError(null);
             mGender.setError(null);
             mBirthday.setError(null);
             mPhone.setError(null);
 
-            // Check if newName is empty
+
             if (newName.isEmpty()) {
                 mName.setError("Name cannot be empty");
                 return;
             }
 
-            // Check if newName contains only letters
+
             if (!newName.matches("[a-zA-Z\\s]+")) {
                 mName.setError("Name can only contain letters and spaces");
                 return;
             }
 
-            // Check if newGender is empty or not "Man" or "Woman"
+
             if (!newGender.equals("Man") && !newGender.equals("Woman")) {
                 Toast.makeText(Admin_Detail.this, "Please select a valid gender (Man or Woman)", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Check if newBirthday is empty
+
             if (newBirthday.isEmpty()) {
                 mBirthday.setError("Birthday cannot be empty");
                 return;
             }
 
-            // Check if newPhone is empty
+
             if (newPhone.isEmpty()) {
                 mPhone.setError("Phone number cannot be empty");
                 return;
             }
 
-            // Check if newPhone is in valid Vietnamese phone number format
+
             if (!isValidVietnamesePhoneNumber(newPhone)) {
                 mPhone.setError("Invalid Vietnamese phone number format");
                 return;
             }
 
-            // Update values in Firebase
+
             referenceProfile.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
                         referenceProfile.child("name").setValue(newName);
-                        referenceProfile.child("gender").setValue(newGender); // Update gender
-                        referenceProfile.child("birthday").setValue(newBirthday); // Update birthday
-                        referenceProfile.child("phone").setValue(newPhone); // Update phone
+                        referenceProfile.child("gender").setValue(newGender);
+                        referenceProfile.child("birthday").setValue(newBirthday);
+                        referenceProfile.child("phone").setValue(newPhone);
 
                         Toast.makeText(Admin_Detail.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
                     } else {
@@ -251,7 +248,6 @@ public class Admin_Detail extends AppCompatActivity {
     }
 
     private boolean isValidVietnamesePhoneNumber(String phoneNumber) {
-        // Check if phone number starts with "0" and has 10 or 11 digits
         return phoneNumber.matches("^(03|05|07|08|09)\\d{8,9}$");
     }
 }
