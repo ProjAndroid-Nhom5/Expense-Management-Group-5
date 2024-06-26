@@ -175,12 +175,10 @@ public class SignInActivity extends AppCompatActivity {
                                 FirebaseUser user = mAuth.getCurrentUser();
 
                                 if (user != null && user.isEmailVerified()) {
-                                    // Email đã được xác minh
                                     Toast.makeText(SignInActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(SignInActivity.this, WaitingActivity.class));
                                     finish();
                                 } else {
-                                    // Email chưa được xác minh
                                     if (user != null) {
                                         user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
