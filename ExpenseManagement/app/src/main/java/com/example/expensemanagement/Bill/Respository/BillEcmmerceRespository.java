@@ -122,6 +122,37 @@ public class BillEcmmerceRespository {
         return list;
     }
 
+    public ArrayList<BillEcommerce> getListForDateRange(ArrayList<BillEcommerce> list, String startDateStr, String endDateStr) {
+        ArrayList<BillEcommerce> filteredList = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+        Date startDate, endDate;
+        try {
+            startDate = sdf.parse(startDateStr);
+            endDate = sdf.parse(endDateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return filteredList; // Xử lý lỗi nếu cần thiết
+        }
+
+        for (BillEcommerce b : list) {
+            Date billDate;
+            try {
+                billDate = sdf.parse(b.getDate());
+            } catch (ParseException e) {
+                e.printStackTrace();
+                continue;
+            }
+
+            if (billDate != null && !billDate.before(startDate) && !billDate.after(endDate)) {
+                filteredList.add(b);
+            }
+        }
+
+        return filteredList;
+    }
+
+
     public ArrayList<BarEntry> displayBillForCurrentYear(ArrayList<BillEcommerce> list) {
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         ArrayList<BarBill> barBills = new ArrayList<>();
@@ -273,6 +304,83 @@ public class BillEcmmerceRespository {
 
         return barEntries;
     }
+    public ArrayList<BarEntry> displayBillForDateRange(ArrayList<BillEcommerce> list, String startDateStr, String endDateStr) {
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
+        ArrayList<BarBill> barBills = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+        Date startDate, endDate;
+        try {
+            startDate = sdf.parse(startDateStr);
+            endDate = sdf.parse(endDateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return barEntries; // Hoặc xử lý lỗi khác tùy vào nhu cầu của bạn
+        }
+
+        Calendar startCalendar = Calendar.getInstance();
+        startCalendar.setTime(startDate);
+        startCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        startCalendar.set(Calendar.MINUTE, 0);
+        startCalendar.set(Calendar.SECOND, 0);
+
+        Calendar endCalendar = Calendar.getInstance();
+        endCalendar.setTime(endDate);
+        endCalendar.set(Calendar.HOUR_OF_DAY, 23);
+        endCalendar.set(Calendar.MINUTE, 59);
+        endCalendar.set(Calendar.SECOND, 59);
+
+        int currentYear = startCalendar.get(Calendar.YEAR);
+        int currentMonth = startCalendar.get(Calendar.MONTH) + 1;
+
+        for (BillEcommerce b : list) {
+            Date billDate;
+            try {
+                billDate = sdf.parse(b.getDate());
+            } catch (ParseException e) {
+                e.printStackTrace();
+                continue;
+            }
+
+            if (billDate == null || billDate.before(startDate) || billDate.after(endDate)) {
+                continue; // Bỏ qua các khoản thanh toán không nằm trong khoảng thời gian yêu cầu
+            }
+
+            boolean check = false;
+            for (BarBill bar : barBills) {
+                if (bar.getDate().equals(billDate)) {
+                    check = true;
+                    break;
+                }
+            }
+
+            if (!check) {
+                BarBill barBill = new BarBill(billDate, b.getTotalPayment());
+                barBills.add(barBill);
+            }
+        }
+        int i = 1;
+        while (!startCalendar.after(endCalendar)) {
+            float total = 0f;
+            for (BarBill bar : barBills) {
+                Calendar billCalendar = Calendar.getInstance();
+                billCalendar.setTime(bar.getDate());
+                if (billCalendar.get(Calendar.DAY_OF_MONTH) == startCalendar.get(Calendar.DAY_OF_MONTH)
+                        && billCalendar.get(Calendar.MONTH) + 1 == currentMonth
+                        && billCalendar.get(Calendar.YEAR) == currentYear) {
+                    total += bar.getTotal();
+                }
+            }
+            if (total!=0){
+                barEntries.add(new BarEntry(i++, total));
+            }
+
+            startCalendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
+
+        return barEntries;
+    }
+
 
     public void addBillEcommerce(BillEcommerce billEcommerce, Context context){
         listBillEcommerce.add(billEcommerce);

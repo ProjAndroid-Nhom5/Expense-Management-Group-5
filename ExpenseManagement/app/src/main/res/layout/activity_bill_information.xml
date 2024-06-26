@@ -196,15 +196,79 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/searchByTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        android:background="@drawable/list_item_card"
+        android:padding="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="From"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/card"/>
+
+        <EditText
+            android:id="@+id/from_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:hint="Date"
+            android:textSize="16sp"
+            android:layout_weight="2"
+            android:maxLines="1"
+            android:textColor="@color/card"
+            android:inputType="none"
+            android:focusable="false" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/card"/>
+
+        <EditText
+            android:id="@+id/to_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:hint="Date"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_weight="2"
+            android:maxLines="1"
+            android:textColor="@color/card"
+            android:inputType="none"
+            android:focusable="false" />
+        <Button
+            android:id="@+id/clearBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clear"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp"/>
+    </LinearLayout>
+
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barchart"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@color/white"/>
 
     <ListView
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/listview"

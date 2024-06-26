@@ -1,5 +1,6 @@
 package com.example.expensemanagement.Bill;
 
+import android.app.DatePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +9,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -53,7 +58,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class BillInformation extends AppCompatActivity {
     //
@@ -85,7 +95,10 @@ public class BillInformation extends AppCompatActivity {
     private BarChart barChart;
     private SearchView searchView;
     private TextView atoz_text,timeTxt,totalTxt;
+    private EditText from_date,to_date;
+    private Button clearBtn;
     private ConstraintLayout layout_atoz, layout_time, layout_totalpayment;
+    private LinearLayout searchByTime;
     private ImageView atoz_image,timeImages,totalImage;
     private DatabaseReference billRef;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -116,6 +129,10 @@ public class BillInformation extends AppCompatActivity {
         atoz_image = findViewById(R.id.atoz_image);
         timeImages = findViewById(R.id.timeImages);
         totalImage = findViewById(R.id.totalImage);
+        searchByTime = findViewById(R.id.searchByTime);
+        clearBtn = findViewById(R.id.clearBtn);
+        from_date = findViewById(R.id.from_date);
+        to_date = findViewById(R.id.to_date);
 
         exit_icon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +143,59 @@ public class BillInformation extends AppCompatActivity {
 
         Intent intent = getIntent();
         int position = intent.getIntExtra("potision",0);
+
+        from_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog1(position);
+            }
+        });
+
+        to_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog2(position);
+            }
+        });
+
+        clearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                from_date.setText("");
+                to_date.setText("");
+                if(position == 1){
+                    billEcommerceList = billEcmmerceRespository.getListBillEcommerce(BillInformation.this);
+                    listBillEcommerceAdapter = new ListBillEcommerceAdapter(BillInformation.this, billEcommerceList);
+                    listView.setAdapter(listBillEcommerceAdapter);
+
+                    CreateBar(billEcmmerceRespository.displayBillForCurrentYear(billEcommerceList),"Ecommerce");
+                }else if(position == 2){
+                    billFacilityList = billFacilityRespository.getListBillFacility(BillInformation.this);
+                    listBillFacitilyAdapter = new ListBillFacitilyAdapter(BillInformation.this, billFacilityList);
+                    listView.setAdapter(listBillFacitilyAdapter);
+
+                    CreateBar(billFacilityRespository.displayBillForCurrentYear(billFacilityList),"Facility");
+                }else if(position == 4){
+                    billStoreList = billStoreRespository.getListBillStore(BillInformation.this);
+                    listBillStoreAdapter = new ListBillStoreAdapter(BillInformation.this, billStoreList);
+                    listView.setAdapter(listBillStoreAdapter);
+
+                    CreateBar(billStoreRespository.displayBillForCurrentYear(billStoreList),"Store");
+                }else if(position == 5){
+                    billFacilityList = billFacilityRespository.getListBillFacility(BillInformation.this);
+                    listBillSupplyAdapter = new ListBillSupplyAdapter(BillInformation.this, billSupplyList);
+                    listView.setAdapter(listBillSupplyAdapter);
+
+                    CreateBar(billSupplyRespository.displayBillForCurrentYear(billSupplyList),"Supply");
+                }else if(position == 6){
+                    billWorkshiftList = billWorkshiftRespository.getListBillWorkshift(BillInformation.this);
+                    listBillWorkshiftAdapter = new ListBillWorkshiftAdapter(BillInformation.this, billWorkshiftList);
+                    listView.setAdapter(listBillWorkshiftAdapter);
+
+                    CreateBar(billWorkshiftRespository.displayBillForCurrentYear(billWorkshiftList),"Workshift");
+                }
+            }
+        });
 
         layout_atoz.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -329,6 +399,7 @@ public class BillInformation extends AppCompatActivity {
         }else if (position == 3) {
             barChart.setVisibility(View.GONE);
             layout_time.setVisibility(View.GONE);
+            searchByTime.setVisibility(View.GONE);
             totalTxt.setText("Quantity ");
 
             billProductRespository = new BillProductRespository();
@@ -657,6 +728,136 @@ public class BillInformation extends AppCompatActivity {
             billSupplyList = billSupplyRespository.getListBillSupply(BillInformation.this);
         }else if (position == 6){
             billWorkshiftList = billWorkshiftRespository.getListBillWorkshift(BillInformation.this);
+        }
+    }
+
+    private void showDatePickerDialog1(int position) {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        // Set selected date to EditText
+                        String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+                        from_date.setText(selectedDate);
+                        String from = from_date.getText().toString();
+                        String to = to_date.getText().toString();
+                        if ( from != "" && to != ""){
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+                            try {
+                                Date fromDate = sdf.parse(from);
+                                Date toDate = sdf.parse(to);
+
+                                if (toDate.after(fromDate)) {
+                                    // Ngày 'to' lớn hơn ngày 'from'
+                                    // Thực hiện các hành động tiếp theo ở đây
+                                    SearchByTime(position,from,to);
+                                } else if (toDate.equals(fromDate)) {
+                                    // Ngày 'to' bằng ngày 'from'
+                                    // Có thể xử lý trường hợp này nếu cần
+                                } else {
+                                    // Ngày 'to' nhỏ hơn ngày 'from'
+                                    // Xử lý khi người dùng nhập ngày không hợp lệ
+                                }
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                                // Xử lý khi không thể chuyển đổi chuỗi thành đối tượng Date
+                            }
+                        }
+                    }
+                },
+                year, month, dayOfMonth);
+
+        datePickerDialog.show();
+    }
+    private void showDatePickerDialog2(int position) {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        // Set selected date to EditText
+                        String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+                        to_date.setText(selectedDate);
+                        String from = from_date.getText().toString();
+                        String to = to_date.getText().toString();
+                        if ( from != "" && to != ""){
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+                            try {
+                                Date fromDate = sdf.parse(from);
+                                Date toDate = sdf.parse(to);
+
+                                if (toDate.after(fromDate)) {
+                                    // Ngày 'to' lớn hơn ngày 'from'
+                                    // Thực hiện các hành động tiếp theo ở đây
+                                    SearchByTime(position,from,to);
+                                } else if (toDate.equals(fromDate)) {
+                                    // Ngày 'to' bằng ngày 'from'
+                                    // Có thể xử lý trường hợp này nếu cần
+                                } else {
+                                    // Ngày 'to' nhỏ hơn ngày 'from'
+                                    // Xử lý khi người dùng nhập ngày không hợp lệ
+                                }
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                                // Xử lý khi không thể chuyển đổi chuỗi thành đối tượng Date
+                            }
+                        }
+                    }
+                },
+                year, month, dayOfMonth);
+
+        datePickerDialog.show();
+    }
+
+    private void SearchByTime(int position, String from, String to){
+        if(position == 1){
+            billEcommerceList = billEcmmerceRespository.getListBillEcommerce(BillInformation.this);
+            CreateBar(billEcmmerceRespository.displayBillForDateRange(billEcommerceList,from,to),"Ecommerce");
+
+            billEcommerceList = billEcmmerceRespository.getListForDateRange(billEcommerceList,from,to);
+            listBillEcommerceAdapter = new ListBillEcommerceAdapter(BillInformation.this, billEcommerceList);
+            listView.setAdapter(listBillEcommerceAdapter);
+        }else if(position == 2){
+            billFacilityList = billFacilityRespository.getListBillFacility(BillInformation.this);
+            CreateBar(billFacilityRespository.displayBillForDateRange(billFacilityList,from,to),"Facility");
+
+            billFacilityList = billFacilityRespository.getListForDateRange(billFacilityList,from,to);
+            listBillFacitilyAdapter = new ListBillFacitilyAdapter(BillInformation.this, billFacilityList);
+            listView.setAdapter(listBillFacitilyAdapter);
+        }else if(position == 4){
+            billStoreList = billStoreRespository.getListBillStore(BillInformation.this);
+            CreateBar(billStoreRespository.displayBillForDateRange(billStoreList,from,to),"Store");
+
+            billStoreList = billStoreRespository.getListForDateRange(billStoreList,from,to);
+            listBillStoreAdapter = new ListBillStoreAdapter(BillInformation.this, billStoreList);
+            listView.setAdapter(listBillStoreAdapter);
+        }else if(position == 5){
+            billSupplyList = billSupplyRespository.getListBillSupply(BillInformation.this);
+            CreateBar(billSupplyRespository.displayBillForDateRange(billSupplyList,from,to),"Supply");
+
+            billSupplyList = billSupplyRespository.getListForDateRange(billSupplyList,from,to);
+            listBillSupplyAdapter = new ListBillSupplyAdapter(BillInformation.this, billSupplyList);
+            listView.setAdapter(listBillSupplyAdapter);
+        }else if(position == 6){
+            billWorkshiftList = billWorkshiftRespository.getListBillWorkshift(BillInformation.this);
+            CreateBar(billWorkshiftRespository.displayBillForDateRange(billWorkshiftList,from,to),"Workshift");
+
+            billWorkshiftList = billWorkshiftRespository.getListForDateRange(billWorkshiftList,from,to);
+            listBillWorkshiftAdapter = new ListBillWorkshiftAdapter(BillInformation.this, billWorkshiftList);
+            listView.setAdapter(listBillWorkshiftAdapter);
         }
     }
 }
