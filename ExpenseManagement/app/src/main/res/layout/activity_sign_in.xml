@@ -86,12 +86,12 @@
                     android:textColor="@color/black"
                     android:imeOptions="actionDone"/>
 
-                 <ImageView
+                <ImageView
                     android:id="@+id/sign_in_seePw"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                     android:layout_marginTop="35dp"
-                     android:layout_marginEnd="10dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_alignParentEnd="true"/>
             </RelativeLayout>
 
@@ -107,15 +107,15 @@
                 android:textSize="16dp"
                 tools:ignore="HardcodedText" />
 
-<!--            <Button-->
-<!--                android:id="@+id/login_button"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_marginTop="15dp"-->
-<!--                android:backgroundTint="@color/lightblue"-->
-<!--                android:text="Sign In"-->
-<!--                android:textSize="18sp"-->
-<!--                app:cornerRadius="20dp" />-->
+            <!--            <Button-->
+            <!--                android:id="@+id/login_button"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="50dp"-->
+            <!--                android:layout_marginTop="15dp"-->
+            <!--                android:backgroundTint="@color/lightblue"-->
+            <!--                android:text="Sign In"-->
+            <!--                android:textSize="18sp"-->
+            <!--                app:cornerRadius="20dp" />-->
 
             <FrameLayout
                 android:layout_width="match_parent"

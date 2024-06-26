@@ -31,6 +31,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class Admin_Detail extends AppCompatActivity {
+
     private EditText mName, mEmail, mPhone;
     private EditText mBirthday; // EditText for Birthday
     private EditText mGender; // EditText for Gender
@@ -59,6 +60,7 @@ public class Admin_Detail extends AppCompatActivity {
         mBirthday.setFocusable(false); // Prevent direct editing
         mGender = findViewById(R.id.Gender); // EditText for Gender
         mGender.setFocusable(false); // Prevent direct editing
+
         mGender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +73,7 @@ public class Admin_Detail extends AppCompatActivity {
         BtnUpAdmin = findViewById(R.id.update_admin);
 
         mAuth = FirebaseAuth.getInstance();
+
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
         showProfile(firebaseUser);
@@ -96,6 +99,8 @@ public class Admin_Detail extends AppCompatActivity {
                 updateProfile();
             }
         });
+
+
     }
 
     // Method to show gender options using AlertDialog
