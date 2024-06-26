@@ -147,7 +147,7 @@ public class SignInActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mEmailOrPhone.setError(null); // Xóa thông báo lỗi khi người dùng bắt đầu gõ
+                mEmailOrPhone.setError(null); 
             }
 
             @Override

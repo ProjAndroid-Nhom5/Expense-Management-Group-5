@@ -148,12 +148,14 @@ public class Admin_Change_password extends AppCompatActivity {
             }
         });
     }
+
     private boolean isPasswordValid(String password) {
         boolean hasUppercase = !password.equals(password.toLowerCase());
         boolean hasSpecialChar = !password.matches("[A-Za-z0-9 ]*");
 
         return hasUppercase && hasSpecialChar;
     }
+
     private void changePassword() {
         String currentPassword = currentPw.getText().toString().trim();
         String newPassword = newPw.getText().toString().trim();
