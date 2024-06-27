@@ -1,5 +1,6 @@
 package com.example.expensemanagement.Bill;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -71,21 +73,35 @@ public class Bill_Detail_Facility extends AppCompatActivity {
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("billFacilities/"+billFacility.getId());
-                myRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(Bill_Detail_Facility.this, "Data deleted successfully.", Toast.LENGTH_SHORT).show();
-                            onBackPressed();
-                            finish();
-                        } else {
-                            Toast.makeText(Bill_Detail_Facility.this, "Error deleting data.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                confirmDeleteEcommerce(billFacility);
             }
         });
+    }
+
+    private void confirmDeleteEcommerce(BillFacility billFacility) {
+        new AlertDialog.Builder(this)
+                .setTitle("Delete Bill Facility")
+                .setMessage("Are you sure you want to delete this Bill Facility?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference myRef = database.getReference("billFacilities/"+billFacility.getId());
+                        myRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(Bill_Detail_Facility.this, "Data deleted successfully.", Toast.LENGTH_SHORT).show();
+                                    onBackPressed();
+                                    finish();
+                                } else {
+                                    Toast.makeText(Bill_Detail_Facility.this, "Error deleting data.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 }
