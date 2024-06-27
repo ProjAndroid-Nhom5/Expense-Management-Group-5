@@ -152,6 +152,28 @@ public class BillStoreRespository {
         return filteredList;
     }
 
+    public ArrayList<BarEntry> displayAllBills(ArrayList<BillStore> list) {
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+        int i = 1;
+
+        for (BillStore b : list) {
+            Date billDate = null;
+            try {
+                billDate = sdf.parse(b.getDate());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            if (billDate != null) {
+                barEntries.add(new BarEntry(i++, b.getTotal()));
+            }
+        }
+
+        return barEntries;
+    }
+
     public ArrayList<BarEntry> displayBillForCurrentYear(ArrayList<BillStore> list) {
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         ArrayList<BarBill> barBills = new ArrayList<>();

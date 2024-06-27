@@ -824,40 +824,35 @@ public class BillInformation extends AppCompatActivity {
 
     private void SearchByTime(int position, String from, String to){
         if(position == 1){
-            billEcommerceList = billEcmmerceRespository.getListBillEcommerce(BillInformation.this);
-            CreateBar(billEcmmerceRespository.displayBillForDateRange(billEcommerceList,from,to),"Ecommerce");
-
             billEcommerceList = billEcmmerceRespository.getListForDateRange(billEcommerceList,from,to);
             listBillEcommerceAdapter = new ListBillEcommerceAdapter(BillInformation.this, billEcommerceList);
             listView.setAdapter(listBillEcommerceAdapter);
-        }else if(position == 2){
-            billFacilityList = billFacilityRespository.getListBillFacility(BillInformation.this);
-            CreateBar(billFacilityRespository.displayBillForDateRange(billFacilityList,from,to),"Facility");
 
+            CreateBar(billEcmmerceRespository.displayAllBills(billEcommerceList),"Ecommerce");
+        }else if(position == 2){
             billFacilityList = billFacilityRespository.getListForDateRange(billFacilityList,from,to);
             listBillFacitilyAdapter = new ListBillFacitilyAdapter(BillInformation.this, billFacilityList);
             listView.setAdapter(listBillFacitilyAdapter);
-        }else if(position == 4){
-            billStoreList = billStoreRespository.getListBillStore(BillInformation.this);
-            CreateBar(billStoreRespository.displayBillForDateRange(billStoreList,from,to),"Store");
 
+            CreateBar(billFacilityRespository.displayAllBills(billFacilityList),"Facility");
+        }else if(position == 4){
             billStoreList = billStoreRespository.getListForDateRange(billStoreList,from,to);
             listBillStoreAdapter = new ListBillStoreAdapter(BillInformation.this, billStoreList);
             listView.setAdapter(listBillStoreAdapter);
-        }else if(position == 5){
-            billSupplyList = billSupplyRespository.getListBillSupply(BillInformation.this);
-            CreateBar(billSupplyRespository.displayBillForDateRange(billSupplyList,from,to),"Supply");
 
+            CreateBar(billStoreRespository.displayAllBills(billStoreList),"Store");
+        }else if(position == 5){
             billSupplyList = billSupplyRespository.getListForDateRange(billSupplyList,from,to);
             listBillSupplyAdapter = new ListBillSupplyAdapter(BillInformation.this, billSupplyList);
             listView.setAdapter(listBillSupplyAdapter);
-        }else if(position == 6){
-            billWorkshiftList = billWorkshiftRespository.getListBillWorkshift(BillInformation.this);
-            CreateBar(billWorkshiftRespository.displayBillForDateRange(billWorkshiftList,from,to),"Workshift");
 
+            CreateBar(billSupplyRespository.displayAllBills(billSupplyList),"Supply");
+        }else if(position == 6){
             billWorkshiftList = billWorkshiftRespository.getListForDateRange(billWorkshiftList,from,to);
             listBillWorkshiftAdapter = new ListBillWorkshiftAdapter(BillInformation.this, billWorkshiftList);
             listView.setAdapter(listBillWorkshiftAdapter);
+
+            CreateBar(billWorkshiftRespository.displayAllBills(billWorkshiftList),"Workshift");
         }
     }
 }

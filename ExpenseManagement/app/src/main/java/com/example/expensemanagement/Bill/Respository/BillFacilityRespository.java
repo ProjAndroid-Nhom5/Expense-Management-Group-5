@@ -151,6 +151,28 @@ public class BillFacilityRespository {
         return filteredList;
     }
 
+    public ArrayList<BarEntry> displayAllBills(ArrayList<BillFacility> list) {
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+        int i = 1;
+
+        for (BillFacility b : list) {
+            Date billDate = null;
+            try {
+                billDate = sdf.parse(b.getDate());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            if (billDate != null) {
+                barEntries.add(new BarEntry(i++, b.getTotalPayment()));
+            }
+        }
+
+        return barEntries;
+    }
+
     public ArrayList<BarEntry> displayBillForCurrentYear(ArrayList<BillFacility> list) {
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         ArrayList<BarBill> barBills = new ArrayList<>();
